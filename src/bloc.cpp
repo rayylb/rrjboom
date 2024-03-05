@@ -1,5 +1,13 @@
 #include "bloc.h"
+#include <assert.h> 
 
+Bloc::Bloc(){
+    destructible = false;
+    bonusPresent = false;
+    peutMarcher = true;
+    bombeActive = false;
+    joueurQuiAPoseLaBombe = 0;
+}
 Bloc::Bloc(bool isDestructible, bool hasBonus, bool marcher)
 {
     destructible = isDestructible;
@@ -9,10 +17,40 @@ Bloc::Bloc(bool isDestructible, bool hasBonus, bool marcher)
     joueurQuiAPoseLaBombe = 0;
 }
 
-    // Méthodes pour accéder et modifier les propriétés
-bool estDestructible();
-bool onPeutMarcher();
-bool aBonus();
-void retirerBonus();
-void poserBombe(int joueur);
-void detruire();
+
+
+bool Bloc::estDestructible() {
+    return destructible;
+}
+bool Bloc::onPeutMarcher() {
+    return peutMarcher;
+}
+bool Bloc::aBonus(){
+    return bonusPresent;
+}
+void Bloc::retirerBonus() {
+    bonusPresent = false;
+}
+void Bloc::poserBombe(int joueur) {
+    bombeActive = true;
+    joueurQuiAPoseLaBombe = joueur;
+}
+void Bloc::detruire(){
+    assert(destructible);
+    peutMarcher = true;
+}
+void Bloc::blocSol(){
+    destructible = false;
+    bonusPresent = false;
+    peutMarcher = true;
+}
+void Bloc::blocMur(){
+    destructible = false;
+    bonusPresent = false;
+    peutMarcher = false;
+}
+void Bloc::blocDes(bool bonus){
+    destructible = true;
+    bonusPresent = bonus;
+    peutMarcher = false;
+}
