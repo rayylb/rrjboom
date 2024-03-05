@@ -10,13 +10,11 @@
  */
 class Bloc {
 private:
-    bool destructible; // Indique si le bloc est destructible ou indestructible
-    bool bonusPresent; // Indique si un bonus est présent dans ce bloc
-    bool peutMarcher; // Indique si le bloc est détruit ou pas
-    bool bombeActive; //Indique si une bombe est posée sur le plateau
-    int joueurQuiAPoseLaBombe; // Peut être 0 pour aucun joueur ou 1/2 pour les joueurs respectifs
-
-    // Vous pouvez ajouter d'autres propriétés en fonction de vos besoins
+    bool destructible; ///<   Indique si le bloc est destructible ou indestructible
+    bool bonusPresent; ///<  Indique si un bonus est présent dans ce bloc
+    bool peutMarcher; ///<  Indique si le bloc est détruit ou pas
+    bool bombeActive; ///< Indique si une bombe est posée sur le plateau
+    int joueurQuiAPoseLaBombe; ///<  Peut être 0 pour aucun joueur ou 1/2 pour les joueurs respectifs
 
 public:
 
@@ -55,18 +53,34 @@ public:
     void retirerBonus();
 
     /**
-    * @brief Efface l'image en remplissant toute sa surface avec une 
-    * couleur spécifiée. La couleur précédente est donc effacée.
+    * @brief Permet de poser une bombe sur la case en affectant au paramètre 'bombeActive' la valeur true et à la valeur 'joueurQuiAPoseLaBombe' le numéro du
+    * joueur qui a posé la bombe
     *
-    * @param couleur La couleur à utiliser pour effacer l'image
-    * @note si les dimensions de l'image sont nulles ou négatives, un message
-    * d'erreur est affiché
+    * @param joueur Le joueur qui a posé la bombe
+    * @note Si une bombe est déjà posée sur la case, un message d'erreur est affiché
     */    
     void poserBombe(int joueur);
 
+    /**
+    * @brief Detruit un bloc dans le jeu, en affectant au paramètre booléen "peutMarcher" la valeur True
+    * @note Si la case n'est pas destructible, un message d'erreur est affiché.
+    */
     void detruire();
+
+    /**
+    * @brief Transforme un bloc en "bloc sol" en affectant destructible = false, bonusPresent = false et peutMarcher = true
+    * @param joueur Le joueur qui a posé la bombe
+    */
     void blocSol();
+
+    /**
+    * @brief Transforme un bloc en "bloc destructible" en affectant destructible = true, bonusPresent = bonus et peutMarcher = false
+    */
     void blocDes(bool bonus);
+
+    /**
+    * @brief Transforme un bloc en "bloc mur" en affectant destructible = false, bonusPresent = false et peutMarcher = false
+    */
     void blocMur();
 };
 

@@ -32,6 +32,7 @@ void Bloc::retirerBonus() {
     bonusPresent = false;
 }
 void Bloc::poserBombe(int joueur) {
+    assert(bombeActive = false);
     bombeActive = true;
     joueurQuiAPoseLaBombe = joueur;
 }
