@@ -11,10 +11,10 @@ private:
     
 public:
     Joueur(bool num, int xg, int yg);
-    int getPositionX() const;
-    int getPositionY() const;
-    int getNbBombesMax() const;
-    int getPorteeBombe() const;
+    int getPositionX();
+    int getPositionY();
+    int getNbBombesMax();
+    int getPorteeBombe();
     void deplacementD();
     void deplacementG();
     void deplacementH();

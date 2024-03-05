@@ -14,27 +14,34 @@ Joueur::Joueur(bool num, int xg, int yg){
     }
 }
 
-int Joueur::getPositionX() const {
+int Joueur::getPositionX() {
     return x;
 }
-int Joueur::getPositionY() const {
+
+int Joueur::getPositionY() {
     return y;
 }
-int Joueur::getNbBombesMax() const {
+
+int Joueur::getNbBombesMax() {
     return nbBombesMax;
 }
-int Joueur::getPorteeBombe() const {
+
+int Joueur::getPorteeBombe() {
     return porteeBombe;
 }
+
 void Joueur::deplacementD() {
     x++;
 }
+
 void Joueur::deplacementG() {
     x--;
 }
+
 void Joueur::deplacementH(){
     y--;
 }
+
 void Joueur::deplacementB(){
     y++;
 }
