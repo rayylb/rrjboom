@@ -9,7 +9,7 @@ void Grille::initGrille() {
                 terrain[i][j].blocMur();
             else if ((i+j) < 3 || (i+j) > (GRILLE_DIMX+GRILLE_DIMY - 5))
                 terrain[i][j].blocSol();
-            else if (rand()%2 == 0)
+            else if (rand()%3 < 2)
                 terrain[i][j].blocDes(false);
             else
                 terrain[i][j].blocSol();
