@@ -1,0 +1,91 @@
+\hypertarget{classGrille}{}\doxysection{Grille Class Reference}
+\label{classGrille}\index{Grille@{Grille}}
+
+
+La classe \mbox{\hyperlink{classGrille}{Grille}} comporte l\textquotesingle{}ensemble des blocs qui forment le terrain de jeu. Elle ne comporte pas les joueurs ou les bombes.  
+
+
+
+
+{\ttfamily \#include $<$Grille.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGrille_a643213d5c2589f8678d491bf6f68f3e3}\label{classGrille_a643213d5c2589f8678d491bf6f68f3e3}} 
+void {\bfseries init\+Grille} ()
+\begin{DoxyCompactList}\small\item\em Génère un terrain aléatoirement, prêt à être joué dessus. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGrille_a63904dbee59fb3b4bc4a0c8dcca63247}\label{classGrille_a63904dbee59fb3b4bc4a0c8dcca63247}} 
+void {\bfseries affich\+Terminal} ()
+\begin{DoxyCompactList}\small\item\em Affiche la grille dans le terminal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGrille_acf1d15089bc6bfb65f22c8a3e2babfc4}{info\+Case}} (int x, int y, \mbox{\hyperlink{classBloc}{Bloc}} \&copie)
+\begin{DoxyCompactList}\small\item\em Récupère une case de la grille sans la modifier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGrille_a316ccf702e183f49b6ff197f1548bbaa}{detruire\+Case}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Détruit le bloc sur une case de la grille, si elle est destructible. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGrille_ae803fb1905e0ce804345729c15bcd841}{recuperer\+Bonus}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Récupère un bonus sur une case de la grille, si elle en comporte un. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+La classe \mbox{\hyperlink{classGrille}{Grille}} comporte l\textquotesingle{}ensemble des blocs qui forment le terrain de jeu. Elle ne comporte pas les joueurs ou les bombes. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGrille_a316ccf702e183f49b6ff197f1548bbaa}\label{classGrille_a316ccf702e183f49b6ff197f1548bbaa}} 
+\index{Grille@{Grille}!detruireCase@{detruireCase}}
+\index{detruireCase@{detruireCase}!Grille@{Grille}}
+\doxysubsubsection{\texorpdfstring{detruireCase()}{detruireCase()}}
+{\footnotesize\ttfamily void Grille\+::detruire\+Case (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Détruit le bloc sur une case de la grille, si elle est destructible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Abscisse du bloc qu\textquotesingle{}on essaie de détruire. \\
+\hline
+{\em y} & Ordonnée du bloc qu\textquotesingle{}on essaie de détruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classGrille_acf1d15089bc6bfb65f22c8a3e2babfc4}\label{classGrille_acf1d15089bc6bfb65f22c8a3e2babfc4}} 
+\index{Grille@{Grille}!infoCase@{infoCase}}
+\index{infoCase@{infoCase}!Grille@{Grille}}
+\doxysubsubsection{\texorpdfstring{infoCase()}{infoCase()}}
+{\footnotesize\ttfamily void Grille\+::info\+Case (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{classBloc}{Bloc}} \&}]{copie }\end{DoxyParamCaption})}
+
+
+
+Récupère une case de la grille sans la modifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Abscisse du bloc à récupérer. \\
+\hline
+{\em y} & Ordonnée du bloc à récupérer. \\
+\hline
+{\em copie} & Copie du bloc demandé. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classGrille_ae803fb1905e0ce804345729c15bcd841}\label{classGrille_ae803fb1905e0ce804345729c15bcd841}} 
+\index{Grille@{Grille}!recupererBonus@{recupererBonus}}
+\index{recupererBonus@{recupererBonus}!Grille@{Grille}}
+\doxysubsubsection{\texorpdfstring{recupererBonus()}{recupererBonus()}}
+{\footnotesize\ttfamily void Grille\+::recuperer\+Bonus (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Récupère un bonus sur une case de la grille, si elle en comporte un. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Abscisse du bonus qu\textquotesingle{}on essaie de récupérer. \\
+\hline
+{\em y} & Ordonnée du bonus qu\textquotesingle{}on essaie de récupérer. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Grille.\+h\item 
+src/Grille.\+cpp\end{DoxyCompactItemize}
