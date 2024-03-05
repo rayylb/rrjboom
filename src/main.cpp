@@ -6,5 +6,8 @@
 
 int main() {
     srand(time(NULL));
+    Grille test;
+    test.initGrille();
+    test.affichTerminal();
     return 0;
 }

@@ -11,13 +11,10 @@ private:
     Bloc terrain[GRILLE_DIMX][GRILLE_DIMY];
 
 public:
-    Grille();
-    ~Grille();
-
     void initGrille();
     void affichTerminal();
 
-    Bloc& infoCase(int x, int y);
+    void infoCase(int x, int y, Bloc& copie);
 
     void detruireCase(int x, int  y);
     void recupererBonus(int x, int y);
