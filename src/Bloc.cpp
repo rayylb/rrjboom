@@ -37,9 +37,12 @@ void Bloc::poserBombe(int joueur) {
     joueurQuiAPoseLaBombe = joueur;
 }
 void Bloc::detruire(){
-    assert(destructible);
-    peutMarcher = true;
+    if (destructible) {
+        peutMarcher = true;
+        destructible = false;
+    }
 }
+
 void Bloc::blocSol(){
     destructible = false;
     bonusPresent = false;
