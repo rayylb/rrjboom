@@ -1,4 +1,4 @@
-# rrjboom
+# rrjboom 💣
 Projet LIFAPCD
 
 ## build
