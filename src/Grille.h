@@ -13,7 +13,9 @@ private:
 public:
     Grille();
     ~Grille();
+
     void initGrille();
+    void affichTerminal();
 
     Bloc& infoCase(int x, int y);
 
