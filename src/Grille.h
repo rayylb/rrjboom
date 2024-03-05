@@ -18,6 +18,14 @@ private:
 
 public:
     /**
+     * @brief Récupère la dimension de la grille.
+     * 
+     * @param x Largeur de la grille.
+     * @param y Hauteur de la grille.
+    */
+    void getDim(int x, int y);
+
+    /**
      * @brief Génère un terrain aléatoirement, prêt à être joué dessus.
     */
     void initGrille();

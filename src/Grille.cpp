@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <iostream>
 
+void Grille::getDim(int x, int y) {
+    x = GRILLE_DIMX;
+    y = GRILLE_DIMY;
+}
+
 void Grille::initGrille() {
     for (int j = 0; j < GRILLE_DIMY; j++)
         for (int i = 0; i < GRILLE_DIMX; i++) {
@@ -14,7 +19,6 @@ void Grille::initGrille() {
             else
                 terrain[i][j].blocSol();
         }
-            
 }
 
 void Grille::affichTerminal() {
