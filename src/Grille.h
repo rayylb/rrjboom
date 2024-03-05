@@ -1,7 +1,7 @@
 #ifndef _GRILLE_H
 #define _GRILLE_H
 
-#include "bloc.h"
+#include "Bloc.h"
 
 const int GRILLE_DIMX = 7;
 const int GRILLE_DIMY = 5;
