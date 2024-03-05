@@ -1,4 +1,4 @@
-#include "bloc.h"
+#include "Bloc.h"
 #include <assert.h> 
 
 Bloc::Bloc(){
