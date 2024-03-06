@@ -12,7 +12,7 @@ Bloc::Bloc(bool isDestructible, bool hasBonus, bool marcher)
 {
     destructible = isDestructible;
     bonusPresent = hasBonus;
-    peutMarcher = marcher;
+    peutMarcher = marcher || (destructible && !isDestructible );
     bombeActive = false;
     joueurQuiAPoseLaBombe = 0;
 }
