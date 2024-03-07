@@ -19,7 +19,7 @@ Bloc::Bloc(bool isDestructible, bool hasBonus, bool marcher)
 
 
 
-bool Bloc::isDestructible() {
+bool Bloc::estDestructible() {
     return destructible;
 }
 bool Bloc::onPeutMarcher() {
