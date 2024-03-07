@@ -15,7 +15,8 @@ public:
     Grille();
     ~Grille();
 
-    void getDim(int x, int y);
+    int getDimX();
+    int getDimY();
     void initGrille();
     void affichTerminal();
 

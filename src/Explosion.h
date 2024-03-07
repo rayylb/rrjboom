@@ -9,6 +9,7 @@ class Explosion {
 
     public:
         Explosion() : timer(3) {};
+        
         void avancerTemps();
         bool estActif();
 };

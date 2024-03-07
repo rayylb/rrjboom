@@ -6,7 +6,8 @@
 #include "Bombe.h"
 #include "Explosion.h"
 
-const int PARTIE_NB_JOUEURS = 2;
+#include <queue>
+
 const int PARTIE_MAX_BOMBES = 9;
 const int PARTIE_MAX_FLAMES = 9;
 
@@ -15,8 +16,8 @@ class Partie {
         Grille* grille;
         Joueur joueur1;
         Joueur joueur2;
-        Bombe bombes[PARTIE_NB_JOUEURS*PARTIE_MAX_BOMBES];
-        Explosion explosions[PARTIE_NB_JOUEURS*PARTIE_MAX_BOMBES*PARTIE_MAX_FLAMES*4];
+        std::queue<Bombe> bombes;
+        std::queue<Explosion> explosions;
 
     public:
         void initJeu(Grille* grille_jeu);

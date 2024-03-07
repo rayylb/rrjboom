@@ -23,6 +23,10 @@ int Joueur::getPositionY() {
     return y;
 }
 
+int Joueur::getNbBombes() {
+    return nbBombes;
+}
+
 int Joueur::getNbBombesMax() {
     return nbBombesMax;
 }
@@ -49,4 +53,8 @@ void Joueur::deplacementH() {
 
 void Joueur::deplacementB() {
     y++;
+}
+
+void Joueur::poserBombe() {
+    nbBombes++;
 }

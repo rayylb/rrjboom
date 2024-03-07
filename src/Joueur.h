@@ -6,6 +6,7 @@ private:
     bool numero; ///<  Numéro du joueur (True pour le joueur 1, False pour le joueur 2)
     int x; ///<  Position en X du joueur sur la grille
     int y; ///<  Position en Y du joueur sur la grille
+    int nbBombes;
     int nbBombesMax; ///<  Nombre maximum de bombes que le joueur peut poser
     int porteeBombe; ///<  Portée de l'explosion de la bombe du joueur
     bool vivant;
@@ -15,6 +16,7 @@ public:
 
     int getPositionX();
     int getPositionY();
+    int getNbBombes();
     int getNbBombesMax();
     int getPorteeBombe();
     bool estVivant();
@@ -23,6 +25,8 @@ public:
     void deplacementG();
     void deplacementH();
     void deplacementB();
+
+    void poserBombe();
 };
 
 #endif

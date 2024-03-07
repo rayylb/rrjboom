@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <iostream>
 
-void Grille::getDim(int x, int y) {
-    x = GRILLE_DIMX;
-    y = GRILLE_DIMY;
+int Grille::getDimX() {
+    return GRILLE_DIMX;
+}
+
+int Grille::getDimY() {
+    return GRILLE_DIMY;
 }
 
 void Grille::initGrille() {
