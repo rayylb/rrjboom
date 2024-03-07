@@ -9,14 +9,13 @@ class Bombe {
         int timer;
     
     public:
-        Bombe();
+        Bombe() : x(0), y(0), range(1), timer(3) {};
         Bombe(int xpos, int ypos, int flamerange);
 
         /**
          * @brief Avance d'une unité de temps, jusqu'à l'explosion.
         */
         void avancerTemps();
-
         bool estExplosee();
 };
 
