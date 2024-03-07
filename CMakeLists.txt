@@ -7,12 +7,16 @@ set(SRCS
     src/Bloc.cpp
     src/Grille.cpp
     src/Bombe.cpp
+    src/Explosion.cpp
+    src/Partie.cpp
     )
     
 set(HEADERS
     src/Bloc.h
     src/Grille.h
     src/Bombe.h
+    src/Explosion.h
+    src/Partie.h
     )
 
 add_executable(Bomberman ${SRCS} ${HEADERS})

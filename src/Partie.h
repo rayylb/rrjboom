@@ -21,7 +21,7 @@ class Partie {
     public:
         void initJeu(Grille* grille_jeu, Joueur* joueur1, Joueur* joueur2);
         void nouvellePartie();
-        void actionsJoueurs();
+        void actionsJoueursTerminal();
         void avancerPartie();
 };
 
