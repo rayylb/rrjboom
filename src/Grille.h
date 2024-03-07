@@ -12,9 +12,6 @@ private:
     Bloc terrain[GRILLE_DIMX][GRILLE_DIMY];
 
 public:
-    Grille();
-    ~Grille();
-
     int getDimX();
     int getDimY();
     void initGrille();

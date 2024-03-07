@@ -8,6 +8,7 @@ set(SRCS
     src/Grille.cpp
     src/Bombe.cpp
     src/Explosion.cpp
+    src/Joueur.cpp
     src/Partie.cpp
     )
     
@@ -16,6 +17,7 @@ set(HEADERS
     src/Grille.h
     src/Bombe.h
     src/Explosion.h
+    src/Joueur.h
     src/Partie.h
     )
 

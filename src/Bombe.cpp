@@ -7,6 +7,18 @@ Bombe::Bombe(int xpos, int ypos, int flamerange) {
     timer = 4;
 }
 
+int Bombe::getPosX() {
+    return x;
+}
+
+int Bombe::getPosY() {
+    return y;
+}
+
+int Bombe::getRange() {
+    return range;
+}
+
 void Bombe::avancerTemps() {
     if(timer > 0)
         timer -= 1;

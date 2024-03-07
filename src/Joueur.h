@@ -27,6 +27,7 @@ public:
     void deplacementB();
 
     void poserBombe();
+    void exploser();
 };
 
 #endif

@@ -8,8 +8,12 @@ class Explosion {
         int timer;
 
     public:
-        Explosion() : timer(3) {};
-        
+        Explosion() : x(0), y(0), timer(3) {};
+        Explosion(int xpos, int ypos);
+
+        int getPosX();
+        int getPosY();
+
         void avancerTemps();
         bool estActif();
 };

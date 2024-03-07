@@ -49,6 +49,10 @@ void Grille::infoCase(int x, int y, Bloc& copie) {
         copie.blocMur();
 }
 
+Bloc& Grille::infoCase(int x, int y) {
+    return terrain[x][y];
+}
+
 void Grille::detruireCase(int x, int y) {
     terrain[x][y].detruire();
 }

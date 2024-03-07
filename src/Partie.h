@@ -6,25 +6,29 @@
 #include "Bombe.h"
 #include "Explosion.h"
 
-#include <queue>
+#include <vector>
 
 const int PARTIE_MAX_BOMBES = 9;
 const int PARTIE_MAX_FLAMES = 9;
 
 class Partie {
     private:
-        Grille* grille;
+        Grille grille;
         Joueur joueur1;
         Joueur joueur2;
-        std::queue<Bombe> bombes;
-        std::queue<Explosion> explosions;
+        std::vector<Bombe> bombes;
+        std::vector<Explosion> explosions;
 
     public:
-        void initJeu(Grille* grille_jeu);
+        void initJeu(Grille grille_jeu);
         void nouvellePartie();
         void actionsJoueursTerminal();
         void avancerPartie();
         void afficherTerminal();
+
+        void creerExplosions(Bombe source);
+        bool caseEstExplosee(int posX, int posY);
+        bool caseEstMinee(int posX, int posY);
 };
 
 #endif

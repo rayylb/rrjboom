@@ -2,16 +2,11 @@
 
 void Joueur::spawn(bool num, int xg, int yg){
     numero = num;
-    nbBombesMax = 10;
-    porteeBombe = 4;
-    if(num){
-        x = 0;
-        y = 0;
-    }
-    else {
-        x  = xg;
-        y = yg;
-    }
+    nbBombesMax = 9;
+    nbBombes = 0;
+    porteeBombe = 2;
+    x  = xg;
+    y = yg;
     vivant = true;
 }
 
@@ -57,4 +52,8 @@ void Joueur::deplacementB() {
 
 void Joueur::poserBombe() {
     nbBombes++;
+}
+
+void Joueur::exploser() {
+    vivant= false;
 }
