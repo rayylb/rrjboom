@@ -38,10 +38,10 @@ void Joueur::deplacementG() {
     x--;
 }
 
-void Joueur::deplacementH(){
+void Joueur::deplacementH() {
     y--;
 }
 
-void Joueur::deplacementB(){
+void Joueur::deplacementB() {
     y++;
 }

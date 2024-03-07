@@ -18,3 +18,7 @@ void Bombe::avancerTemps() {
     if(timer > 0)
         timer -= 1;
 }
+
+bool Bombe::estExplosee() {
+    return (timer == 0);
+}

@@ -16,6 +16,8 @@ class Bombe {
          * @brief Avance d'une unité de temps, jusqu'à l'explosion.
         */
         void avancerTemps();
+
+        bool estExplosee();
 };
 
 #endif
