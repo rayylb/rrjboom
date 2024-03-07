@@ -13,16 +13,17 @@ const int PARTIE_MAX_FLAMES = 9;
 class Partie {
     private:
         Grille* grille;
-        Joueur* j1;
-        Joueur* j2;
+        Joueur joueur1;
+        Joueur joueur2;
         Bombe bombes[PARTIE_NB_JOUEURS*PARTIE_MAX_BOMBES];
         Explosion explosions[PARTIE_NB_JOUEURS*PARTIE_MAX_BOMBES*PARTIE_MAX_FLAMES*4];
 
     public:
-        void initJeu(Grille* grille_jeu, Joueur* joueur1, Joueur* joueur2);
+        void initJeu(Grille* grille_jeu);
         void nouvellePartie();
         void actionsJoueursTerminal();
         void avancerPartie();
+        void afficherTerminal();
 };
 
 #endif

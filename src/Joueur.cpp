@@ -1,6 +1,6 @@
 #include "Joueur.h"
 
-Joueur::Joueur(bool num, int xg, int yg){
+void Joueur::spawn(bool num, int xg, int yg){
     numero = num;
     nbBombesMax = 10;
     porteeBombe = 4;
@@ -12,6 +12,7 @@ Joueur::Joueur(bool num, int xg, int yg){
         x  = xg;
         y = yg;
     }
+    vivant = true;
 }
 
 int Joueur::getPositionX() {
@@ -28,6 +29,10 @@ int Joueur::getNbBombesMax() {
 
 int Joueur::getPorteeBombe() {
     return porteeBombe;
+}
+
+bool Joueur::estVivant() {
+    return vivant;
 }
 
 void Joueur::deplacementD() {

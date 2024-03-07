@@ -8,13 +8,17 @@ private:
     int y; ///<  Position en Y du joueur sur la grille
     int nbBombesMax; ///<  Nombre maximum de bombes que le joueur peut poser
     int porteeBombe; ///<  Portée de l'explosion de la bombe du joueur
+    bool vivant;
     
 public:
-    Joueur(bool num, int xg, int yg);
+    void spawn(bool num, int xg, int yg);
+
     int getPositionX();
     int getPositionY();
     int getNbBombesMax();
     int getPorteeBombe();
+    bool estVivant();
+
     void deplacementD();
     void deplacementG();
     void deplacementH();
