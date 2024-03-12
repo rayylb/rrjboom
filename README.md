@@ -1,18 +1,25 @@
-# rrjboom 💣  
+# RRJBoom 💣  
 Jeu Bomberman à 2 joueurs en version Textuel et Graphique.  
 Réalisé dans le cadre de l'UE LIFAPCD.  
   
 Graphical interface with SDL2.  
-Build uses CMake.  
+Build with CMake.  
+Documentation with Doxygen.  
   
-## build  
+## Build  
 ``cd rrjboom/build``  
 ``cmake ..``  
 ``make``  
   
-## run  
+## Run  
 Text version:  
+``cd rrjboom/build``  
 ``./BombTex``  
   
 Graphical version:  
-``./BombGraph``
+``cd rrjboom/build``  
+``./BombGraph``  
+  
+## Doc  
+``cd rrjboom``  
+``doxygen doc/doxyfile``
