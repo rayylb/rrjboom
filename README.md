@@ -22,4 +22,5 @@ Graphical version:
   
 ## Doc  
 ``cd rrjboom``  
-``doxygen doc/doxyfile``
+``doxygen doc/doxyfile``  
+``firefox doc/html/index.html``  
