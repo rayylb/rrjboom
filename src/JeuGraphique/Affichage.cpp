@@ -1,7 +1,5 @@
 #include "Affichage.h"
 #include <iostream>
-DimX=800;
-DimY=600;
 
 void Affichage::initFenetre(){
     if(SDL_Init(SDL_INIT_VIDEO)<0){
