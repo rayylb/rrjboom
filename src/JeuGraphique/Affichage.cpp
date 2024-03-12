@@ -1,10 +1,7 @@
 #include "Affichage.h"
 #include <iostream>
-#include <time.h>
-#include <ctime>
-#include "SDL2/SDL_mixer.h"
-using namespace std;
-
+DimX=800;
+DimY=600;
 
 void Affichage::initFenetre(){
     if(SDL_Init(SDL_INIT_VIDEO)<0){
@@ -26,5 +23,3 @@ void Affichage::detruireFenetre(){
     SDL_DestroyWindow(fenetre);
     SDL_Quit();
 }
-
-void::afficherJoueur()
