@@ -1,11 +1,11 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "Affichage.h"
+#include "AffichageTexte.h"
 
 int main() {
     srand(time(NULL));
-    Affichage jeuText;
+    AffichageTexte jeuText;
     jeuText.boucleJeu();
     return 0;
 }

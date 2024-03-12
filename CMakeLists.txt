@@ -21,8 +21,8 @@ set(HEADERS_CORE
     )
 
 set(TEXT
-    src/JeuTextuel/Affichage.cpp
-    src/JeuTextuel/Affichage.h
+    src/JeuTextuel/AffichageTexte.cpp
+    src/JeuTextuel/AffichageTexte.h
     src/JeuTextuel/main.cpp
     )
 

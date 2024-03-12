@@ -3,7 +3,7 @@
 
 #include "../Core/Partie.h"
 
-class Affichage {
+class AffichageTexte {
     private:
         Partie jeu;
         int menu;

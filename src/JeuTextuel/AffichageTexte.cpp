@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Affichage.h"
+#include "AffichageTexte.h"
 
-void Affichage::boucleJeu() {
+void AffichageTexte::boucleJeu() {
     Partie jeu;
     bool jeuFini = false;
     char reponse;
@@ -17,7 +17,7 @@ void Affichage::boucleJeu() {
     std::cout<<"Aurevoir !"<<std::endl;
 }
 
-void Affichage::nouvellePartie() {
+void AffichageTexte::nouvellePartie() {
     jeu.initPartie();
     afficherPartie();
     while(jeu.getJoueur1().estVivant() && jeu.getJoueur2().estVivant()) {
@@ -32,7 +32,7 @@ void Affichage::nouvellePartie() {
         std::cout<<"Personne a gagné..."<<std::endl;
 }
 
-void Affichage::afficherPartie() {
+void AffichageTexte::afficherPartie() {
     std::cout<<std::endl;
     for(int j = 0; j < jeu.getGrille().getDimY(); j++) {
         for(int i = 0; i < jeu.getGrille().getDimX(); i++) {
@@ -58,7 +58,7 @@ void Affichage::afficherPartie() {
     std::cout<<std::endl;
 }
 
-void Affichage::tourDeJeu() {
+void AffichageTexte::tourDeJeu() {
     char movJ1, bombJ1, movJ2, bombJ2;
     std::cout<<"Joueur1 mouvement: ZQSD"<<std::endl;
     std::cin>>movJ1;
@@ -79,7 +79,7 @@ void Affichage::tourDeJeu() {
     jeu.avancerPartie();
 }
 
-void Affichage::convertirMove(char up, char left, char down, char right, char& mov) {
+void AffichageTexte::convertirMove(char up, char left, char down, char right, char& mov) {
     char diff = 'A'-'a';
     if(mov == up || mov == up-diff)
         mov = 'U';
