@@ -15,6 +15,7 @@ private:
 public:
 void initFenetre();
 void detruireFenetre();
+SDL_Renderer* getRenderer();
 }
 
 #endif
