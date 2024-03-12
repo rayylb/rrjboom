@@ -11,8 +11,8 @@ Build uses CMake.
 ``make``  
   
 ## run  
-Text version :  
+Text version:  
 ``./BombTex``  
   
-Graphical version :
+Graphical version:  
 ``./BombGraph``
