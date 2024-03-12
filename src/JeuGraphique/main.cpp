@@ -6,12 +6,9 @@
 #include "Partie.h"
 #include "Grille.h"
 
-int main()
-{
-    srand(time(NULL));
-    Partie testjeu;
-    Grille grillejeu;
-    testjeu.initJeu(grillejeu);
-    testjeu.nouvellePartie();
-    return 0;
+int main(int argc,char *argv[])
+{ 
+    //fenetre noire
+    SDL_SetRenderDrawColor(p_renderer, 0, 0, 0, 255);
+        SDL_RenderClear(p_renderer);
 }
