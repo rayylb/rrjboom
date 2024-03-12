@@ -27,8 +27,8 @@ set(TEXT
     )
 
 set(GRAPH
-    src/JeuGraphique/Affichage.cpp
-    src/JeuGraphique/Affichage.h
+    src/JeuGraphique/AffichageGraphique.cpp
+    src/JeuGraphique/AffichageGraphique.h
     src/JeuGraphique/main.cpp
     )
 
