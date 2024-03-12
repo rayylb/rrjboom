@@ -4,21 +4,11 @@
 #include <SDL2/SDL.h>
 #include "AffichageGraphique.h"
 
-int main(int argc,char *argv[])
-{ 
-    //fenetre noire
-    SDL_SetRenderDrawColor(rendu, 255, 255, 255, 255);
-    //personnage rectangle rouge
-    SDL_Rect rect;
-    rect.x = 100;
-    rect.y = 100;
-    rect.w = 200
-    rect.h = 150;
-    SDL_SetRenderDrawColor(rendu, 0, 0, 255, 255);
-    SDL_RenderFillRect(rendu, & rect);
-    SDL_RenderClear(rendu);
-    SDL_RenderPresent(rendu);
-    SDL_Delay(9000); 
-    affichage.detruireFenetre();
-    return 0;
+int main(int argc,char *argv[]) {
+  AffichageGraphique aff;
+  aff.initFenetre(500, 500);
+  aff.afficherFenetre();
+  SDL_Delay(9000); 
+  aff.detruireFenetre();
+  return 0;
 }

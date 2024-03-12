@@ -7,15 +7,15 @@
 
 class AffichageGraphique {
     private:
-        int DimX,DimY;
-        SDL_Window * fenetre;
-        SDL_Renderer * rendu;
-        SDL_Texture *textureFond;
+        int dimX, dimY;
+        SDL_Window* fenetre;
+        SDL_Renderer* rendu;
+        SDL_Texture* texture;
 
     public:
-        void initFenetre();
+        void initFenetre(int width, int height);
+        void afficherFenetre();
         void detruireFenetre();
-        SDL_Renderer* getRenderer();
 };
 
 #endif
