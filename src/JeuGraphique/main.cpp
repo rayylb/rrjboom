@@ -2,9 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
-
-#include "Partie.h"
-#include "Grille.h"
+#include "Affichage.h"
 
 int main(int argc,char *argv[])
 { 
