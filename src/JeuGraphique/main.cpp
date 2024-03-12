@@ -18,4 +18,7 @@ int main(int argc,char *argv[])
         SDL_RenderFillRect(rendu, & rect);
         SDL_RenderClear(rendu);
     SDL_RenderPresent(rendu);
+      SDL_Delay(9000); 
+    affichage.detruireFenetre();
+    return 0;
 }
