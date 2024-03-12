@@ -8,6 +8,7 @@
 
 int main(int argc,char *argv[])
 { 
-    SDL_SetRenderDrawColor(p_renderer, 0, 0, 240, 0);
+    //fenetre noire
+    SDL_SetRenderDrawColor(p_renderer, 0, 0, 0, 255);
         SDL_RenderClear(p_renderer);
 }
