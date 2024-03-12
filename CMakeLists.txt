@@ -2,23 +2,34 @@ cmake_minimum_required(VERSION 3.0)
 
 project(Bomberman)
 
-set(SRCS
-    src/main.cpp
-    src/Bloc.cpp
-    src/Grille.cpp
-    src/Bombe.cpp
-    src/Explosion.cpp
-    src/Joueur.cpp
-    src/Partie.cpp
+set(SRCS_CORE
+    src/Core/Bloc.cpp
+    src/Core/Grille.cpp
+    src/Core/Bombe.cpp
+    src/Core/Explosion.cpp
+    src/Core/Joueur.cpp
+    src/Core/Partie.cpp
     )
     
-set(HEADERS
-    src/Bloc.h
-    src/Grille.h
-    src/Bombe.h
-    src/Explosion.h
-    src/Joueur.h
-    src/Partie.h
+set(HEADERS_CORE
+    src/Core/Bloc.h
+    src/Core/Grille.h
+    src/Core/Bombe.h
+    src/Core/Explosion.h
+    src/Core/Joueur.h
+    src/Core/Partie.h
     )
 
-add_executable(Bomberman ${SRCS} ${HEADERS})
+set(TEXT
+    src/JeuTextuel/main.cpp
+    )
+
+set(GRAPH
+    src/JeuGraphique/Affichage.cpp
+    src/JeuGraphique/affichage.h
+    src/JeuGraphique/main.cpp
+    )
+
+add_executable(BombermanTextuel ${SRCS_CORE} ${HEADERS_CORE} ${TEXT})
+
+add_executable(BombermanGraphique ${SRCS_CORE} ${HEADERS_CORE} ${GRAPH})
