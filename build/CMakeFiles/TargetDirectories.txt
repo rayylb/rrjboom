@@ -1,3 +1,0 @@
-/home/rym/Bureau/rrjboom/build/CMakeFiles/Bomberman.dir
-/home/rym/Bureau/rrjboom/build/CMakeFiles/edit_cache.dir
-/home/rym/Bureau/rrjboom/build/CMakeFiles/rebuild_cache.dir
