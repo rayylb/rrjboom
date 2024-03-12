@@ -28,9 +28,8 @@ class Partie {
         std::vector<Bombe>& getBombes();
         std::vector<Explosion>& getExplosions();
 
-        void actionsJoueursTerminal();
+        void actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2);
         void avancerPartie();
-        void afficherTerminal();
 
         void creerExplosions(Bombe source);
         bool caseEstExplosee(int posX, int posY);

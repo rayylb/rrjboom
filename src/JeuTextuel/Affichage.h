@@ -1,7 +1,7 @@
 #ifndef _AFFICHAGE_H
 #define _AFFICHAGE_H
 
-#include "src/Core/Partie.h"
+#include "../Core/Partie.h"
 
 class Affichage {
     private:
@@ -9,7 +9,12 @@ class Affichage {
         int menu;
     
     public:
-        void commencerJeu();
+        void boucleJeu();
+        void nouvellePartie();
+        void afficherPartie();
+        void tourDeJeu();
+
+        void convertirMove(char up, char left, char down, char right, char& mov);
 };
 
 #endif

@@ -21,15 +21,17 @@ set(HEADERS_CORE
     )
 
 set(TEXT
+    src/JeuTextuel/Affichage.cpp
+    src/JeuTextuel/Affichage.h
     src/JeuTextuel/main.cpp
     )
 
 set(GRAPH
     src/JeuGraphique/Affichage.cpp
-    src/JeuGraphique/affichage.h
+    src/JeuGraphique/Affichage.h
     src/JeuGraphique/main.cpp
     )
 
-add_executable(BombermanTextuel ${SRCS_CORE} ${HEADERS_CORE} ${TEXT})
+add_executable(BombTex ${SRCS_CORE} ${HEADERS_CORE} ${TEXT})
 
-add_executable(BombermanGraphique ${SRCS_CORE} ${HEADERS_CORE} ${GRAPH})
+#add_executable(BombGraph ${SRCS_CORE} ${HEADERS_CORE} ${GRAPH})

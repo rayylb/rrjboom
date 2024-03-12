@@ -5,18 +5,6 @@ void Partie::initPartie() {
     grille.initGrille();
     joueur1.spawn(true, 0, 0);
     joueur2.spawn(false, grille.getDimX()-1, grille.getDimY()-1);
-    afficherTerminal();
-    while(joueur1.estVivant() && joueur2.estVivant()) { ///BOUCLE DE JEU
-        actionsJoueursTerminal();
-        avancerPartie();
-        afficherTerminal();
-    }
-    if(joueur1.estVivant())
-        std::cout<<"Victoire du joueur 1!"<<std::endl;
-    else if(joueur2.estVivant())
-        std::cout<<"Victoire du joueur 2!"<<std::endl;
-    else
-        std::cout<<"Personne a gagné..."<<std::endl;
 }
 
 Grille& Partie::getGrille() {
@@ -39,61 +27,52 @@ std::vector<Explosion>& Partie::getExplosions() {
     return explosions;
 }
 
-void Partie::actionsJoueursTerminal() {
-    char touche;
+void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     int jx, jy;
 
     //////////JOUEUR1
-    std::cout<<"Joueur1 mouvement: ZQSD"<<std::endl;
-    std::cin>>touche;
     jx = joueur1.getPositionX();
     jy = joueur1.getPositionY();
-    switch(touche) {
-        case('Z') : {
+    switch(movJ1) {
+        case('U') : {
             if(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1)))
                 {joueur1.deplacementH(); jy--;} break;}
-        case('Q') : {
+        case('L') : {
             if(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy)))
                 {joueur1.deplacementG(); jx--;} break;}
-        case('S') : {
+        case('D') : {
             if(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1)))
                 {joueur1.deplacementB(); jy++;} break;}
-        case('D') : {
+        case('R') : {
             if(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy)))
                 {joueur1.deplacementD(); jx++;} break;}
         default: break;
     }
-    std::cout<<"Joueur1 poser bombe: X"<<std::endl;
-    std::cin>>touche;
-    if (touche == 'X' && joueur1.getNbBombes() < joueur1.getNbBombesMax()) {
+    if (bombJ1 == 'X' && joueur1.getNbBombes() < joueur1.getNbBombesMax()) {
         Bombe newbombe(jx, jy, joueur1.getPorteeBombe());
         bombes.push_back(newbombe);
         joueur1.poserBombe();
     }
 
     //////////JOUEUR2
-    std::cout<<"Joueur2 mouvement: IJKL"<<std::endl;
-    std::cin>>touche;
     jx = joueur2.getPositionX();
     jy = joueur2.getPositionY();
-    switch(touche) {
-        case('I') : {
+    switch(movJ2) {
+        case('U') : {
             if(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1)))
                 {joueur2.deplacementH(); jy--;} break;}
-        case('J') : {
+        case('L') : {
             if(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy)))
                 {joueur2.deplacementG(); jx--;} break;}
-        case('K') : {
+        case('D') : {
             if(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1)))
                 {joueur2.deplacementB(); jy++;} break;}
-        case('L') : {
+        case('R') : {
             if(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy)))
                 {joueur2.deplacementD(); jx++;} break;}
         default: break;
     }
-    std::cout<<"Joueur1 poser bombe: P"<<std::endl;
-    std::cin>>touche;
-    if (touche == 'P' && joueur2.getNbBombes() < joueur2.getNbBombesMax()) {
+    if (bombJ2 == 'X' && joueur2.getNbBombes() < joueur2.getNbBombesMax()) {
         Bombe newbombe(jx, jy, joueur2.getPorteeBombe());
         bombes.push_back(newbombe);
         joueur2.poserBombe();
@@ -122,32 +101,6 @@ void Partie::avancerPartie() {
             }
         }
     }
-}
-
-void Partie::afficherTerminal() {
-    std::cout<<std::endl;
-    for(int j = 0; j < grille.getDimY(); j++) {
-        for(int i = 0; i < grille.getDimX(); i++) { ///AFFICHAGE DES CASES AVEC ORDRE DE PRIORITE
-            if(grille.infoCase(i, j).onPeutMarcher() == false && grille.infoCase(i, j).estDestructible() == false)
-                std::cout<<"X";
-            else if(caseEstExplosee(i, j))
-                std::cout<<"#";
-            else if(i == joueur1.getPositionX() && j == joueur1.getPositionY())
-                std::cout<<"1";
-            else if(i == joueur2.getPositionX() && j == joueur2.getPositionY())
-                std::cout<<"2";
-            else if(caseEstMinee(i, j))
-                std::cout<<"B";
-            else if(grille.infoCase(i, j).estDestructible() == true)
-                std::cout<<"=";
-            else if(grille.infoCase(i, j).aBonus() == true)
-                std::cout<<"S";
-            else
-                std::cout<<" ";
-        }
-        std::cout<<std::endl;
-    }
-    std::cout<<std::endl;
 }
 
 void Partie::creerExplosions(Bombe source) {
