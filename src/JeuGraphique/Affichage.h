@@ -13,8 +13,6 @@ private:
     SDL_Texture *textureFond;
 
 public:
-Affichage();
-~Affichage();
 void initFenetre();
 void detruireFenetre();
 }
