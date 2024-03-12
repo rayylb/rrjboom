@@ -13,4 +13,8 @@ class Affichage{
     SDL_Renderer * rendu;
     SDL_Texture *textureFond;
 
+int DimX,DimY;
+SDL_Window * fenetre;
+SDL_Renderer * rendu;
+SD_Texture *textureFond;
 }
