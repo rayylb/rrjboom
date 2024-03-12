@@ -20,8 +20,14 @@ class Partie {
         std::vector<Explosion> explosions;
 
     public:
-        void initJeu(Grille grille_jeu);
-        void nouvellePartie();
+        void initPartie();
+
+        Grille& getGrille();
+        Joueur& getJoueur1();
+        Joueur& getJoueur2();
+        std::vector<Bombe>& getBombes();
+        std::vector<Explosion>& getExplosions();
+
         void actionsJoueursTerminal();
         void avancerPartie();
         void afficherTerminal();

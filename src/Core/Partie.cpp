@@ -1,11 +1,7 @@
 #include "Partie.h"
 #include <iostream>
 
-void Partie::initJeu(Grille grille_jeu) {
-    grille = grille_jeu;
-}
-
-void Partie::nouvellePartie() {
+void Partie::initPartie() {
     grille.initGrille();
     joueur1.spawn(true, 0, 0);
     joueur2.spawn(false, grille.getDimX()-1, grille.getDimY()-1);
@@ -21,6 +17,26 @@ void Partie::nouvellePartie() {
         std::cout<<"Victoire du joueur 2!"<<std::endl;
     else
         std::cout<<"Personne a gagné..."<<std::endl;
+}
+
+Grille& Partie::getGrille() {
+    return grille;
+}
+
+Joueur& Partie::getJoueur1() {
+    return joueur1;
+}
+
+Joueur& Partie::getJoueur2() {
+    return joueur2;
+}
+
+std::vector<Bombe>& Partie::getBombes() {
+    return bombes;
+}
+
+std::vector<Explosion>& Partie::getExplosions() {
+    return explosions;
 }
 
 void Partie::actionsJoueursTerminal() {
