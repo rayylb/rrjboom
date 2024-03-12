@@ -1,5 +1,5 @@
-#ifndef _AFFICHAGE_H
-#define _AFFICHAGE_H
+#ifndef _AFFICHAGETEXTE_H
+#define _AFFICHAGETEXTE_H
 
 #include "../Core/Partie.h"
 
