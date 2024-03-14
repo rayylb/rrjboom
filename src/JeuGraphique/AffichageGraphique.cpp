@@ -14,7 +14,7 @@ void AffichageGraphique::initFenetre(int width, int height) {
 }
 
 void AffichageGraphique::afficherFenetre() {
-    SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(rendu, 0, 0, 255, 255);
     SDL_RenderClear(rendu);
     texture = IMG_LoadTexture(rendu, "bloc destructible.png");
     SDL_RenderCopy(rendu, texture, NULL, NULL);
