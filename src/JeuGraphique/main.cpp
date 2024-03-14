@@ -8,7 +8,7 @@ int main(int argc,char *argv[]) {
   AffichageGraphique aff;
   aff.initFenetre(800, 600);
   aff.afficherFenetre();
-  SDL_Delay(9000); 
+  //SDL_Delay(9000); 
   aff.detruireFenetre();
   return 0;
 }
