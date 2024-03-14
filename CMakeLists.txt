@@ -39,5 +39,12 @@ find_package(SDL2_image REQUIRED)
 
 add_executable(BombTex ${SRCS_CORE} ${HEADERS_CORE} ${TEXT})
 add_executable(BombGraph ${SRCS_CORE} ${HEADERS_CORE} ${GRAPH})
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
-target_link_libraries(BombGraph ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+
+target_include_directories(BombGraph PRIVATE
+    ${SDL2_INCLUDE_DIRS}
+    ${SDL2_IMAGE_INCLUDE_DIRS}
+    )
+target_link_libraries(BombGraph PRIVATE 
+    SDL2
+    SDL2_image
+    )
