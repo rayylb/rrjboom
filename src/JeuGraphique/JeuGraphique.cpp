@@ -31,8 +31,12 @@ void JeuGraphique::jeuRectangle() {
                     break;
                 }
         }
-        recX += (movX);
-        recY += (movY);
+        if (recX + movX >= 0 && recX + movX <= 800-100) {
+            recX += (2*movX);
+        }
+        if (recY + movY >= 0 && recY + movY <= 600-100) {
+            recY += (2*movY);
+        }
         affichage.afficherRectangle(recX, recY);
         SDL_Delay(16);
     }
