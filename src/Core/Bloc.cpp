@@ -52,3 +52,13 @@ void Bloc::blocDes(bool bonus){
     bonusPresent = bonus;
     peutMarcher = false;
 }
+int Bloc::getType(){
+    if (onPeutMarcher() == true)
+        return 0;
+    else if (estDestructible() == true)
+        return 1;
+    else if (estDestructible() == false)
+        return 2;
+    else
+        return 3;
+}

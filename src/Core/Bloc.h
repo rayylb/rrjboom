@@ -41,6 +41,8 @@ public:
     */
     bool aBonus();
 
+    int getType();
+
     /**
     * @brief Retire le bonus de la case en modifier la valeur du paramètre booléen 'BonusPresent' en false.
     */

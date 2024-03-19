@@ -5,7 +5,8 @@
 #include "JeuGraphique.h"
 
 int main(int argc,char *argv[]) {
-  JeuGraphique jeu;
-  jeu.jeuRectangle();
+    JeuGraphique jeu;
+    jeu.jeuSprite();
+  
   return 0;
 }

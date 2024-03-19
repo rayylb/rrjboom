@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include "../Core/Grille.h"
 
 class AffichageGraphique {
     private:
@@ -18,7 +19,8 @@ class AffichageGraphique {
         void detruireFenetre();
 
         void afficherRectangle(int posX, int posY);
-        void afficherSprite(int posX, int posY);
+        void afficherSprite(int posX, int posY, int type_bloc);
+        void afficherGrille(Grille grille);
 };
 
 #endif
