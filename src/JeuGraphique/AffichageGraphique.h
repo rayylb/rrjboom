@@ -19,7 +19,7 @@ class AffichageGraphique {
         void detruireFenetre();
 
         void afficherRectangle(int posX, int posY);
-        void afficherSprite(int posX, int posY, int type_bloc);
+        void afficherSprite(int posX, int posY, int type_bloc, int taille_bloc);
 };
 
 #endif
