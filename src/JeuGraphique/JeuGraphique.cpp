@@ -59,7 +59,7 @@ void JeuGraphique::jeuSprite() {
         for(int i = 0; i < dimX; i++) {
             for(int j = 0; j < dimY; j++) {
                 int type_bloc = jeu.getGrille().infoCase(i, j).getType();
-                affichage.afficherSprite((i*50), (j*50), type_bloc);
+                affichage.afficherSprite((i*100), (j*100), type_bloc);
             }
         }
         SDL_Delay(16);
