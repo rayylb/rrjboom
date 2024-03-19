@@ -24,8 +24,10 @@ class JeuGraphique {
 
         void boucleJeuMain();
         void nouvellePartie(int taille_bloc);
-        void afficherPartie();
+        void afficherPartie(int taille_bloc);
         void tourDeJeu(bool& stillRunning);
+
+        void convertirTouches(float& joueurX, float& joueurY, char& mov);
 };
 
 #endif

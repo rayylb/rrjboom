@@ -22,17 +22,14 @@ void AffichageGraphique::detruireFenetre() {
     SDL_Quit();
 }
 
-void AffichageGraphique::afficherRectangle(int posX, int posY) {
-    SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
-    SDL_RenderClear(rendu);
+void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int widht) {
     SDL_Rect rect;
     rect.x = posX;
     rect.y = posY;
-    rect.h = 100;
-    rect.w = 100;
-    SDL_SetRenderDrawColor(rendu, 50, 100, 0, 255);
+    rect.h = height;
+    rect.w = widht;
+    SDL_SetRenderDrawColor(rendu, 100, 100, 200, 255);
     SDL_RenderDrawRect(rendu, &rect);
-    void afficherGrille(Grille grille);
     SDL_RenderPresent(rendu);
 }
 
