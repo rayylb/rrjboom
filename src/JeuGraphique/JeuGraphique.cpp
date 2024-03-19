@@ -66,3 +66,25 @@ void JeuGraphique::jeuSprite() {
     }
     affichage.detruireFenetre();
 }
+
+void JeuGraphique::boucleJeu() {
+    nouvellePartie();
+}
+
+void JeuGraphique::nouvellePartie() {
+    jeu.initPartie();
+    afficherPartie();
+    while(jeu.getJoueur1().estVivant() && jeu.getJoueur2().estVivant()) {
+        tourDeJeu();
+        afficherPartie();
+        SDL_Delay(16);
+    }
+}
+
+void JeuGraphique::afficherPartie() {
+
+}
+
+void JeuGraphique::tourDeJeu() {
+    
+}

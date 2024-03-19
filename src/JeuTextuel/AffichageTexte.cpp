@@ -2,7 +2,6 @@
 #include "AffichageTexte.h"
 
 void AffichageTexte::boucleJeu() {
-    Partie jeu;
     bool jeuFini = false;
     char reponse;
     std::cout<<"Bienvenue dans Bomberman !"<<std::endl;

@@ -13,6 +13,11 @@ class JeuGraphique {
     public:
         void jeuRectangle();
         void jeuSprite();
+
+        void boucleJeu();
+        void nouvellePartie();
+        void afficherPartie();
+        void tourDeJeu();
 };
 
 #endif
