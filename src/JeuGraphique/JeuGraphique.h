@@ -9,23 +9,10 @@ class JeuGraphique {
     private:
         Partie jeu;
         AffichageGraphique affichage;
-        float joueur1X;
-        float joueur1Y;
-        float joueur2X;
-        float joueur2Y;
-        int joueur1movX;
-        int joueur1movY;
-        int joueur2movX;
-        int joueur2movY;
 
     public:
         void jeuRectangle();
         void jeuSprite();
-
-        void boucleJeuMain();
-        void nouvellePartie();
-        void afficherPartie();
-        void tourDeJeu(bool stillRunning);
 };
 
 #endif
