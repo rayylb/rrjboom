@@ -23,9 +23,9 @@ class JeuGraphique {
         void jeuSprite();
 
         void boucleJeuMain();
-        void nouvellePartie();
+        void nouvellePartie(int taille_bloc);
         void afficherPartie();
-        void tourDeJeu(bool stillRunning);
+        void tourDeJeu(bool& stillRunning);
 };
 
 #endif

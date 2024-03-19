@@ -59,7 +59,7 @@ void JeuGraphique::jeuSprite() {
         for(int i = 0; i < dimX; i++) {
             for(int j = 0; j < dimY; j++) {
                 int type_bloc = jeu.getGrille().infoCase(i, j).getType();
-                affichage.afficherSprite((i*100), (j*100), type_bloc);
+                affichage.afficherSprite(i, j, type_bloc, 64);
             }
         }
         SDL_Delay(16);
@@ -68,10 +68,10 @@ void JeuGraphique::jeuSprite() {
 }
 
 void JeuGraphique::boucleJeuMain() {
-    nouvellePartie();
+    nouvellePartie(64);
 }
 
-void JeuGraphique::nouvellePartie() {
+void JeuGraphique::nouvellePartie(int taille_bloc) {
     joueur1X = 0.5;
     joueur1Y = 0.5;
     joueur2X = 0.5;
@@ -81,6 +81,7 @@ void JeuGraphique::nouvellePartie() {
     joueur2movX = 0;
     joueur2movY = 0;
     jeu.initPartie();
+    affichage.initFenetre(jeu.getGrille().getDimX()*taille_bloc, jeu.getGrille().getDimY()*taille_bloc);
     afficherPartie();
     bool running = true;
     while(running) {
@@ -96,12 +97,12 @@ void JeuGraphique::afficherPartie() {
     for(int i = 0; i < dimX; i++) {
         for(int j = 0; j < dimY; j++) {
             int type_bloc = jeu.getGrille().infoCase(i, j).getType();
-            affichage.afficherSprite((i*50), (j*50), type_bloc);
+            affichage.afficherSprite(i, j, type_bloc, 64);
         }
     }
 }
 
-void JeuGraphique::tourDeJeu(bool stillRunning) {
+void JeuGraphique::tourDeJeu(bool& stillRunning) {
     SDL_Event event;
     int recX = 100;
     int recY = 100;
@@ -126,10 +127,10 @@ void JeuGraphique::tourDeJeu(bool stillRunning) {
                         case SDLK_RIGHT : if(movX>0) movX = 0; break;
                     }
                     break;
-                }
-        }
-        recX += (movX);
-        recY += (movY);
-    if (jeu.getJoueur1().estVivant() && jeu.getJoueur2().estVivant())
+            }
+    }
+    recX += (movX);
+    recY += (movY);
+    if ((!jeu.getJoueur1().estVivant()) || (!jeu.getJoueur2().estVivant()))
         stillRunning = false;
 }

@@ -36,7 +36,7 @@ void AffichageGraphique::afficherRectangle(int posX, int posY) {
     SDL_RenderPresent(rendu);
 }
 
-void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc) {
+void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc, int taille_bloc) {
     if (rendu == nullptr) {
         std::cout << "Erreur : Le rendu n'a pas été initialisé." << std::endl;
         return;
@@ -67,9 +67,8 @@ void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc) {
         std::cout << "Erreur : Création de la texture impossible." << std::endl;
         return;
     }
-    SDL_Rect srcRect = {0, 0, 32, 32};
-    SDL_Rect destRect = {posX, posY, 100, 100};
-    SDL_RenderCopy(rendu, texture, &srcRect, &destRect);
+    SDL_Rect destRect = {posX*taille_bloc, posY*taille_bloc, taille_bloc, taille_bloc};
+    SDL_RenderCopy(rendu, texture, NULL, &destRect);
     SDL_DestroyTexture(texture);
     SDL_RenderPresent(rendu);
 }
