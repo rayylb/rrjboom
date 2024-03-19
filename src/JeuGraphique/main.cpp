@@ -7,6 +7,6 @@
 int main(int argc,char *argv[]) {
     srand(time(NULL));
     JeuGraphique jeu;
-    jeu.jeuRectangle();
+    jeu.jeuSprite();
   return 0;
 }

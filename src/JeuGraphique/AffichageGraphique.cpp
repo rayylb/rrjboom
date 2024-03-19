@@ -45,7 +45,7 @@ void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc) {
     surface = nullptr;
     switch (type_bloc) {
         case 0:
-            surface = IMG_Load("../data/bloc_indestructible.png");
+            surface = IMG_Load("../data/bloc_sol.png");
             break;
         case 1:
             surface = IMG_Load("../data/bloc_destructible.png");
