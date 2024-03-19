@@ -40,8 +40,9 @@ void JeuGraphique::jeuRectangle() {
 }
 
 void JeuGraphique::jeuSprite() {
-    Grille grille = jeu.getGrille();
-    grille.initGrille();
+    jeu.getGrille().initGrille();
+    int dimX = jeu.getGrille().getDimX();
+    int dimY = jeu.getGrille().getDimY();
     affichage.initFenetre(800, 600);
     SDL_Event event;
     bool running = true;
@@ -51,12 +52,13 @@ void JeuGraphique::jeuSprite() {
                 running = false;
             }
         }
-        for(int i = 0; i < grille.getDimX(); i++) {
-            for(int j = 0; j < grille.getDimY(); j++) {
-                int type_bloc = grille.infoCase(i, j).getType();
-                affichage.afficherSprite((i*100), (j*100), type_bloc);
+        for(int i = 0; i < dimX; i++) {
+            for(int j = 0; j < dimY; j++) {
+                int type_bloc = jeu.getGrille().infoCase(i, j).getType();
+                affichage.afficherSprite((i*50), (j*50), type_bloc);
             }
         }
+        SDL_Delay(16);
     }
     affichage.detruireFenetre();
 }

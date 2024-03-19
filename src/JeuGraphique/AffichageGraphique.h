@@ -12,15 +12,14 @@ class AffichageGraphique {
         SDL_Window* fenetre;
         SDL_Renderer* rendu;
         SDL_Texture* texture;
+        SDL_Surface* surface;
 
     public:
         void initFenetre(int width, int height);
-        void afficherFenetre();
         void detruireFenetre();
 
         void afficherRectangle(int posX, int posY);
         void afficherSprite(int posX, int posY, int type_bloc);
-        void afficherGrille(Grille grille);
 };
 
 #endif

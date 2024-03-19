@@ -41,8 +41,6 @@ public:
     */
     bool aBonus();
 
-    int getType();
-
     /**
     * @brief Retire le bonus de la case en modifier la valeur du paramètre booléen 'BonusPresent' en false.
     */
@@ -69,6 +67,8 @@ public:
     * @brief Transforme un bloc en "bloc mur" en affectant destructible = false, bonusPresent = false et peutMarcher = false
     */
     void blocMur();
+
+    int getType();
 };
 
 
