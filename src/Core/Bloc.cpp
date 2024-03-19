@@ -52,6 +52,7 @@ void Bloc::blocDes(bool bonus){
     bonusPresent = bonus;
     peutMarcher = false;
 }
+
 int Bloc::getType(){
     if (onPeutMarcher() == true)
         return 0;
