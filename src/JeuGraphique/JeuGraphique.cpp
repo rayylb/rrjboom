@@ -1,20 +1,18 @@
 #include "JeuGraphique.h"
 
 void JeuGraphique::jeuRectangle() {
-    AffichageGraphique aff;
-    aff.initFenetre(800, 600);
-    aff.afficherFenetre();
-    //SDL_Delay(9000); 
+    affichage.initFenetre(800, 600);
+    SDL_Event event;
     bool running = true;
     while(running) {
-        SDL_Event event;
         while(SDL_PollEvent(&event)) {
             if(event.type == SDL_QUIT){
                 running = false;
             }
         }
+        affichage.afficherRectangle(100, 100);
     }
-    aff.detruireFenetre();
+    affichage.detruireFenetre();
 }
 
 void JeuGraphique::jeuSprite() {

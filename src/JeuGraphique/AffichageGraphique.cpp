@@ -26,12 +26,14 @@ void AffichageGraphique::detruireFenetre() {
 }
 
 void AffichageGraphique::afficherRectangle(int posX, int posY) {
+    SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     SDL_RenderClear(rendu);
     SDL_Rect rect;
     rect.x = posX;
     rect.y = posY;
     rect.h = 100;
     rect.w = 100;
+    SDL_SetRenderDrawColor(rendu, 50, 100, 0, 255);
     SDL_RenderDrawRect(rendu, &rect);
     SDL_RenderPresent(rendu);
 }
