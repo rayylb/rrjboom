@@ -58,6 +58,7 @@ void JeuGraphique::jeuSprite() {
                 affichage.afficherSprite((i*50), (j*50), type_bloc);
             }
         }
+        SDL_Delay(16);
     }
     affichage.detruireFenetre();
 }

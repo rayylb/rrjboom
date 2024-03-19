@@ -7,6 +7,5 @@
 int main(int argc,char *argv[]) {
     JeuGraphique jeu;
     jeu.jeuSprite();
-  
   return 0;
 }
