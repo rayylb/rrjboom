@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-//#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 class AffichageGraphique {
     private:
@@ -16,6 +16,9 @@ class AffichageGraphique {
         void initFenetre(int width, int height);
         void afficherFenetre();
         void detruireFenetre();
+
+        void afficherRectangle(int posX, int posY);
+        void afficherSprite(int posX, int posY);
 };
 
 #endif

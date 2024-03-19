@@ -11,6 +11,8 @@ class JeuGraphique {
         AffichageGraphique affichage;
 
     public:
+        void jeuRectangle();
+        void jeuSprite();
 };
 
 #endif
