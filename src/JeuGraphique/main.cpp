@@ -5,6 +5,7 @@
 #include "JeuGraphique.h"
 
 int main(int argc,char *argv[]) {
+    srand(time(NULL));
     JeuGraphique jeu;
     jeu.jeuRectangle();
   return 0;
