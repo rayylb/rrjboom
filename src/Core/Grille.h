@@ -4,7 +4,7 @@
 #include "Bloc.h"
 
 /// constantes GRILLE_DIMX et GRILLE_DIMY
-const int GRILLE_DIMX = 7;
+const int GRILLE_DIMX = 9;
 const int GRILLE_DIMY = 5;
 
 /**

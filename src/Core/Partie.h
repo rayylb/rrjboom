@@ -5,21 +5,31 @@
 #include "Joueur.h"
 #include "Bombe.h"
 #include "Explosion.h"
-
 #include <vector>
 
 const int PARTIE_MAX_BOMBES = 9;
 const int PARTIE_MAX_FLAMES = 9;
 
+/*
+* @class Partie
+* @brief Classe représentant une partie de jeu
+* Elle contient une grille, deux joueurs, des bombes et des explosions
+*
+*/
+
 class Partie {
     private:
-        Grille grille;
-        Joueur joueur1;
-        Joueur joueur2;
-        std::vector<Bombe> bombes;
-        std::vector<Explosion> explosions;
+        Grille grille; ///< La grille de jeu
+        Joueur joueur1; ///< Le joueur 1
+        Joueur joueur2; ///< Le joueur 2
+        std::vector<Bombe> bombes; ///< La liste des bombes posées sur la grille
+        std::vector<Explosion> explosions; ///< La liste des explosions sur la grille
 
     public:
+
+        /**
+         * @brief Fonction qui initialise une partie de jeu
+         */
         void initPartie();
 
         Grille& getGrille();

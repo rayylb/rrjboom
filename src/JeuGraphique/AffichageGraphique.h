@@ -3,7 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include "../Core/Grille.h"
 
 class AffichageGraphique {
@@ -18,8 +17,8 @@ class AffichageGraphique {
         void initFenetre(int width, int height);
         void detruireFenetre();
 
-        void afficherRectangle(int posX, int posY);
-        void afficherSprite(int posX, int posY, int type_bloc);
+        void afficherRectangle(int posX, int posY, int widht, int height);
+        void afficherSprite(int posX, int posY, int type_bloc, int taille_bloc);
 };
 
 #endif
