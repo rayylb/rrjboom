@@ -10,16 +10,51 @@ void AffichageGraphique::initFenetre(int width, int height) {
     dimY = height;
     fenetre = SDL_CreateWindow("Rrjboom", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimX, dimY, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     rendu = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+    if (rendu == nullptr) {
+        std::cout << "Erreur : Le rendu n'a pas été initialisé." << std::endl;
+        return;
+    }
     IMG_Init(IMG_INIT_PNG);
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     SDL_RenderClear(rendu);
+    for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
+        textures[i] = nullptr;
+        surface = nullptr;
+        switch (i) {
+            case 0: surface = IMG_Load("../data/bloc_sol.png"); break;
+            case 1: surface = IMG_Load("../data/bloc_destructible.png"); break;
+            case 2: surface = IMG_Load("../data/bloc_indestructible.png"); break;
+            case 3: surface = IMG_Load("../data/personn1.png"); break;
+            case 4: surface = IMG_Load("../data/personn2.png"); break;
+            default: std::cout << "Erreur : Type de bloc non pris en charge." << std::endl; return;
+        }
+        if (surface == nullptr) {
+            std::cout << "Erreur : Chargement de l'image impossible." << std::endl;
+            return;
+        }
+        textures[i] = SDL_CreateTextureFromSurface(rendu, surface);
+        SDL_FreeSurface(surface);
+        if (textures[i] == nullptr) {
+            std::cout << "Erreur : Création de la texture impossible." << std::endl;
+            return;
+        }
+    }
 }
 
 void AffichageGraphique::detruireFenetre() {
-    SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(rendu);
     SDL_DestroyWindow(fenetre);
+    for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++)
+        SDL_DestroyTexture(textures[i]);
     SDL_Quit();
+}
+
+void AffichageGraphique::clearRendu() {
+    SDL_RenderClear(rendu);
+}
+
+void AffichageGraphique::afficherRendu() {
+    SDL_RenderPresent(rendu);
 }
 
 void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int widht) {
@@ -30,48 +65,9 @@ void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int w
     rect.w = widht;
     SDL_SetRenderDrawColor(rendu, 100, 100, 200, 255);
     SDL_RenderDrawRect(rendu, &rect);
-    SDL_RenderPresent(rendu);
 }
 
 void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc, int taille_bloc) {
-    if (rendu == nullptr) {
-        std::cout << "Erreur : Le rendu n'a pas été initialisé." << std::endl;
-        return;
-    }
-    texture = nullptr;
-    surface = nullptr;
-    switch (type_bloc) {
-        case 0:
-            surface = IMG_Load("../data/bloc_sol.png");
-            break;
-        case 1:
-            surface = IMG_Load("../data/bloc_destructible.png");
-            break;
-        case 2:
-            surface = IMG_Load("../data/bloc_indestructible.png");
-            break;
-        case 3:
-            surface = IMG_Load("../data/personn1.png");
-            break;
-        case 4:
-            surface = IMG_Load("../data/personn2.png");
-            break;
-        default:
-            std::cout << "Erreur : Type de bloc non pris en charge." << std::endl;
-            return;
-    }
-    if (surface == nullptr) {
-        std::cout << "Erreur : Chargement de l'image impossible." << std::endl;
-        return;
-    }
-    texture = SDL_CreateTextureFromSurface(rendu, surface);
-    SDL_FreeSurface(surface);
-    if (texture == nullptr) {
-        std::cout << "Erreur : Création de la texture impossible." << std::endl;
-        return;
-    }
     SDL_Rect destRect = {posX*taille_bloc, posY*taille_bloc, taille_bloc, taille_bloc};
-    SDL_RenderCopy(rendu, texture, NULL, &destRect);
-    SDL_DestroyTexture(texture);
-    SDL_RenderPresent(rendu);
+    SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }

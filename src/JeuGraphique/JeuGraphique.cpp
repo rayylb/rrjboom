@@ -92,6 +92,7 @@ void JeuGraphique::nouvellePartie(int taille_bloc) {
 }
 
 void JeuGraphique::afficherPartie(int taille_bloc) {
+    affichage.clearRendu();
     int dimX = jeu.getGrille().getDimX();
     int dimY = jeu.getGrille().getDimY();
     for(int i = 0; i < dimX; i++) {
@@ -103,10 +104,10 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     int J1X = jeu.getJoueur1().getPositionX();
     int J1Y = jeu.getJoueur1().getPositionY();
     affichage.afficherSprite(J1X, J1Y, 3, taille_bloc);
-
     int J2X = jeu.getJoueur2().getPositionX();
     int J2Y = jeu.getJoueur2().getPositionY();
     affichage.afficherSprite(J2X, J2Y, 4, taille_bloc);
+    affichage.afficherRendu();
 }
 
 void JeuGraphique::tourDeJeu(bool& stillRunning) {
