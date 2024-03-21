@@ -102,10 +102,11 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     }
     int J1X = jeu.getJoueur1().getPositionX();
     int J1Y = jeu.getJoueur1().getPositionY();
+    affichage.afficherSprite(J1X, J1Y, 3, taille_bloc);
+
     int J2X = jeu.getJoueur2().getPositionX();
     int J2Y = jeu.getJoueur2().getPositionY();
-    affichage.afficherRectangle(J1X*taille_bloc, J1Y*taille_bloc, taille_bloc, taille_bloc);
-    affichage.afficherRectangle((J2X+joueur2X)*taille_bloc, (J2Y+joueur2Y)*taille_bloc, taille_bloc, taille_bloc);
+    affichage.afficherSprite(J2X, J2Y, 4, taille_bloc);
 }
 
 void JeuGraphique::tourDeJeu(bool& stillRunning) {
