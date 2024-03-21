@@ -50,6 +50,12 @@ void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc, int t
         case 2:
             surface = IMG_Load("../data/bloc_indestructible.png");
             break;
+        case 3:
+            surface = IMG_Load("../data/personn1.png");
+            break;
+        case 4:
+            surface = IMG_Load("../data/personn2.png");
+            break;
         default:
             std::cout << "Erreur : Type de bloc non pris en charge." << std::endl;
             return;
