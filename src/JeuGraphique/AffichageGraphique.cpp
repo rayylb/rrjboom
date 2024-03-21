@@ -67,7 +67,7 @@ void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int w
     SDL_RenderDrawRect(rendu, &rect);
 }
 
-void AffichageGraphique::afficherSprite(int posX, int posY, int type_bloc, int taille_bloc) {
-    SDL_Rect destRect = {posX*taille_bloc, posY*taille_bloc, taille_bloc, taille_bloc};
+void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, int taille_bloc) {
+    SDL_Rect destRect = {(int) (posX*taille_bloc), (int) (posY*taille_bloc), taille_bloc, taille_bloc};
     SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }

@@ -22,7 +22,7 @@ class AffichageGraphique {
         void afficherRendu();
 
         void afficherRectangle(int posX, int posY, int width, int height);
-        void afficherSprite(int posX, int posY, int type_bloc, int taille_bloc);
+        void afficherSprite(float posX, float posY, int type_bloc, int taille_bloc);
 };
 
 #endif

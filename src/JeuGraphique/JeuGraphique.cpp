@@ -72,10 +72,6 @@ void JeuGraphique::boucleJeuMain() {
 }
 
 void JeuGraphique::nouvellePartie(int taille_bloc) {
-    joueur1X = 0.5;
-    joueur1Y = 0.5;
-    joueur2X = 0.5;
-    joueur2Y = 0.5;
     joueur1movX = 0;
     joueur1movY = 0;
     joueur2movX = 0;
@@ -101,11 +97,11 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
             affichage.afficherSprite(i, j, type_bloc, taille_bloc);
         }
     }
-    int J1X = jeu.getJoueur1().getPositionX();
-    int J1Y = jeu.getJoueur1().getPositionY();
+    float J1X = jeu.getJoueur1().getExactX();
+    float J1Y = jeu.getJoueur1().getExactY();
     affichage.afficherSprite(J1X, J1Y, 3, taille_bloc);
-    int J2X = jeu.getJoueur2().getPositionX();
-    int J2Y = jeu.getJoueur2().getPositionY();
+    float J2X = jeu.getJoueur2().getExactX();
+    float J2Y = jeu.getJoueur2().getExactY();
     affichage.afficherSprite(J2X, J2Y, 4, taille_bloc);
     affichage.afficherRendu();
 }
@@ -132,6 +128,10 @@ void JeuGraphique::tourDeJeu(bool& stillRunning) {
                         case SDLK_LEFT : joueur2movX = -1; break;
                         case SDLK_RIGHT : joueur2movX = +1; break;
                     }
+                    if(event.key.keysym.sym == SDLK_SPACE)
+                        bombJ1 = 'X';
+                    if(event.key.keysym.sym == SDLK_0)
+                        bombJ2 = 'X';
                     break;
                 case SDL_KEYUP :
                     switch (event.key.keysym.sym) {
@@ -149,33 +149,21 @@ void JeuGraphique::tourDeJeu(bool& stillRunning) {
                     break;
             }
     }
-    joueur1X += (joueur1movX*0.2);
-    joueur1Y += (joueur1movY*0.2);
-    joueur2X += (joueur2movX*0.2);
-    joueur2Y += (joueur2movY*0.2);
-    convertirTouches(joueur1X, joueur1Y, movJ1);
-    convertirTouches(joueur2X, joueur2Y, movJ2);
+    convertirTouches(joueur1movX, joueur1movY, movJ1);
+    convertirTouches(joueur2movX, joueur2movY, movJ2);
     jeu.actionsJoueurs(movJ1, bombJ1, movJ2, bombJ2);
     jeu.avancerPartie();
     if((!jeu.getJoueur1().estVivant()) || (!jeu.getJoueur2().estVivant()))
         stillRunning = false;
 }
 
-void JeuGraphique::convertirTouches(float& joueurX, float& joueurY, char& mov) {
-    if(joueurX > 1) {
-        joueurX--;
+void JeuGraphique::convertirTouches(int joueurMovX, int joueurMovY, char& mov) {
+    if(joueurMovX == 1)
         mov = 'R';
-    }
-    if(joueurX < 0) {
-        joueurX++;
+    if(joueurMovX == -1)
         mov = 'L';
-    }
-    if(joueurY > 1) {
-        joueurY--;
+    if(joueurMovY == 1)
         mov = 'D';
-    }
-    if(joueurY < 0) {
-        joueurY++;
+    if(joueurMovY == -1)
         mov = 'U';
-    }
 }

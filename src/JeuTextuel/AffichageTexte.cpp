@@ -74,7 +74,8 @@ void AffichageTexte::tourDeJeu() {
     convertirMove('Z', 'Q', 'S', 'D', movJ1);
     convertirMove('I', 'J', 'K', 'L', movJ2);
     std::cout<<movJ1<<" "<<bombJ1<<" "<<movJ2<<" "<<bombJ2<<std::endl;
-    jeu.actionsJoueurs(movJ1, bombJ1, movJ2, bombJ2);
+    for(int i = 0; i < 5; i++)
+        jeu.actionsJoueurs(movJ1, bombJ1, movJ2, bombJ2);
     jeu.avancerPartie();
 }
 

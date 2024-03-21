@@ -9,10 +9,6 @@ class JeuGraphique {
     private:
         Partie jeu;
         AffichageGraphique affichage;
-        float joueur1X;
-        float joueur1Y;
-        float joueur2X;
-        float joueur2Y;
         int joueur1movX;
         int joueur1movY;
         int joueur2movX;
@@ -27,7 +23,7 @@ class JeuGraphique {
         void afficherPartie(int taille_bloc);
         void tourDeJeu(bool& stillRunning);
 
-        void convertirTouches(float& joueurX, float& joueurY, char& mov);
+        void convertirTouches(int joueurMovX, int joueurMovY, char& mov);
 };
 
 #endif
