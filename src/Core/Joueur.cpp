@@ -1,53 +1,21 @@
 #include "Joueur.h"
 
 void Joueur::spawn(bool num, int xg, int yg){
-    numero = num;
-    nbBombesMax = 9;
-    nbBombes = 0;
-    porteeBombe = 2;
-    speed = 2;
-    x  = xg;
+    x = xg;
     y = yg;
     xExact = xg+0.5;
     yExact = yg+0.5;
     vivant = true;
+    
+    nbBombesMax = 9;
+    nbBombes = 0;
+    porteeBombe = 2;
+    speed = 2;
+    
     hitboxUP = 0.1;
     hitboxDOWN = 0.4;
     hitboxLEFT = 0.4;
     hitboxRIGHT = 0.4;
-}
-
-int Joueur::getPositionX() {
-    return x;
-}
-
-int Joueur::getPositionY() {
-    return y;
-}
-
-float Joueur::getExactX() {
-    return xExact;
-}
-
-float Joueur::getExactY() {
-    return yExact;
-}
-
-
-int Joueur::getNbBombes() {
-    return nbBombes;
-}
-
-int Joueur::getNbBombesMax() {
-    return nbBombesMax;
-}
-
-int Joueur::getPorteeBombe() {
-    return porteeBombe;
-}
-
-bool Joueur::estVivant() {
-    return vivant;
 }
 
 void Joueur::moveR(bool canSkip) {
@@ -90,19 +58,52 @@ void Joueur::poserBombe() {
     nbBombes++;
 }
 
+void Joueur::recupererBombe() {
+    nbBombes--;
+}
+
 void Joueur::exploser() {
-    vivant= false;
+    vivant = false;
 }
 
 void Joueur::appliquerBonus(BonusType typeBonus) {
-    // Appliquer les effets du bonus au joueur en fonction de son type
     switch(typeBonus) {
-        case BonusType::Speed : speed += 1;
-          
-            break;
-        default:
-         
-            break;
+        case BonusType::Rien : break;
+        case BonusType::BombUp : nbBombesMax += 1; break;
+        case BonusType::FlameUp : porteeBombe += 1; break;
+        case BonusType::SpeedUp : speed += 1; break;
+        default: break;
     }
 }
 
+int Joueur::getPositionX() {
+    return x;
+}
+
+int Joueur::getPositionY() {
+    return y;
+}
+
+float Joueur::getExactX() {
+    return xExact;
+}
+
+float Joueur::getExactY() {
+    return yExact;
+}
+
+bool Joueur::estVivant() {
+    return vivant;
+}
+
+int Joueur::getNbBombes() {
+    return nbBombes;
+}
+
+int Joueur::getNbBombesMax() {
+    return nbBombesMax;
+}
+
+int Joueur::getPorteeBombe() {
+    return porteeBombe;
+}

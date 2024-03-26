@@ -3,22 +3,20 @@
 
 #include "Bloc.h"
 
-/// constantes GRILLE_DIMX et GRILLE_DIMY
-const int GRILLE_DIMX = 9;
-const int GRILLE_DIMY = 5;
+const int GRILLE_DIMX = 9; //Largeur grille
+const int GRILLE_DIMY = 5; //Hauteur grille
 
 /**
- * 
  * @class Grille
  * @brief Classe représentant le plateau de jeu.
- * 
  * La grille est composée de cases, qui peuvent être vides, contenir un mur (destructible ou non), une bombe
  * ou un bonus. Elle est utilisée pour déterminer les déplacements des joueurs, les
  * explosions des bombes et les effets des bonus.
  */
+
 class Grille {
 private:
-    Bloc terrain[GRILLE_DIMX][GRILLE_DIMY]; ///<  Tableau de cases représentant le plateau de jeu
+    Bloc terrain[GRILLE_DIMX][GRILLE_DIMY]; //Tableau de cases représentant le plateau de jeu
 
 public:
     /*

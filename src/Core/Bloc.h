@@ -7,16 +7,15 @@
  * @class Bloc
  *
  * @brief La classe Bloc représente un bloc de la grille. Cette classe permet de créer et manipuler des bloc. 
- * La classe est notamment constituée de booléens permettant de gérer les propriétés de la case: si elle est destructible, si elle est détruite, si une bombe a été
- * posée dessus, si un bonus est présent sur la case... L'entier jouerQuiAPoséLaBombe permet de connaître le joueur qui a posé une bombe, si une bombe a été posée.
+ * La classe est constituée de booléens représentant si elle est destructible, si elle est détruite, si un bonus est présent sur la casee, et lequel.
  */
 
 class Bloc {
 private:
-    bool destructible; ///<   Indique si le bloc est destructible ou indestructible
-    bool bonusPresent; ///<  Indique si un bonus est présent dans ce bloc
-    bool peutMarcher; ///<  Indique si le bloc est détruit ou pas
-    BonusType typeBonus;
+    bool destructible; //Indique si le bloc est destructible ou indestructible
+    bool bonusPresent; //Indique si un bonus est présent dans ce bloc
+    bool peutMarcher; //Indique si le bloc est détruit ou pas
+    BonusType typeBonus; //Bonus présent sur la case
 
 public:
 

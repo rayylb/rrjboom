@@ -1,10 +1,11 @@
 #include "Bombe.h"
 
-Bombe::Bombe(int xpos, int ypos, int flamerange) {
+Bombe::Bombe(int xpos, int ypos, int flamerange, int joueurpose) {
     x = xpos;
     y = ypos;
     range = flamerange;
-    timer = 30;
+    timer = 60;
+    joueur = joueurpose;
 }
 
 int Bombe::getPosX() {
@@ -17,6 +18,10 @@ int Bombe::getPosY() {
 
 int Bombe::getRange() {
     return range;
+}
+
+int Bombe::getJoueur() {
+    return joueur;
 }
 
 void Bombe::avancerTemps() {

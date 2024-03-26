@@ -4,38 +4,38 @@
 void Timer::start() {
     started = true;
     paused = false;
-    debut_timer = SDL_GetTicks();
-    debut_pause = 0;
+    debutTimer = SDL_GetTicks();
+    debutPause = 0;
 }
 
 void Timer::stop() {
     started = false;
     paused = false;
-    debut_timer = 0;
-    debut_pause = 0;
+    debutTimer = 0;
+    debutPause = 0;
 }
 
 void Timer::pause() {
     if (started && !paused) {
         paused = true;
-        debut_pause = SDL_GetTicks() - debut_timer;
+        debutPause = SDL_GetTicks() - debutTimer;
     }
 }
 
 void Timer::unpause() {
     if (started && paused) {
         paused = false;
-        debut_timer = SDL_GetTicks() - debut_pause;
-        debut_pause = 0;
+        debutTimer = SDL_GetTicks() - debutPause;
+        debutPause = 0;
     }
 }
 
-int Timer::temps_timer() {
+int Timer::tempsTimer() {
     if (started) {
         if (paused) {
-            return debut_pause;
+            return debutPause;
         } else {
-            return SDL_GetTicks() - debut_timer;
+            return SDL_GetTicks() - debutTimer;
         }
     }
     return 0;

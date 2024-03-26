@@ -3,9 +3,9 @@
 
 enum BonusType {
     Rien,
-    Fire,
-    Bomb,
-    Speed
+    BombUp,
+    FlameUp,
+    SpeedUp
 };
 
 #endif

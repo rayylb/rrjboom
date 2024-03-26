@@ -11,14 +11,14 @@
 
 class Timer {
     private:
-        int debut_timer; ///< Le temps de début du timer
-        int debut_pause; ///< Le temps de fin du timer
-        bool paused; ///< Indique si le timer est en pause
-        bool started; ///< Indique si le timer a commencé
+        int debutTimer; //Le temps de début du timer
+        int debutPause; //Le temps de fin du timer
+        bool paused; //Indique si le timer est en pause
+        bool started; //Indique si le timer a commencé
     
     public:
 
-        Timer() : debut_timer(0), debut_pause(0), paused(false), started(false) {};
+        Timer() : debutTimer(0), debutPause(0), paused(false), started(false) {};
 
         /*
         * @brief Fonction qui démarre le timer
@@ -44,7 +44,7 @@ class Timer {
         * @brief Fonction qui retourne le temps écoulé depuis le début du timer
         * @return L'entier qui représente le temps écoulé depuis le début du timer
         */
-        int temps_timer();
+        int tempsTimer();
 
         /*
         * @brief Fonction qui indique si le timer est démarré

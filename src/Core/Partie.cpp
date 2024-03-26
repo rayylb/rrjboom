@@ -46,7 +46,7 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     jx = joueur1.getPositionX();
     jy = joueur1.getPositionY();
     if (bombJ1 == 'X' && joueur1.getNbBombes() < joueur1.getNbBombesMax()) {
-        Bombe newbombe(jx, jy, joueur1.getPorteeBombe());
+        Bombe newbombe(jx, jy, joueur1.getPorteeBombe(), 1);
         bombes.push_back(newbombe);
         joueur1.poserBombe();
     }
@@ -66,7 +66,7 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     jx = joueur2.getPositionX();
     jy = joueur2.getPositionY();
     if (bombJ2 == 'X' && joueur2.getNbBombes() < joueur2.getNbBombesMax()) {
-        Bombe newbombe(jx, jy, joueur2.getPorteeBombe());
+        Bombe newbombe(jx, jy, joueur2.getPorteeBombe(), 2);
         bombes.push_back(newbombe);
         joueur2.poserBombe();
     }
@@ -78,6 +78,10 @@ void Partie::avancerPartie() {
             bombes.at(i).avancerTemps();
             if (bombes.at(i).estExplosee()) {
                 creerExplosions(bombes.at(i)); ///EXPLOSIONS DES BOMBES
+                if(bombes.at(i).getJoueur() == 1)
+                    joueur1.recupererBombe();
+                else
+                    joueur2.recupererBombe();
                 bombes.erase(bombes.begin()+i);
             }
         }
@@ -101,47 +105,54 @@ void Partie::creerExplosions(Bombe source) {
     int by = source.getPosY();
     int brange = source.getRange();
     int i, j;
+    int step;
     Explosion newexp(bx, by); //EXPLOSION CENTRE
     explosions.push_back(newexp);
     i = bx+1;
-    while (i <= bx+brange && i < grille.getDimX()) { ///EXPLOSION BAS
+    while (i <= bx+brange && i < grille.getDimX()) { ///EXPLOSION DROITE
         Explosion newexp(i, by);
         explosions.push_back(newexp);
-        grille.detruireCase(i, by);
         if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
-            i = grille.getDimX();
+            step = grille.getDimX();
         else
-            i++;
+            step = i + 1;
+        grille.detruireCase(i, by);
+        i = step;
     }
     i = bx-1;
-    while (i >= bx-brange && i >= 0) { ///EXPLOSION HAUT
+    while (i >= bx-brange && i >= 0) { ///EXPLOSION GAUCHE
         Explosion newexp(i, by);
         explosions.push_back(newexp);
-        grille.detruireCase(i, by);
         if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
-            i = -1;
+            step = -1;
         else
-            i--;
+            step = i - 1;
+        grille.detruireCase(i, by);
+        i = step;
     }
     j = by+1;
-    while (j <= by+brange && j < grille.getDimY()) { ///EXPLOSION DROITE
+    while (j <= by+brange && j < grille.getDimY()) { ///EXPLOSION BAS
         Explosion newexp(bx, j);
         explosions.push_back(newexp);
         grille.detruireCase(bx, j);
         if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
-            j = grille.getDimY();
+            step = grille.getDimY();
         else
-            j++;
+            step = j + 1;
+        grille.detruireCase(bx, j);
+        j = step;
     }
     j = by-1;
-    while (j >= by-brange && j >= 0) { ///EXPLOSION GAUCHE
+    while (j >= by-brange && j >= 0) { ///EXPLOSION HAUT
         Explosion newexp(bx, j);
         explosions.push_back(newexp);
         grille.detruireCase(bx, j);
         if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
-            j = -1;
+            step = -1;
         else
-            j--;
+            step = j - 1;
+        grille.detruireCase(bx, j);
+        j = step;
     }
 }
 
