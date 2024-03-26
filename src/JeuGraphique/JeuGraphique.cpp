@@ -103,6 +103,10 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     float J2X = jeu.getJoueur2().getExactX();
     float J2Y = jeu.getJoueur2().getExactY();
     affichage.afficherSprite(J2X, J2Y, 4, taille_bloc);
+    for(int i = 0; i < jeu.getBombes().size(); i++)
+        affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 5, taille_bloc);
+    for(int i = 0; i < jeu.getExplosions().size(); i++)
+        affichage.afficherRectangle(jeu.getExplosions().at(i).getPosX()*taille_bloc, jeu.getExplosions().at(i).getPosY()*taille_bloc, taille_bloc, taille_bloc);
     affichage.afficherRendu();
 }
 

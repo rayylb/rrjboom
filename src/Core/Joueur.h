@@ -6,10 +6,16 @@ private:
     bool numero; ///<  Numéro du joueur (True pour le joueur 1, False pour le joueur 2)
     int x; ///<  Position en X du joueur sur la grille
     int y; ///<  Position en Y du joueur sur la grille
+    float xExact; ///<  Position en X exacte (flottante) du joueur sur la grille
+    float yExact; ///<  Position en Y exacte (flottante) du joueur sur la grille
     int nbBombes; ///<  Nombre de bombes posées par le joueur
     int nbBombesMax; ///<  Nombre maximum de bombes que le joueur peut poser
     int porteeBombe; ///<  Portée de l'explosion de la bombe du joueur
     bool vivant; ///<  Indique si le joueur est vivant ou non
+    float hitboxUP;
+    float hitboxDOWN;
+    float hitboxLEFT;
+    float hitboxRIGHT;
     
 public:
     void spawn(bool num, int xg, int yg);
@@ -31,6 +37,18 @@ public:
     * @return L'entier joueur.nbBombes qui est le nombre de bombes posées par le joueur
     */
     int getNbBombes();
+
+    /*
+    * @brief Fonction qui retourne la position horizontale exacte du joueur
+    * @return Le flottant joueur.xExact qui est la position horizontale exacte du joueur
+    */
+    float getExactX();
+
+    /*
+    * @brief Fonction qui retourne la position verticale exacte du joueur
+    * @return Le flottant joueur.yExact qui est la position verticale exacte du joueur
+    */
+    float getExactY();
 
     /*
     * @brief Fonction qui retourne le nombre maximum de bombes que le joueur peut poser
