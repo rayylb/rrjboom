@@ -12,30 +12,6 @@ Bloc::Bloc(bool isDestructible, bool hasBonus, bool canWalk) {
     peutMarcher = canWalk;
 }
 
-bool Bloc::estDestructible() {
-    return destructible;
-}
-
-bool Bloc::onPeutMarcher() {
-    return peutMarcher;
-}
-
-bool Bloc::aBonus() {
-    return bonusPresent;
-}
-
-void Bloc::retirerBonus() {
-    bonusPresent = false;
-    typeBonus = BonusType::Rien;
-}
-
-void Bloc::detruire() {
-    if (destructible) {
-        peutMarcher = true;
-        destructible = false;
-    }
-}
-
 void Bloc::blocSol() {
     destructible = false;
     bonusPresent = false;
@@ -55,7 +31,19 @@ void Bloc::blocDes(BonusType bonus) {
     typeBonus = bonus;
 }
 
-int Bloc::getType() {
+void Bloc::retirerBonus() {
+    bonusPresent = false;
+    typeBonus = BonusType::Rien;
+}
+
+void Bloc::detruire() {
+    if (destructible) {
+        peutMarcher = true;
+        destructible = false;
+    }
+}
+
+int Bloc::typeBloc() {
     if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien))
         return 6;
     else if (onPeutMarcher())
@@ -65,7 +53,19 @@ int Bloc::getType() {
     else if (estDestructible() == false)
         return 2;
     else
-        return 3;
+        return -1;
+}
+
+bool Bloc::estDestructible() {
+    return destructible;
+}
+
+bool Bloc::onPeutMarcher() {
+    return peutMarcher;
+}
+
+bool Bloc::aBonus() {
+    return bonusPresent;
 }
 
 BonusType Bloc::getBonusType() {

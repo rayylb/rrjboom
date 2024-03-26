@@ -58,7 +58,7 @@ void JeuGraphique::jeuSprite() {
         }
         for(int i = 0; i < dimX; i++) {
             for(int j = 0; j < dimY; j++) {
-                int type_bloc = jeu.getGrille().infoCase(i, j).getType();
+                int type_bloc = jeu.getGrille().infoCase(i, j).typeBloc();
                 affichage.afficherSprite(i, j, type_bloc, 64);
             }
         }
@@ -93,7 +93,7 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     int dimY = jeu.getGrille().getDimY();
     for(int i = 0; i < dimX; i++) {
         for(int j = 0; j < dimY; j++) {
-            int type_bloc = jeu.getGrille().infoCase(i, j).getType();
+            int type_bloc = jeu.getGrille().infoCase(i, j).typeBloc();
             affichage.afficherSprite(i, j, type_bloc, taille_bloc);
         }
     }
