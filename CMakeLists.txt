@@ -32,6 +32,8 @@ set(GRAPH
     src/JeuGraphique/JeuGraphique.cpp
     src/JeuGraphique/JeuGraphique.h
     src/JeuGraphique/main.cpp
+    src/JeuGraphique/Timer.cpp
+    src/JeuGraphique/Timer.h
     )
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
