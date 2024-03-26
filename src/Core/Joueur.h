@@ -24,34 +24,36 @@ private:
 public:
     void spawn(bool num, int xg, int yg);
 
-    /*
+    /**
     * @brief Fonction qui déplace le joueur vers la droite
     */
     void moveR(bool canSkip);
 
-    /*
+    /**
     * @brief Fonction qui déplace le joueur vers la gauche
     */
     void moveL(bool canSkip);
 
-    /*
+    /**
     * @brief Fonction qui déplace le joueur vers le haut
     */
     void moveU(bool canSkip);
 
-    /*
+    /**
     * @brief Fonction qui déplace le joueur vers le bas
     */
     void moveD(bool canSkip);
 
-    /*
+    /**
     * @brief Fonction qui fait poser une bombe au joueur
     */
     void poserBombe();
 
     void recupererBombe();
 
-    /*
+    void recupererBombe();
+
+    /**
     * @brief Fonction qui fait exploser le joueur
     */
     void exploser();

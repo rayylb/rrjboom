@@ -20,24 +20,24 @@ class Explosion {
         
         Explosion(int xpos, int ypos);
 
-        /*
+        /**
         * @brief Fonction qui retourne la position horizontale de l'explosion
         * @return L'entier explosion.x qui est la position horizontale de l'explosion
         */
         int getPosX();
 
-        /*
+        /**
         * @brief Fonction qui retourne la position verticale de l'explosion
         * @return L'entier explosion.y qui est la position verticale de l'explosion
         */
         int getPosY();
 
-        /*
+        /**
         * @brief Fonction qui avance d'une unité de temps, jusqu'à la fin de l'explosion
         */
         void avancerTemps();
 
-        /*
+        /**
         * @brief Fonction qui retourne un booléen indiquant si l'explosion est terminée
         */
         bool estActif();

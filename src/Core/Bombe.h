@@ -21,19 +21,19 @@ class Bombe {
 
         Bombe(int xpos, int ypos, int flamerange, int joueurpose);
 
-        /*
+        /**
         * @brief Fonction qui retourne la position horizontale de la bombe
         * @return L'entier bombe.x qui est la position horizontale de la bombe
         */
         int getPosX();
 
-        /* 
+        /** 
         * @brief Fonction qui retourne la position verticale de la bombe
         * @return L'entier bombe.y qui est la position verticale de la bombe
         */
         int getPosY();
 
-        /*
+        /**
         * @brief Fonction qui retourne la portée de la bombe
         * @return L'entier bombe.range qui est la portée de la bombe
         */
