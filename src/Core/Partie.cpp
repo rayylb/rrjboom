@@ -29,29 +29,22 @@ std::vector<Explosion>& Partie::getExplosions() {
 
 void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     int jx, jy;
+    BonusType bonus;
 
     //////////JOUEUR1
     jx = joueur1.getPositionX();
     jy = joueur1.getPositionY();
-    BonusType bonus = grille.recupererBonus(jx,jy);
+    bonus = grille.recupererBonus(jx,jy);
     joueur1.appliquerBonus(bonus);
-      //recupere bonus sur la grille
-    //puis on donne le bonus au joueur
     switch(movJ1) {
-        case('U') : {
-            if(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1)))
-                {joueur1.deplacementH(); jy--;} break;}
-        case('L') : {
-            if(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy)))
-                {joueur1.deplacementG(); jx--;} break;}
-        case('D') : {
-            if(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1)))
-                {joueur1.deplacementB(); jy++;} break;}
-        case('R') : {
-            if(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy)))
-                {joueur1.deplacementD(); jx++;} break;}
+        case('U') : joueur1.moveU(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1))); break;
+        case('L') : joueur1.moveL(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy))); break;
+        case('D') : joueur1.moveD(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1))); break;
+        case('R') : joueur1.moveR(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy))); break;
         default: break;
     }
+    jx = joueur1.getPositionX();
+    jy = joueur1.getPositionY();
     if (bombJ1 == 'X' && joueur1.getNbBombes() < joueur1.getNbBombesMax()) {
         Bombe newbombe(jx, jy, joueur1.getPorteeBombe());
         bombes.push_back(newbombe);
@@ -61,24 +54,17 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     //////////JOUEUR2
     jx = joueur2.getPositionX();
     jy = joueur2.getPositionY();
-    joueur2.appliquerBonus(grille.infoCase(jx,jy).getBonusType());
-    //recupere bonus sur la grille
-    //puis on donne le bonus au joueur
+    bonus = grille.recupererBonus(jx,jy);
+    joueur2.appliquerBonus(bonus);
     switch(movJ2) {
-        case('U') : {
-            if(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1)))
-                {joueur2.deplacementH(); jy--;} break;}
-        case('L') : {
-            if(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy)))
-                {joueur2.deplacementG(); jx--;} break;}
-        case('D') : {
-            if(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1)))
-                {joueur2.deplacementB(); jy++;} break;}
-        case('R') : {
-            if(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy)))
-                {joueur2.deplacementD(); jx++;} break;}
+        case('U') : joueur2.moveU(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1))); break;
+        case('L') : joueur2.moveL(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy))); break;
+        case('D') : joueur2.moveD(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1))); break;
+        case('R') : joueur2.moveR(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy))); break;
         default: break;
     }
+    jx = joueur2.getPositionX();
+    jy = joueur2.getPositionY();
     if (bombJ2 == 'X' && joueur2.getNbBombes() < joueur2.getNbBombesMax()) {
         Bombe newbombe(jx, jy, joueur2.getPorteeBombe());
         bombes.push_back(newbombe);

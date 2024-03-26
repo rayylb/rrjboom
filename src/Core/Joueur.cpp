@@ -1,11 +1,11 @@
 #include "Joueur.h"
-#include "Bloc.h"
 
 void Joueur::spawn(bool num, int xg, int yg){
     numero = num;
     nbBombesMax = 9;
     nbBombes = 0;
     porteeBombe = 2;
+    speed = 2;
     x  = xg;
     y = yg;
     xExact = xg+0.5;
@@ -25,6 +25,15 @@ int Joueur::getPositionY() {
     return y;
 }
 
+float Joueur::getExactX() {
+    return xExact;
+}
+
+float Joueur::getExactY() {
+    return yExact;
+}
+
+
 int Joueur::getNbBombes() {
     return nbBombes;
 }
@@ -41,20 +50,40 @@ bool Joueur::estVivant() {
     return vivant;
 }
 
-void Joueur::deplacementD() {
-    x++;
+void Joueur::moveR(bool canSkip) {
+    xExact += (float) speed/10;
+    if((int)xExact > x)
+        if(canSkip)
+            x++;
+        else
+            xExact = x + 0.9;
 }
 
-void Joueur::deplacementG() {
-    x--;
+void Joueur::moveL(bool canSkip) {
+    xExact -= (float) speed/10;
+    if((int)xExact < x)
+        if(canSkip)
+            x--;
+        else
+            xExact = x;
 }
 
-void Joueur::deplacementH() {
-    y--;
+void Joueur::moveU(bool canSkip) {
+    yExact -= (float) speed/10;
+    if((int)yExact < y)
+        if(canSkip)
+            y--;
+        else
+            yExact = y;
 }
 
-void Joueur::deplacementB() {
-    y++;
+void Joueur::moveD(bool canSkip) {
+    yExact += (float) speed/10;
+    if((int)yExact > y)
+        if(canSkip)
+            y++;
+        else
+            yExact = y + 0.9;
 }
 
 void Joueur::poserBombe() {
