@@ -13,6 +13,10 @@ private:
     int porteeBombe; ///<  Portée de l'explosion de la bombe du joueur
     int speed;
     bool vivant; ///<  Indique si le joueur est vivant ou non
+    float hitboxUP;
+    float hitboxDOWN;
+    float hitboxLEFT;
+    float hitboxRIGHT;
     
 public:
     void spawn(bool num, int xg, int yg);

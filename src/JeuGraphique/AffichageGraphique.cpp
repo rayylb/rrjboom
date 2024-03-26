@@ -24,9 +24,9 @@ void AffichageGraphique::initFenetre(int width, int height) {
             case 0: surface = IMG_Load("../data/bloc_sol.png"); break;
             case 1: surface = IMG_Load("../data/bloc_destructible.png"); break;
             case 2: surface = IMG_Load("../data/bloc_indestructible.png"); break;
-            case 3: surface = IMG_Load("../data/personn1.png"); break;
-            case 4: surface = IMG_Load("../data/personn2.png"); break;
-            case 4: surface = IMG_Load("../data/bombe.png"); break;
+            case 3: surface = IMG_Load("../data/joueur1.png"); break;
+            case 4: surface = IMG_Load("../data/joueur2.png"); break;
+            case 5: surface = IMG_Load("../data/bombe.png"); break;
             default: std::cout << "Erreur : Type de bloc non pris en charge." << std::endl; return;
         }
         if (surface == nullptr) {
@@ -70,9 +70,15 @@ void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int w
 
 void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, int taille_bloc) {
     SDL_Rect destRect = {(int) (posX*taille_bloc), (int) (posY*taille_bloc), taille_bloc, taille_bloc};
-    if(type_bloc == 3 || type_bloc == 4)
+    if(type_bloc == 3 || type_bloc == 4) {
         destRect.h = destRect.w*3/2;
-    if(type_bloc == 5)
+        destRect.x -= taille_bloc/2;
+        destRect.y -= taille_bloc;
+    }
+    if(type_bloc == 5) {
         destRect.h = destRect.w*19/15;
+        destRect.y -= taille_bloc*19/15;
+        destRect.y += taille_bloc;
+    }
     SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }

@@ -8,9 +8,13 @@ void Joueur::spawn(bool num, int xg, int yg){
     speed = 2;
     x = xg;
     y = yg;
-    xExact = xg;
-    yExact = yg;
+    xExact = xg+0.5;
+    yExact = yg+0.5;
     vivant = true;
+    hitboxUP = 0.1;
+    hitboxDOWN = 0.4;
+    hitboxLEFT = 0.4;
+    hitboxRIGHT = 0.4;
 }
 
 int Joueur::getPositionX() {
