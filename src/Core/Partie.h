@@ -32,17 +32,65 @@ class Partie {
          */
         void initPartie();
 
+        /**
+         * @brief Fonction qui retourne l'adresse mémoire de la grille de la partie
+         */
         Grille& getGrille();
+
+        /**
+         * @brief Fonction qui retourne l'adresse mémoire du joueur 1
+         */        
         Joueur& getJoueur1();
+
+        /**
+         * @brief Fonction qui retourne l'adresse mémoire du joueur 2
+         */        
         Joueur& getJoueur2();
+
+        /**
+         * @brief Fonction qui retourne la liste des bombes de la partie
+         */        
         std::vector<Bombe>& getBombes();
+
+        /**
+         * @brief Fonction qui retourne la liste des explosions de la partie
+         */
         std::vector<Explosion>& getExplosions();
 
+        /**
+         * @brief Procédure permettant aux joueurs de se déplacer et de poser des bombes
+         * @param movJ1 Mouvement du joueur 1
+         * @param bombJ1 Pose de bombe du joueur 1
+         * @param movJ2 Mouvement du joueur 2
+         * @param bombJ2 Pose de bombe du joueur 2
+         */
         void actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2);
+
+        /**
+         * @brief Procédure qui gère les bombes et les explosions
+         */
         void avancerPartie();
 
+        /**
+         * @brief Procédure qui gère les explosions des bombes
+         * @param source Bombe qui a explosé
+         */
         void creerExplosions(Bombe source);
+
+        /**
+         * @brief Fonction qui indique si la case de coordonnées (posX, posY) est une case explosée par une bombe
+         * @param posX Coordonnée horizontale de la case
+         * @param posY Coordonnée verticale de la case
+         * @return Un booléen indiquant si la case est explosée
+         */   
         bool caseEstExplosee(int posX, int posY);
+
+        /**
+         * @brief Fonction qui indique si la case de coordonnées (posX, posY) est une case minée par une bombe
+         * @param posX Coordonnée horizontale de la case
+         * @param posY Coordonnée verticale de la case
+         * @return Un booléen indiquant si la case est minée
+         */
         bool caseEstMinee(int posX, int posY);
 };
 
