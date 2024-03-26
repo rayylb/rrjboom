@@ -40,12 +40,14 @@ class Bombe {
         int getRange();
         
         int getJoueur();
-        
+
         /**
          * @brief Avance d'une unité de temps, jusqu'à l'explosion.
         */
         void avancerTemps();
 
+        void exploser();
+        
         /**
          * @brief Fonction qui retourne un booléen indiquant si la bombe a explosé
         */

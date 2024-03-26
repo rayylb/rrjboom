@@ -11,10 +11,13 @@ private:
     float yExact; //Position en Y exacte (flottante) du joueur sur la grille
     bool vivant; //Indique si le joueur est vivant ou non
 
-    int nbBombes; //Nombre de bombes posées par le joueur
-    int nbBombesMax; //Nombre maximum de bombes que le joueur peut poser
+    int nbBombesPosee; //Nombre de bombes posées par le joueur
+    int nbBombesPoseeMax; //Nombre maximum de bombes que le joueur peut poser
+    int nbBombesMax;
     int porteeBombe; //ortée de l'explosion de la bombe du joueur
+    int porteeMax;
     int speed;
+    int speedMax;
     
     float hitboxUP;
     float hitboxDOWN;

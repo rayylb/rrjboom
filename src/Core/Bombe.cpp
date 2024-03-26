@@ -29,6 +29,10 @@ void Bombe::avancerTemps() {
         timer -= 1;
 }
 
+void Bombe::exploser() {
+    timer = 0;
+}
+
 bool Bombe::estExplosee() {
     return (timer == 0);
 }

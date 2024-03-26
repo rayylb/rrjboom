@@ -5,7 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include "../Core/Grille.h"
 
-const int AFFICHAGE_NB_TEXTURES = 7; //Nombre de textures en mémoire
+const int AFFICHAGE_NB_TEXTURES = 8; //Nombre de textures en mémoire
 
 class AffichageGraphique {
     private:

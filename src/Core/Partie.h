@@ -93,6 +93,8 @@ class Partie {
          * @return Un booléen indiquant si la case est minée
          */
         bool caseEstMinee(int posX, int posY);
+
+        void pushExplosion(int posX, int posY);
 };
 
 #endif

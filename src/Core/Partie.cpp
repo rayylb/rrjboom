@@ -45,7 +45,7 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     }
     jx = joueur1.getPositionX();
     jy = joueur1.getPositionY();
-    if (bombJ1 == 'X' && joueur1.getNbBombes() < joueur1.getNbBombesMax()) {
+    if (bombJ1 == 'X' && joueur1.getNbBombes() < joueur1.getNbBombesMax() && (!caseEstMinee(jx, jy))) {
         Bombe newbombe(jx, jy, joueur1.getPorteeBombe(), 1);
         bombes.push_back(newbombe);
         joueur1.poserBombe();
@@ -65,7 +65,7 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     }
     jx = joueur2.getPositionX();
     jy = joueur2.getPositionY();
-    if (bombJ2 == 'X' && joueur2.getNbBombes() < joueur2.getNbBombesMax()) {
+    if (bombJ2 == 'X' && joueur2.getNbBombes() < joueur2.getNbBombesMax() && (!caseEstMinee(jx, jy))) {
         Bombe newbombe(jx, jy, joueur2.getPorteeBombe(), 2);
         bombes.push_back(newbombe);
         joueur2.poserBombe();
@@ -78,10 +78,6 @@ void Partie::avancerPartie() {
             bombes.at(i).avancerTemps();
             if (bombes.at(i).estExplosee()) {
                 creerExplosions(bombes.at(i)); ///EXPLOSIONS DES BOMBES
-                if(bombes.at(i).getJoueur() == 1)
-                    joueur1.recupererBombe();
-                else
-                    joueur2.recupererBombe();
                 bombes.erase(bombes.begin()+i);
             }
         }
@@ -101,6 +97,11 @@ void Partie::avancerPartie() {
 }
 
 void Partie::creerExplosions(Bombe source) {
+    source.exploser();
+    if(source.getJoueur() == 1)
+        joueur1.recupererBombe();
+    else
+        joueur2.recupererBombe();
     int bx = source.getPosX();
     int by = source.getPosY();
     int brange = source.getRange();
@@ -108,44 +109,9 @@ void Partie::creerExplosions(Bombe source) {
     int step;
     Explosion newexp(bx, by); //EXPLOSION CENTRE
     explosions.push_back(newexp);
-    i = bx+1;
-    while (i <= bx+brange && i < grille.getDimX()) { ///EXPLOSION DROITE
-        Explosion newexp(i, by);
-        explosions.push_back(newexp);
-        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
-            step = grille.getDimX();
-        else
-            step = i + 1;
-        grille.detruireCase(i, by);
-        i = step;
-    }
-    i = bx-1;
-    while (i >= bx-brange && i >= 0) { ///EXPLOSION GAUCHE
-        Explosion newexp(i, by);
-        explosions.push_back(newexp);
-        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
-            step = -1;
-        else
-            step = i - 1;
-        grille.detruireCase(i, by);
-        i = step;
-    }
-    j = by+1;
-    while (j <= by+brange && j < grille.getDimY()) { ///EXPLOSION BAS
-        Explosion newexp(bx, j);
-        explosions.push_back(newexp);
-        grille.detruireCase(bx, j);
-        if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
-            step = grille.getDimY();
-        else
-            step = j + 1;
-        grille.detruireCase(bx, j);
-        j = step;
-    }
     j = by-1;
     while (j >= by-brange && j >= 0) { ///EXPLOSION HAUT
-        Explosion newexp(bx, j);
-        explosions.push_back(newexp);
+        pushExplosion(bx, j);
         grille.detruireCase(bx, j);
         if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
             step = -1;
@@ -154,6 +120,38 @@ void Partie::creerExplosions(Bombe source) {
         grille.detruireCase(bx, j);
         j = step;
     }
+    i = bx-1;
+    while (i >= bx-brange && i >= 0) { ///EXPLOSION GAUCHE
+        pushExplosion(i, by);
+        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
+            step = -1;
+        else
+            step = i - 1;
+        grille.detruireCase(i, by);
+        i = step;
+    }
+    i = bx+1;
+    while (i <= bx+brange && i < grille.getDimX()) { ///EXPLOSION DROITE
+        pushExplosion(i, by);
+        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
+            step = grille.getDimX();
+        else
+            step = i + 1;
+        grille.detruireCase(i, by);
+        i = step;
+    }
+    j = by+1;
+    while (j <= by+brange && j < grille.getDimY()) { ///EXPLOSION BAS
+        pushExplosion(bx, j);
+        grille.detruireCase(bx, j);
+        if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
+            step = grille.getDimY();
+        else
+            step = j + 1;
+        grille.detruireCase(bx, j);
+        j = step;
+    }
+    
 }
 
 bool Partie::caseEstExplosee(int posX, int posY) {
@@ -174,4 +172,14 @@ bool Partie::caseEstMinee(int posX, int posY) {
         }
     }
     return false;
+}
+
+void Partie::pushExplosion(int posX, int posY) {
+    Explosion newexp(posX, posY);
+    explosions.push_back(newexp);
+    for (int i=0; i<bombes.size(); i++)
+        if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) {
+            creerExplosions(bombes.at(i));
+            bombes.erase(bombes.begin()+i);
+        }
 }

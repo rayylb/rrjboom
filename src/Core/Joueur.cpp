@@ -7,10 +7,13 @@ void Joueur::spawn(bool num, int xg, int yg){
     yExact = yg+0.5;
     vivant = true;
     
-    nbBombesMax = 1;
-    nbBombes = 0;
+    nbBombesPosee = 0;
+    nbBombesPoseeMax = 1;
+    nbBombesMax = 9;
     porteeBombe = 1;
+    porteeMax = 9;
     speed = 2;
+    speedMax = 5;
     
     hitboxUP = 0.1;
     hitboxDOWN = 0.4;
@@ -55,11 +58,11 @@ void Joueur::moveD(bool canSkip) {
 }
 
 void Joueur::poserBombe() {
-    nbBombes++;
+    nbBombesPosee++;
 }
 
 void Joueur::recupererBombe() {
-    nbBombes--;
+    nbBombesPosee--;
 }
 
 void Joueur::exploser() {
@@ -69,9 +72,9 @@ void Joueur::exploser() {
 void Joueur::appliquerBonus(BonusType typeBonus) {
     switch(typeBonus) {
         case BonusType::Rien : break;
-        case BonusType::BombUp : nbBombesMax += 1; break;
-        case BonusType::FlameUp : porteeBombe += 1; break;
-        case BonusType::SpeedUp : speed += 1; break;
+        case BonusType::BombUp : if(nbBombesPoseeMax < nbBombesMax) nbBombesPoseeMax += 1; break;
+        case BonusType::FlameUp : if(porteeBombe < porteeMax) porteeBombe += 1; break;
+        case BonusType::SpeedUp : if(speed < speedMax) speed += 1; break;
         default: break;
     }
 }
@@ -97,11 +100,11 @@ bool Joueur::estVivant() {
 }
 
 int Joueur::getNbBombes() {
-    return nbBombes;
+    return nbBombesPosee;
 }
 
 int Joueur::getNbBombesMax() {
-    return nbBombesMax;
+    return nbBombesPoseeMax;
 }
 
 int Joueur::getPorteeBombe() {
