@@ -1,6 +1,8 @@
 #ifndef _BLOC_H
 #define _BLOC_H
 
+#include "Bonus.h"
+
 /**
  * @class Bloc
  *
@@ -14,6 +16,7 @@ private:
     bool destructible; ///<   Indique si le bloc est destructible ou indestructible
     bool bonusPresent; ///<  Indique si un bonus est présent dans ce bloc
     bool peutMarcher; ///<  Indique si le bloc est détruit ou pas
+    BonusType bonus;
 
 public:
 
@@ -54,7 +57,6 @@ public:
 
     /**
     * @brief Transforme un bloc en "bloc sol" en affectant destructible = false, bonusPresent = false et peutMarcher = true
-    * @param joueur Le joueur qui a posé la bombe
     */
     void blocSol();
 
