@@ -51,8 +51,6 @@ public:
 
     void recupererBombe();
 
-    void recupererBombe();
-
     /**
     * @brief Fonction qui fait exploser le joueur
     */
