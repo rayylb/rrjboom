@@ -72,7 +72,7 @@ public:
 
     int getType();
 
-    BonusType getBonusType() const;
+    BonusType getBonusType();
 };
 
 

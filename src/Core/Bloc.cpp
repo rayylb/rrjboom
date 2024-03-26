@@ -1,60 +1,60 @@
 #include "Bloc.h"
 
-Bloc::Bloc(){
+Bloc::Bloc() {
     destructible = false;
     bonusPresent = false;
     peutMarcher = true;
 }
 
-Bloc::Bloc(bool isDestructible, bool hasBonus, bool canWalk){
+Bloc::Bloc(bool isDestructible, bool hasBonus, bool canWalk) {
     destructible = isDestructible;
     bonusPresent = hasBonus;
     peutMarcher = canWalk;
 }
 
-bool Bloc::estDestructible(){
+bool Bloc::estDestructible() {
     return destructible;
 }
 
-bool Bloc::onPeutMarcher(){
+bool Bloc::onPeutMarcher() {
     return peutMarcher;
 }
 
-bool Bloc::aBonus(){
+bool Bloc::aBonus() {
     return bonusPresent;
 }
 
-void Bloc::retirerBonus(){
+void Bloc::retirerBonus() {
     bonusPresent = false;
     typeBonus = BonusType::Rien;
 }
 
-void Bloc::detruire(){
+void Bloc::detruire() {
     if (destructible) {
         peutMarcher = true;
         destructible = false;
     }
 }
 
-void Bloc::blocSol(){
+void Bloc::blocSol() {
     destructible = false;
     bonusPresent = false;
     peutMarcher = true;
 }
 
-void Bloc::blocMur(){
+void Bloc::blocMur() {
     destructible = false;
     bonusPresent = false;
     peutMarcher = false;
 }
 
-void Bloc::blocDes(bool bonus){
+void Bloc::blocDes(bool bonus) {
     destructible = true;
     bonusPresent = bonus;
     peutMarcher = false;
 }
 
-int Bloc::getType(){
+int Bloc::getType() {
     if (onPeutMarcher() && aBonus())
         return 6;
     else if (onPeutMarcher())
@@ -67,6 +67,6 @@ int Bloc::getType(){
         return 3;
 }
 
-BonusType Bloc::getBonusType() const{
+BonusType Bloc::getBonusType() {
     return typeBonus;
 }
