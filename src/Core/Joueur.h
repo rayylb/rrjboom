@@ -1,6 +1,8 @@
 #ifndef _JOUEUR_H
 #define _JOUEUR_H
 
+#include "Bonus.h"
+
 class Joueur {
 private:
     bool numero; ///<  Numéro du joueur (True pour le joueur 1, False pour le joueur 2)
@@ -13,6 +15,10 @@ private:
     int porteeBombe; ///<  Portée de l'explosion de la bombe du joueur
     int speed;
     bool vivant; ///<  Indique si le joueur est vivant ou non
+    float hitboxUP;
+    float hitboxDOWN;
+    float hitboxLEFT;
+    float hitboxRIGHT;
     
 public:
     void spawn(bool num, int xg, int yg);
@@ -93,6 +99,11 @@ public:
     * @brief Fonction qui fait exploser le joueur
     */
     void exploser();
+
+    //ajouter un getbonus
+    int GetBonus();
+
+    void appliquerBonus(BonusType typeBonus);
 };
 
 #endif

@@ -3,7 +3,7 @@
 Explosion::Explosion(int xpos, int ypos) {
     x = xpos;
     y = ypos;
-    timer = 3;
+    timer = 20;
 }
 
 int Explosion::getPosX() {

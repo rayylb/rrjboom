@@ -4,7 +4,7 @@ Bombe::Bombe(int xpos, int ypos, int flamerange) {
     x = xpos;
     y = ypos;
     range = flamerange;
-    timer = 4;
+    timer = 30;
 }
 
 int Bombe::getPosX() {

@@ -6,11 +6,15 @@ void Joueur::spawn(bool num, int xg, int yg){
     nbBombes = 0;
     porteeBombe = 2;
     speed = 2;
-    x = xg;
+    x  = xg;
     y = yg;
-    xExact = xg;
-    yExact = yg;
+    xExact = xg+0.5;
+    yExact = yg+0.5;
     vivant = true;
+    hitboxUP = 0.1;
+    hitboxDOWN = 0.4;
+    hitboxLEFT = 0.4;
+    hitboxRIGHT = 0.4;
 }
 
 int Joueur::getPositionX() {
@@ -28,6 +32,7 @@ float Joueur::getExactX() {
 float Joueur::getExactY() {
     return yExact;
 }
+
 
 int Joueur::getNbBombes() {
     return nbBombes;
@@ -88,3 +93,16 @@ void Joueur::poserBombe() {
 void Joueur::exploser() {
     vivant= false;
 }
+
+void Joueur::appliquerBonus(BonusType typeBonus) {
+    // Appliquer les effets du bonus au joueur en fonction de son type
+    switch(typeBonus) {
+        case BonusType::Speed : speed += 1;
+          
+            break;
+        default:
+         
+            break;
+    }
+}
+

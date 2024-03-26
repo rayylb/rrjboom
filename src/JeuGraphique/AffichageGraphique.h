@@ -5,7 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include "../Core/Grille.h"
 
-const int AFFICHAGE_NB_TEXTURES = 5;
+const int AFFICHAGE_NB_TEXTURES = 7;
 
 class AffichageGraphique {
     private:

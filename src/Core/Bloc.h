@@ -16,12 +16,12 @@ private:
     bool destructible; ///<   Indique si le bloc est destructible ou indestructible
     bool bonusPresent; ///<  Indique si un bonus est présent dans ce bloc
     bool peutMarcher; ///<  Indique si le bloc est détruit ou pas
-    BonusType bonus;
+    BonusType typeBonus;
 
 public:
 
     Bloc();
-    Bloc(bool isDestructible, bool hasBonus, bool marcher);
+    Bloc(bool isDestructible, bool hasBonus, bool canWalk);
 
     /**
     * @brief Fonction qui retourne un booléen indiquant si le bloc est destructible
@@ -57,6 +57,7 @@ public:
 
     /**
     * @brief Transforme un bloc en "bloc sol" en affectant destructible = false, bonusPresent = false et peutMarcher = true
+    * @param joueur Le joueur qui a posé la bombe
     */
     void blocSol();
 
@@ -71,6 +72,8 @@ public:
     void blocMur();
 
     int getType();
+
+    BonusType getBonusType() const;
 };
 
 

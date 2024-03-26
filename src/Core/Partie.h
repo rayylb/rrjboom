@@ -4,6 +4,7 @@
 #include "Grille.h"
 #include "Joueur.h"
 #include "Bombe.h"
+#include "Bonus.h"
 #include "Explosion.h"
 #include <vector>
 

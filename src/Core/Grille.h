@@ -71,7 +71,7 @@ public:
     * @param x Coordonnée horizontale de la case
     * @param y Coordonnée verticale de la case
     */
-    void recupererBonus(int x, int y);
+    BonusType recupererBonus(int x, int y);
 };
 
 #endif
