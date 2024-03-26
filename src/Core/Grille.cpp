@@ -57,6 +57,8 @@ void Grille::detruireCase(int x, int y) {
     terrain[x][y].detruire();
 }
 
-void Grille::recupererBonus(int x, int y) {
+BonusType Grille::recupererBonus(int x, int y) {
+    BonusType bonusSurCase = terrain[x][y].getBonusType();
     terrain[x][y].retirerBonus();
+    return bonusSurCase;
 }

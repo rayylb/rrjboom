@@ -6,12 +6,9 @@ private:
     bool numero; ///<  Numéro du joueur (True pour le joueur 1, False pour le joueur 2)
     int x; ///<  Position en X du joueur sur la grille
     int y; ///<  Position en Y du joueur sur la grille
-    float xExact;
-    float yExact;
     int nbBombes; ///<  Nombre de bombes posées par le joueur
     int nbBombesMax; ///<  Nombre maximum de bombes que le joueur peut poser
     int porteeBombe; ///<  Portée de l'explosion de la bombe du joueur
-    int speed;
     bool vivant; ///<  Indique si le joueur est vivant ou non
     
 public:
@@ -33,11 +30,6 @@ public:
     * @brief Fonction qui retourne le nombre de bombes que le joueur a posé
     * @return L'entier joueur.nbBombes qui est le nombre de bombes posées par le joueur
     */
-
-    float getExactX();
-
-    float getExactY();
-
     int getNbBombes();
 
     /*
@@ -60,22 +52,22 @@ public:
     /*
     * @brief Fonction qui déplace le joueur vers la droite
     */
-    void moveR(bool canSkip);
+    void deplacementD();
 
     /*
     * @brief Fonction qui déplace le joueur vers la gauche
     */
-    void moveL(bool canSkip);
+    void deplacementG();
 
     /*
     * @brief Fonction qui déplace le joueur vers le haut
     */
-    void moveU(bool canSkip);
+    void deplacementH();
 
     /*
     * @brief Fonction qui déplace le joueur vers le bas
     */
-    void moveD(bool canSkip);
+    void deplacementB();
 
     /*
     * @brief Fonction qui fait poser une bombe au joueur
@@ -86,6 +78,11 @@ public:
     * @brief Fonction qui fait exploser le joueur
     */
     void exploser();
+
+    //ajouter un getbonus
+    int GetBonus();
+
+    void appliquerBonus(BonusType typeBonus);
 };
 
 #endif

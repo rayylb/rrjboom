@@ -26,6 +26,7 @@ bool Bloc::aBonus(){
 
 void Bloc::retirerBonus(){
     bonusPresent = false;
+    typeBonus = BonusType::Rien;
 }
 
 void Bloc::detruire(){
@@ -62,4 +63,8 @@ int Bloc::getType(){
         return 2;
     else
         return 3;
+}
+
+BonusType Bloc::getBonusType() const{
+    return typeBonus;
 }

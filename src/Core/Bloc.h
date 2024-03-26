@@ -1,8 +1,6 @@
 #ifndef _BLOC_H
 #define _BLOC_H
 
-#include "Bonus.h"
-
 /**
  * @class Bloc
  *
@@ -10,18 +8,17 @@
  * La classe est notamment constituée de booléens permettant de gérer les propriétés de la case: si elle est destructible, si elle est détruite, si une bombe a été
  * posée dessus, si un bonus est présent sur la case... L'entier jouerQuiAPoséLaBombe permet de connaître le joueur qui a posé une bombe, si une bombe a été posée.
  */
-
 class Bloc {
 private:
     bool destructible; ///<   Indique si le bloc est destructible ou indestructible
     bool bonusPresent; ///<  Indique si un bonus est présent dans ce bloc
     bool peutMarcher; ///<  Indique si le bloc est détruit ou pas
-    BonusType bonus;
+    BonusType typeBonus;
 
 public:
 
     Bloc();
-    Bloc(bool isDestructible, bool hasBonus, bool marcher);
+    Bloc(bool isDestructible, bool aBonus, bool marcher);
 
     /**
     * @brief Fonction qui retourne un booléen indiquant si le bloc est destructible
@@ -57,6 +54,7 @@ public:
 
     /**
     * @brief Transforme un bloc en "bloc sol" en affectant destructible = false, bonusPresent = false et peutMarcher = true
+    * @param joueur Le joueur qui a posé la bombe
     */
     void blocSol();
 
@@ -71,6 +69,8 @@ public:
     void blocMur();
 
     int getType();
+
+    BonusType getBonusType() const;
 };
 
 
