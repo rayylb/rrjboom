@@ -47,7 +47,7 @@ void AffichageTexte::afficherPartie() {
                 std::cout<<"B";
             else if(jeu.getGrille().infoCase(i, j).estDestructible() == true)
                 std::cout<<"=";
-            else if(jeu.getGrille().infoCase(i, j).aBonus() == true)
+            else if(jeu.getGrille().infoCase(i, j).getBonusType() != BonusType::Rien)
                 std::cout<<"S";
             else
                 std::cout<<" ";
@@ -76,7 +76,8 @@ void AffichageTexte::tourDeJeu() {
     std::cout<<movJ1<<" "<<bombJ1<<" "<<movJ2<<" "<<bombJ2<<std::endl;
     for(int i = 0; i < 5; i++)
         jeu.actionsJoueurs(movJ1, bombJ1, movJ2, bombJ2);
-    jeu.avancerPartie();
+    for(int i = 0; i < 20; i++)
+        jeu.avancerPartie();
 }
 
 void AffichageTexte::convertirMove(char up, char left, char down, char right, char& mov) {

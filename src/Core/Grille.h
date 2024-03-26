@@ -4,7 +4,7 @@
 #include "Bloc.h"
 
 const int GRILLE_DIMX = 9; //Largeur grille
-const int GRILLE_DIMY = 5; //Hauteur grille
+const int GRILLE_DIMY = 7; //Hauteur grille
 
 /**
  * @class Grille
@@ -70,6 +70,8 @@ public:
     * @param y Coordonnée verticale de la case
     */
     BonusType recupererBonus(int x, int y);
+
+    BonusType nouveauBonus();
 };
 
 #endif

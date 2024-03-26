@@ -63,7 +63,7 @@ public:
     /**
     * @brief Transforme un bloc en "bloc destructible" en affectant destructible = true, bonusPresent = bonus et peutMarcher = false
     */
-    void blocDes(bool bonus);
+    void blocDes(BonusType bonus);
 
     /**
     * @brief Transforme un bloc en "bloc mur" en affectant destructible = false, bonusPresent = false et peutMarcher = false

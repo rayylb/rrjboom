@@ -19,6 +19,9 @@ Text version:
 Graphical version:  
 ``cd rrjboom/build``  
 ``./BombGraph``  
+
+Fast launch:  
+``make -j 8 && ./BombGraph``  
   
 ## Doc  
 ``cd rrjboom``  

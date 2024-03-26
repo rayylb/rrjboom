@@ -2,9 +2,9 @@
 #define _BONUS_H
 
 /**
- * @brief Définition des types de bonus disponibles.
- * @brief Enumération des types de bonus.
+ * @brief Enumération des types de bonus disponibles.
  */
+
 enum BonusType {
     Rien,
     BombUp,

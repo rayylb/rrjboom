@@ -48,14 +48,15 @@ void Bloc::blocMur() {
     peutMarcher = false;
 }
 
-void Bloc::blocDes(bool bonus) {
+void Bloc::blocDes(BonusType bonus) {
     destructible = true;
-    bonusPresent = bonus;
+    bonusPresent = (bonus != BonusType::Rien);
     peutMarcher = false;
+    typeBonus = bonus;
 }
 
 int Bloc::getType() {
-    if (onPeutMarcher() && aBonus())
+    if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien))
         return 6;
     else if (onPeutMarcher())
         return 0;

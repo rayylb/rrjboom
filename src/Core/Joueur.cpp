@@ -7,9 +7,9 @@ void Joueur::spawn(bool num, int xg, int yg){
     yExact = yg+0.5;
     vivant = true;
     
-    nbBombesMax = 9;
+    nbBombesMax = 1;
     nbBombes = 0;
-    porteeBombe = 2;
+    porteeBombe = 1;
     speed = 2;
     
     hitboxUP = 0.1;
@@ -19,7 +19,7 @@ void Joueur::spawn(bool num, int xg, int yg){
 }
 
 void Joueur::moveR(bool canSkip) {
-    xExact += (float) speed/10;
+    xExact += (float) speed/20;
     if((int)xExact > x)
         if(canSkip)
             x++;
@@ -28,7 +28,7 @@ void Joueur::moveR(bool canSkip) {
 }
 
 void Joueur::moveL(bool canSkip) {
-    xExact -= (float) speed/10;
+    xExact -= (float) speed/20;
     if((int)xExact < x)
         if(canSkip)
             x--;
@@ -37,7 +37,7 @@ void Joueur::moveL(bool canSkip) {
 }
 
 void Joueur::moveU(bool canSkip) {
-    yExact -= (float) speed/10;
+    yExact -= (float) speed/20;
     if((int)yExact < y)
         if(canSkip)
             y--;
@@ -46,7 +46,7 @@ void Joueur::moveU(bool canSkip) {
 }
 
 void Joueur::moveD(bool canSkip) {
-    yExact += (float) speed/10;
+    yExact += (float) speed/20;
     if((int)yExact > y)
         if(canSkip)
             y++;

@@ -18,7 +18,7 @@ void Grille::initGrille() {
             else if ((i+j) < 3 || (i+j) > (GRILLE_DIMX+GRILLE_DIMY - 5))
                 terrain[i][j].blocSol();
             else if (rand()%3 < 2)
-                terrain[i][j].blocDes(false);
+                terrain[i][j].blocDes(nouveauBonus());
             else
                 terrain[i][j].blocSol();
         }
@@ -44,7 +44,7 @@ void Grille::infoCase(int x, int y, Bloc& copie) {
     if (terrain[x][y].onPeutMarcher() == true)
         copie.blocSol();
     else if (terrain[x][y].estDestructible() == true)
-        copie.blocDes(terrain[x][y].aBonus());
+        copie.blocDes(terrain[x][y].getBonusType());
     else
         copie.blocMur();
 }
@@ -61,4 +61,15 @@ BonusType Grille::recupererBonus(int x, int y) {
     BonusType bonusSurCase = terrain[x][y].getBonusType();
     terrain[x][y].retirerBonus();
     return bonusSurCase;
+}
+
+BonusType Grille::nouveauBonus() {
+    if(rand()%2 == 0)
+        return BonusType::Rien;
+    else switch (rand()%3) {
+        case 0 : return BonusType::BombUp;
+        case 1 : return BonusType::FlameUp;
+        case 2 : return BonusType::SpeedUp;
+        default : return BonusType::Rien;
+    }
 }
