@@ -18,19 +18,6 @@ void AffichageGraphique::initFenetre(int width, int height) {
     IMG_Init(IMG_INIT_PNG);
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     SDL_RenderClear(rendu);
-
-    SDL_Surface *surfaceFond = IMG_Load("../data/menu_background.png");
-    if (surfaceFond == nullptr) {
-        std::cout << "Erreur : Chargement de l'image de fond impossible." << std::endl;
-        return;
-    }
-    textureFondMenu = SDL_CreateTextureFromSurface(rendu, surfaceFond);
-    SDL_FreeSurface(surfaceFond);
-    if (textureFondMenu == nullptr) {
-        std::cout << "Erreur : Création de la texture du fond de menu impossible." << std::endl;
-        return;
-    }
-
     for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
         textures[i] = nullptr;
         surface = nullptr;
@@ -43,7 +30,9 @@ void AffichageGraphique::initFenetre(int width, int height) {
             case 5: surface = IMG_Load("../data/bombe.png"); break;
             case 6: surface = IMG_Load("../data/explosion.png"); break;
             case 7: surface = IMG_Load("../data/bonus.png"); break;
-            case 8: surface = IMG_Load("../data/bonus_vitesse.png"); break;
+            case 8: surface = IMG_Load("../data/bonus_bombe.png"); break;
+            case 9: surface = IMG_Load("../data/bonus_flame.png"); break;
+            case 10: surface = IMG_Load("../data/bonus_vitesse.png"); break;
             default: std::cout << "Erreur : Type de bloc non pris en charge." << std::endl; return;
         }
         if (surface == nullptr) {
@@ -113,43 +102,32 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
 }
 
 void AffichageGraphique::dessinerMenu() {
-   SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255); // Couleur de fond noire
-    SDL_RenderClear(rendu); // Efface le rendu précédent
-    // Dessin du fond de menu
-    SDL_Rect fondRect = {0, 0, dimX, dimY}; // Rectangle couvrant toute la fenêtre
-    SDL_RenderCopy(rendu, textureFondMenu, nullptr, &fondRect); // Dessine le fond de menu
-
-    // Tableau de boutons
+    SDL_SetRenderDrawColor(rendu, 200, 200, 0, 255); // Couleur de fond orange
+    SDL_RenderClear(rendu);
     Button buttons[2];
-
     /* Initialisation des boutons
     buttons[0].text = "Play";
     buttons[0].textColor = {255, 255, 255, 255};
     buttons[1].text = "Quit";
     buttons[1].textColor = {255, 255, 255, 255};
     */
-
     // Coordonnées et dimensions des boutons
-SDL_Rect playRect = {
-    static_cast<int>(static_cast<double>(dimX) / 2 - static_cast<double>(dimX) * 0.6 * 0.5),
-    static_cast<int>(static_cast<double>(dimY) * 0.3 - static_cast<double>(dimY) * 0.1 * 0.5),
-    static_cast<int>(dimX * 0.6),
-    static_cast<int>(dimY * 0.1)
-};
-
-SDL_Rect quitRect = {
-    static_cast<int>(static_cast<double>(dimX) / 2 - static_cast<double>(dimX) * 0.6 * 0.5),
-    static_cast<int>(static_cast<double>(dimY) * 0.3 + static_cast<double>(dimY) * 0.1 * 0.5),
-    static_cast<int>(dimX * 0.6),
-    static_cast<int>(dimY * 0.1)
-};
-
-
-   // Dessin des boutons
+    SDL_Rect playRect = {
+        static_cast<int>(static_cast<double>(dimX) / 2 - static_cast<double>(dimX) * 0.6 * 0.5),
+        static_cast<int>(static_cast<double>(dimY) * 0.3 - static_cast<double>(dimY) * 0.1 * 0.5),
+        static_cast<int>(dimX * 0.6),
+        static_cast<int>(dimY * 0.1)
+    };
+    SDL_Rect quitRect = {
+        static_cast<int>(static_cast<double>(dimX) / 2 - static_cast<double>(dimX) * 0.6 * 0.5),
+        static_cast<int>(static_cast<double>(dimY) * 0.3 + static_cast<double>(dimY) * 0.1 * 0.5),
+        static_cast<int>(dimX * 0.6),
+        static_cast<int>(dimY * 0.1)
+    };
+    // Dessin des boutons
     SDL_SetRenderDrawColor(rendu, 255, 0, 0, 255); // Couleur rouge pour les boutons (pour tester)     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 0); // Couleur transparente
     SDL_RenderDrawRect(rendu, &playRect); // Dessine le rectangle du bouton "Play"
     SDL_RenderDrawRect(rendu, &quitRect); // Dessine le rectangle du bouton "Quit"
-
     // Met à jour l'affichage
     SDL_RenderPresent(rendu);
 
@@ -197,7 +175,8 @@ SDL_Rect quitRect = {
 
     // Libérer la police
     TTF_CloseFont(font);
-*/
+    
+    */
 }
 
 

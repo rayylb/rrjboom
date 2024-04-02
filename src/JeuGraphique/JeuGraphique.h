@@ -19,14 +19,14 @@ class JeuGraphique {
         void jeuSprite();
 
         void boucleJeuMain();
+        bool boucleMenu(SDL_Event& e, bool& quit);
+        void dessinerMenu();
+
         void nouvellePartie(int taille_bloc);
         void afficherPartie(int taille_bloc);
         void tourDeJeu(bool& stillRunning);
 
         void convertirTouches(int joueurMovX, int joueurMovY, char& mov);
-        void dessinerMenu();
-        bool boucleMenu(SDL_Event& e, bool& quit);
-
 };
 
 #endif
