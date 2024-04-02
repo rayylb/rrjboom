@@ -30,7 +30,9 @@ class AffichageGraphique {
         void detruireFenetre();
         void clearRendu();
         void afficherRendu();
-        SDL_Renderer * getRendu() const;
+        SDL_Renderer* getRendu() const;
+        int getDimX() const;
+        int getDimY() const;
 
 
         void afficherRectangle(int posX, int posY, int height, int width);

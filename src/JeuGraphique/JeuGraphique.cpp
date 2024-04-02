@@ -204,17 +204,17 @@ bool JeuGraphique::boucleMenu(SDL_Event& e, bool& quit) {
 
     SDL_Rect r;
     
-    r.w = affichage.dimX * 0.6;     //pour le bouton (ici play)
-    r.h = affichage.dimY * 0.1;
-    r.x = affichage.dimX / 2 - r.w * 0.5;
-    r.y = affichage.dimY * 0.3 - r.h * 0.5;
+    r.w = affichage.getDimX() * 0.6;     //pour le bouton (ici play)
+    r.h = affichage.getDimY() * 0.1;
+    r.x = affichage.getDimX() / 2 - r.w * 0.5;
+    r.y = affichage.getDimY() * 0.3 - r.h * 0.5;
 
     SDL_Rect r2;
     
-    r2.w = affichage.dimX * 0.6;  //pour la dimension bouton (ici quit)
-    r2.h = affichage.dimY * 0.1;
-    r2.x = affichage.dimX / 2 - r2.w * 0.5;
-    r2.y = affichage.dimY * 0.3 + r2.h;
+    r2.w = affichage.getDimX() * 0.6;  //pour la dimension bouton (ici quit)
+    r2.h = affichage.getDimY() * 0.1;
+    r2.x = affichage.getDimX() / 2 - r2.w * 0.5;
+    r2.y = affichage.getDimY() * 0.3 + r2.h;
 
     buttons[0].x = r.x;  //pour la position du bouton sur la fenetre
     buttons[0].y = r.y;

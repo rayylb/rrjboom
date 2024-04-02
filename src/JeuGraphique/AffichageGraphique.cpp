@@ -78,6 +78,14 @@ void AffichageGraphique::afficherRendu() {
     return rendu;
  }
 
+int AffichageGraphique::getDimX() const{
+    return dimX;
+}
+
+int AffichageGraphique::getDimY() const{
+    return dimY;
+}
+
 void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int width) {
     SDL_Rect rect;
     rect.x = posX;
