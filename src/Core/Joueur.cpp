@@ -13,48 +13,96 @@ void Joueur::spawn(bool num, int xg, int yg){
     porteeBombe = 1;
     porteeMax = 9;
     speed = 2;
-    speedMax = 4;
+    speedMax = 3;
     
-    hitboxUP = 0.1;
+    hitboxUP = 0;
     hitboxDOWN = 0.4;
-    hitboxLEFT = 0.4;
-    hitboxRIGHT = 0.4;
+    hitboxLEFT = 0.3;
+    hitboxRIGHT = 0.3;
 }
 
-void Joueur::moveR(bool canSkip) {
-    xExact += (float) speed/20;
-    if((int)xExact > x)
-        if(canSkip)
-            x++;
-        else
-            xExact = x + 0.9;
+void Joueur::moveR(bool canSkip, bool canSkipUp, bool canSkipDown) {
+    xExact += (float)(speed)/20;
+    bool canMove = canSkip;
+    if((int)(xExact + hitboxRIGHT) > x) {
+        if(yExact-y-hitboxUP < 0) {
+            if(!canSkipUp) canMove = false;
+        }
+        else if(yExact-y+hitboxDOWN > 1) {
+            if(!canSkipDown) canMove = false;
+        }
+        if(canMove) {
+            if((int)(xExact) > x)
+                x++;
+        }
+        else {
+            xExact = x + 1 - hitboxRIGHT;
+        }
+    }
 }
 
-void Joueur::moveL(bool canSkip) {
-    xExact -= (float) speed/20;
-    if((int)xExact < x)
-        if(canSkip)
-            x--;
-        else
-            xExact = x;
+void Joueur::moveL(bool canSkip, bool canSkipUp, bool canSkipDown) {
+    xExact -= (float)(speed)/20;
+    bool canMove = canSkip;
+    if((xExact - hitboxLEFT) < 0)
+        xExact = x + hitboxLEFT;
+    else if((int)(xExact - hitboxLEFT) < x) {
+        if(yExact-y-hitboxUP < 0) {
+            if(!canSkipUp) canMove = false;
+        }
+        else if(yExact-y+hitboxDOWN > 1) {
+            if(!canSkipDown) canMove = false;
+        }
+        if(canMove) {
+            if((int)(xExact) < x)
+                x--;
+        }
+        else {
+            xExact = x + hitboxLEFT;
+        }
+    }
 }
 
-void Joueur::moveU(bool canSkip) {
-    yExact -= (float) speed/20;
-    if((int)yExact < y)
-        if(canSkip)
-            y--;
-        else
-            yExact = y;
+void Joueur::moveU(bool canSkip, bool canSkipLeft, bool canSkipRight) {
+    yExact -= (float)(speed)/20;
+    bool canMove = canSkip;
+    if((yExact - hitboxUP) < 0)
+        yExact = y + hitboxUP;
+    else if((int)(yExact - hitboxUP) < y) {
+        if(xExact-x-hitboxLEFT < 0) {
+            if(!canSkipLeft) canMove = false;
+        }
+        else if(xExact-x+hitboxRIGHT > 1) {
+            if(!canSkipRight) canMove = false;
+        }
+        if(canMove) {
+            if((int)(yExact) < y)
+                y--;
+        }
+        else {
+            yExact = y + hitboxUP;
+        }
+    }
 }
 
-void Joueur::moveD(bool canSkip) {
-    yExact += (float) speed/20;
-    if((int)yExact > y)
-        if(canSkip)
-            y++;
-        else
-            yExact = y + 0.9;
+void Joueur::moveD(bool canSkip, bool canSkipLeft, bool canSkipRight) {
+    yExact += (float)(speed)/20;
+    bool canMove = canSkip;
+    if((int)(yExact + hitboxDOWN) > y) {
+        if(xExact-x-hitboxLEFT < 0) {
+            if(!canSkipLeft) canMove = false;
+        }
+        else if(xExact-x+hitboxRIGHT > 1) {
+            if(!canSkipRight) canMove = false;
+        }
+        if(canMove) {
+            if((int)(yExact) > y)
+                y++;
+        }
+        else {
+            yExact = y + 1 - hitboxDOWN;
+        }
+    }
 }
 
 void Joueur::poserBombe() {

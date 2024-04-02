@@ -1,6 +1,7 @@
 #ifndef _JOUEUR_H
 #define _JOUEUR_H
 
+#include <iostream>
 #include "Bonus.h"
 
 class Joueur {
@@ -30,22 +31,22 @@ public:
     /**
     * @brief Fonction qui déplace le joueur vers la droite
     */
-    void moveR(bool canSkip);
+    void moveR(bool canSkip, bool canSkipUp, bool canSkipDown);
 
     /**
     * @brief Fonction qui déplace le joueur vers la gauche
     */
-    void moveL(bool canSkip);
+    void moveL(bool canSkip, bool canSkipUp, bool canSkipDown);
 
     /**
     * @brief Fonction qui déplace le joueur vers le haut
     */
-    void moveU(bool canSkip);
+    void moveU(bool canSkip, bool canSkipLeft, bool canSkipRight);
 
     /**
     * @brief Fonction qui déplace le joueur vers le bas
     */
-    void moveD(bool canSkip);
+    void moveD(bool canSkip, bool canSkipLeft, bool canSkipRight);
 
     /**
     * @brief Fonction qui fait poser une bombe au joueur
