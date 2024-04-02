@@ -75,16 +75,16 @@ void AffichageGraphique::afficherRendu() {
     SDL_RenderPresent(rendu);
 }
 
- SDL_Renderer* AffichageGraphique::getRendu() const{
-    return rendu;
- }
-
 int AffichageGraphique::getDimX() const{
     return dimX;
 }
 
 int AffichageGraphique::getDimY() const{
     return dimY;
+}
+
+SDL_Renderer* AffichageGraphique::getRendu() const{
+    return rendu;
 }
 
 void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int width) {

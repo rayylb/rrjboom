@@ -3,7 +3,7 @@
 
 #include "Bloc.h"
 
-const int GRILLE_DIMX = 7; //Largeur grille
+const int GRILLE_DIMX = 9; //Largeur grille
 const int GRILLE_DIMY = 5; //Hauteur grille
 
 /**
