@@ -97,6 +97,10 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
         destRect.h = destRect.w*19/15;
         destRect.y -= taille_bloc*19/15;
         destRect.y += taille_bloc;
+        destRect.h = destRect.h*0.8;
+        destRect.w = destRect.w*0.8;
+        destRect.x += taille_bloc*0.1;
+        destRect.y += taille_bloc*0.3;
     }
     SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }

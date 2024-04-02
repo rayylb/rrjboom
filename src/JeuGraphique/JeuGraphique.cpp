@@ -181,6 +181,10 @@ void JeuGraphique::nouvellePartie(int taille_bloc) {
     jeu.initPartie();
     affichage.initFenetre(jeu.getGrille().getDimX()*taille_bloc, jeu.getGrille().getDimY()*taille_bloc);
     afficherPartie(taille_bloc);
+    joueur1movX = 0;
+    joueur1movY = 0;
+    joueur2movX = 0;
+    joueur2movY = 0;
     bool running = true;
     while(running) {
         tourDeJeu(running);
