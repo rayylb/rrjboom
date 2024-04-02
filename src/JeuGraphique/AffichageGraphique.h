@@ -11,9 +11,8 @@ const int AFFICHAGE_NB_TEXTURES = 11; //Nombre de textures en mémoire
 struct Button {
     int x, y;
     SDL_Rect rect;
-    //std::string text;
-    //SDL_Color textColor;
-    SDL_Texture* texture;
+    std::string text;
+    SDL_Color textColor;
 };
 
 class AffichageGraphique {
@@ -27,16 +26,17 @@ class AffichageGraphique {
     public:
         void initFenetre(int width, int height);
         void detruireFenetre();
-        void clearRendu();
+        void clearRendu(SDL_Color color = {255, 255, 255, 255});
         void afficherRendu();
         
-        int getDimX() const;
-        int getDimY() const;
-        SDL_Renderer* getRendu() const;
+        int getDimX();
+        int getDimY();
+        SDL_Renderer* getRendu();
 
-        void afficherRectangle(int posX, int posY, int height, int width);
+        void afficherRectangle(int posX, int posY, int width, int height, SDL_Color color = {255, 255, 255, 255});
+        void afficherRectangle(SDL_Rect rect, SDL_Color color = {255, 255, 255, 255});
         void afficherSprite(float posX, float posY, int type_bloc, int taille_bloc);
-        void dessinerMenu();
+        void afficherBouton(Button bouton);
 };
 
 #endif

@@ -19,8 +19,8 @@ class JeuGraphique {
         void jeuSprite();
 
         void boucleJeuMain();
-        bool boucleMenu(SDL_Event& e, bool& quit);
-        void dessinerMenu();
+        bool boucleMenu(bool& mainQuit);
+        void dessinerMenu(Button buttons[2]);
 
         void nouvellePartie(int taille_bloc);
         void afficherPartie(int taille_bloc);

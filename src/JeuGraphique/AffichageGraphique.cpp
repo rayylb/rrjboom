@@ -1,5 +1,5 @@
 #include "AffichageGraphique.h"
-//#include <SDL/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 
 void AffichageGraphique::initFenetre(int width, int height) {
@@ -47,7 +47,7 @@ void AffichageGraphique::initFenetre(int width, int height) {
         }
     }
 }
-
+void afficherRectangle(SDL_Rect rect);
 void AffichageGraphique::detruireFenetre() {
     SDL_DestroyRenderer(rendu);
     SDL_DestroyWindow(fenetre);
@@ -56,7 +56,8 @@ void AffichageGraphique::detruireFenetre() {
     SDL_Quit();
 }
 
-void AffichageGraphique::clearRendu() {
+void AffichageGraphique::clearRendu(SDL_Color color) {
+    SDL_SetRenderDrawColor(rendu, color.r, color.g, color.b, color.a);
     SDL_RenderClear(rendu);
 }
 
@@ -64,26 +65,30 @@ void AffichageGraphique::afficherRendu() {
     SDL_RenderPresent(rendu);
 }
 
-int AffichageGraphique::getDimX() const{
+int AffichageGraphique::getDimX() {
     return dimX;
 }
 
-int AffichageGraphique::getDimY() const{
+int AffichageGraphique::getDimY() {
     return dimY;
 }
 
-SDL_Renderer* AffichageGraphique::getRendu() const{
+SDL_Renderer* AffichageGraphique::getRendu() {
     return rendu;
 }
 
-void AffichageGraphique::afficherRectangle(int posX, int posY, int height, int width) {
+void AffichageGraphique::afficherRectangle(int posX, int posY, int width, int height, SDL_Color color) {
     SDL_Rect rect;
     rect.x = posX;
     rect.y = posY;
     rect.h = height;
     rect.w = width;
-    SDL_SetRenderDrawColor(rendu, 100, 100, 200, 255);
+    SDL_SetRenderDrawColor(rendu, color.r, color.g, color.b, color.a);
     SDL_RenderDrawRect(rendu, &rect);
+}
+
+void AffichageGraphique::afficherRectangle(SDL_Rect rect, SDL_Color color) {
+    afficherRectangle(rect.x, rect.y, rect.w, rect.h, color);
 }
 
 void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, int taille_bloc) {
@@ -105,7 +110,7 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
     SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }
 
-void AffichageGraphique::dessinerMenu() {
+void AffichageGraphique::afficherBouton(Button bouton) {
     SDL_SetRenderDrawColor(rendu, 200, 200, 0, 255); // Couleur de fond orange
     SDL_RenderClear(rendu);
     Button buttons[2];

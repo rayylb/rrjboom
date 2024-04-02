@@ -68,113 +68,96 @@ void JeuGraphique::jeuSprite() {
 }
 
 void JeuGraphique::boucleJeuMain() {
-    nouvellePartie(64);
-    /*
-    SDL_Event event;
     bool quit = false;
-    while(!quit){
-        bool play = boucleMenu(event, quit);
-        if(!quit && play){
-        nouvellePartie(64);
-        }
+    while(!quit) {
+        bool play = boucleMenu(quit);
+        std::cout<<quit<<std::endl;
+        if(play && !quit)
+            nouvellePartie(64);
     }
-    */
 }
 
-bool JeuGraphique::boucleMenu(SDL_Event& e, bool& quit) {
-    // Boucle principale
-    quit = false;
-    SDL_Surface* playSurface = IMG_Load("../data/boutonplay.png");
-    SDL_Texture* playTexture = SDL_CreateTextureFromSurface(affichage.getRendu(), playSurface);
-    SDL_FreeSurface(playSurface);
-    SDL_Surface* quitSurface = IMG_Load("../data/boutonshade.png");
-    SDL_Texture* quitTexture = SDL_CreateTextureFromSurface(affichage.getRendu(), quitSurface);
-    SDL_FreeSurface(quitSurface);  
-    SDL_SetRenderDrawColor(affichage.getRendu(), 0xFF, 0xFF, 0xFF, 0xFF);
-    
-    // Tableau de boutons
-    Button buttons[2];
+bool JeuGraphique::boucleMenu(bool& mainQuit) {
+    int dimX = 800;
+    int dimY = 600;
+    affichage.initFenetre(dimX, dimY);
 
-    /* Initialisation des boutons
+    SDL_Rect r; //DIMENSIONS BOUTON PLAY
+    r.w = 300;
+    r.h = 100;
+    r.x = (dimX / 2) - (r.w / 2);
+    r.y = (dimY * 0.4);
+    SDL_Rect r2; //DIMENSIONS BOUTON QUIT
+    r2.w = 300;
+    r2.h = 100;
+    r2.x = dimX / 2 - r2.w * 0.5;
+    r2.y = (dimY * 0.6);
+
+    Button buttons[2];
     buttons[0].text = "Play";
     buttons[0].textColor = {255, 255, 255, 255};
-    buttons[1].text = "Quit";
-    buttons[1].textColor = {255, 255, 255, 255};
-    */
-
-    SDL_Rect r;
-    
-    r.w = affichage.getDimX() * 0.6;     //pour le bouton (ici play)
-    r.h = affichage.getDimY() * 0.1;
-    r.x = affichage.getDimX() / 2 - r.w * 0.5;
-    r.y = affichage.getDimY() * 0.3 - r.h * 0.5;
-
-    SDL_Rect r2;
-    
-    r2.w = affichage.getDimX() * 0.6;  //pour la dimension bouton (ici quit)
-    r2.h = affichage.getDimY() * 0.1;
-    r2.x = affichage.getDimX() / 2 - r2.w * 0.5;
-    r2.y = affichage.getDimY() * 0.3 + r2.h;
-
-    buttons[0].x = r.x;  //pour la position du bouton sur la fenetre
+    buttons[0].x = r.x;
     buttons[0].y = r.y;
     buttons[0].rect = {r.x, r.y, r.w, r.h};
-
+    buttons[1].text = "Quit";
+    buttons[1].textColor = {255, 255, 255, 255};
     buttons[1].x = r2.x;
     buttons[1].y = r2.y;
     buttons[1].rect = {r2.x, r2.y, r2.w, r2.h};
-       
+    
+    bool quit = false;
+    SDL_Event event;
+    int x, y;
+    
     while (!quit) {
-        SDL_SetRenderDrawColor(affichage.getRendu(), 0, 0, 0, 0);
-        SDL_RenderClear(affichage.getRendu());
-        // Gestion des événements
-        while (SDL_PollEvent(&e)) {
-            // Fermeture de la fenêtre
-            if (e.type == SDL_QUIT) return false;         
-            else if (e.type == SDL_KEYDOWN) { // Gestion des événements clavier          
-                switch (e.key.keysym.scancode) {
-                    case SDL_SCANCODE_ESCAPE:
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                affichage.detruireFenetre();
+                mainQuit = true;
+                return false;
+            }
+            if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.scancode) {
+                    case SDL_SCANCODE_ESCAPE: affichage.detruireFenetre();
+                        mainQuit = true;
                         return false;
                         break;
                     default: break;
                 }
             }
-
-            // Gestion des événements de souris
-            if (e.type == SDL_MOUSEBUTTONDOWN) {
-                int x, y;
+            if (event.type == SDL_MOUSEBUTTONDOWN) {
                 SDL_GetMouseState(&x, &y);
                 SDL_Point p = {x, y};
                 for (int i = 0; i < 2; i++) {
                     if (SDL_PointInRect(&p, &buttons[i].rect)) {
-                        // Le joueur a cliqué sur un bouton
                         if (i == 0) {
-                            // Nouvelle partie
                             std::cout << "Play" << std::endl;
+                            affichage.detruireFenetre();
                             return true;
                         }
                         else if (i == 1) {
-                            // Quitter
                             std::cout << "Quit" << std::endl;
+                            affichage.detruireFenetre();
+                            mainQuit = true;
                             return false;
                         }
                     }
                 }
             }
         }
-        SDL_SetRenderDrawColor(affichage.getRendu(), 255, 0, 0, 0);
-        SDL_RenderDrawRect(affichage.getRendu(), &r);
-        SDL_RenderDrawRect(affichage.getRendu(), &r2);
-        SDL_RenderCopy(affichage.getRendu(), playTexture, NULL, &r);
-        SDL_RenderCopy(affichage.getRendu(), quitTexture, NULL, &r2);
-        SDL_RenderPresent(affichage.getRendu());
+        dessinerMenu(buttons);
     }
-
-    return quit;
+    affichage.detruireFenetre();
+    mainQuit = true;
+    return false;
 }
 
-void JeuGraphique::dessinerMenu() {
-
+void JeuGraphique::dessinerMenu(Button buttons[2]) {
+    SDL_Color fond = {0, 0, 0, 255};
+    affichage.clearRendu(fond);
+    affichage.afficherRectangle(buttons[0].rect, buttons[0].textColor);
+    affichage.afficherRectangle(buttons[1].rect, buttons[1].textColor);
+    affichage.afficherRendu();
 }
 
 void JeuGraphique::nouvellePartie(int taille_bloc) {
@@ -191,6 +174,7 @@ void JeuGraphique::nouvellePartie(int taille_bloc) {
         afficherPartie(taille_bloc);
         SDL_Delay(33);
     }
+    affichage.detruireFenetre();
 }
 
 
