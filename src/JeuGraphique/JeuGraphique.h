@@ -24,6 +24,9 @@ class JeuGraphique {
         void tourDeJeu(bool& stillRunning);
 
         void convertirTouches(int joueurMovX, int joueurMovY, char& mov);
+        void dessinerMenu();
+        bool boucleMenu(SDL_Event& e, bool& quit);
+
 };
 
 #endif

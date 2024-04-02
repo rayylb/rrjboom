@@ -68,14 +68,18 @@ void JeuGraphique::jeuSprite() {
 }
 
 void JeuGraphique::boucleJeuMain() {
-    nouvellePartie(64);
+    SDL_Event event;
+    bool quit = false;
+    while(!quit){
+        bool play = boucleMenu(event, quit);
+        if(!quit && play){
+        nouvellePartie(64);
+        }
+    }
+
 }
 
 void JeuGraphique::nouvellePartie(int taille_bloc) {
-    joueur1movX = 0;
-    joueur1movY = 0;
-    joueur2movX = 0;
-    joueur2movY = 0;
     jeu.initPartie();
     affichage.initFenetre(jeu.getGrille().getDimX()*taille_bloc, jeu.getGrille().getDimY()*taille_bloc);
     afficherPartie(taille_bloc);
@@ -86,6 +90,7 @@ void JeuGraphique::nouvellePartie(int taille_bloc) {
         SDL_Delay(33);
     }
 }
+
 
 void JeuGraphique::afficherPartie(int taille_bloc) {
     affichage.clearRendu();
@@ -174,4 +179,96 @@ void JeuGraphique::convertirTouches(int joueurMovX, int joueurMovY, char& mov) {
         mov = 'D';
     if(joueurMovY == -1)
         mov = 'U';
+}
+
+bool JeuGraphique::boucleMenu(SDL_Event& e, bool& quit) {
+    // Boucle principale
+    quit = false;
+    SDL_Surface* playSurface = IMG_Load("../data/boutonplay.png");
+    SDL_Texture* playTexture = SDL_CreateTextureFromSurface(affichage.getRendu(), playSurface);
+    SDL_FreeSurface(playSurface);
+    SDL_Surface* quitSurface = IMG_Load("../data/boutonshade.png");
+    SDL_Texture* quitTexture = SDL_CreateTextureFromSurface(affichage.getRendu(), quitSurface);
+    SDL_FreeSurface(quitSurface);  
+    SDL_SetRenderDrawColor(affichage.getRendu(), 0xFF, 0xFF, 0xFF, 0xFF);
+    
+    // Tableau de boutons
+    Button buttons[2];
+
+    /* Initialisation des boutons
+    buttons[0].text = "Play";
+    buttons[0].textColor = {255, 255, 255, 255};
+    buttons[1].text = "Quit";
+    buttons[1].textColor = {255, 255, 255, 255};
+    */
+
+    SDL_Rect r;
+    
+    r.w = affichage.dimX * 0.6;     //pour le bouton (ici play)
+    r.h = affichage.dimY * 0.1;
+    r.x = affichage.dimX / 2 - r.w * 0.5;
+    r.y = affichage.dimY * 0.3 - r.h * 0.5;
+
+    SDL_Rect r2;
+    
+    r2.w = affichage.dimX * 0.6;  //pour la dimension bouton (ici quit)
+    r2.h = affichage.dimY * 0.1;
+    r2.x = affichage.dimX / 2 - r2.w * 0.5;
+    r2.y = affichage.dimY * 0.3 + r2.h;
+
+    buttons[0].x = r.x;  //pour la position du bouton sur la fenetre
+    buttons[0].y = r.y;
+    buttons[0].rect = {r.x, r.y, r.w, r.h};
+
+    buttons[1].x = r2.x;
+    buttons[1].y = r2.y;
+    buttons[1].rect = {r2.x, r2.y, r2.w, r2.h};
+       
+    while (!quit) {
+        SDL_SetRenderDrawColor(affichage.getRendu(), 0, 0, 0, 0);
+        SDL_RenderClear(affichage.getRendu());
+        // Gestion des événements
+        while (SDL_PollEvent(&e)) {
+            // Fermeture de la fenêtre
+            if (e.type == SDL_QUIT) return false;         
+            else if (e.type == SDL_KEYDOWN) { // Gestion des événements clavier          
+                switch (e.key.keysym.scancode) {
+                    case SDL_SCANCODE_ESCAPE:
+                        return false;
+                        break;
+                    default: break;
+                }
+            }
+
+            // Gestion des événements de souris
+            if (e.type == SDL_MOUSEBUTTONDOWN) {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
+                SDL_Point p = {x, y};
+                for (int i = 0; i < 2; i++) {
+                    if (SDL_PointInRect(&p, &buttons[i].rect)) {
+                        // Le joueur a cliqué sur un bouton
+                        if (i == 0) {
+                            // Nouvelle partie
+                            std::cout << "Play" << std::endl;
+                            return true;
+                        }
+                        else if (i == 1) {
+                            // Quitter
+                            std::cout << "Quit" << std::endl;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        SDL_SetRenderDrawColor(affichage.getRendu(), 255, 0, 0, 0);
+        SDL_RenderDrawRect(affichage.getRendu(), &r);
+        SDL_RenderDrawRect(affichage.getRendu(), &r2);
+        SDL_RenderCopy(affichage.getRendu(), playTexture, NULL, &r);
+        SDL_RenderCopy(affichage.getRendu(), quitTexture, NULL, &r2);
+        SDL_RenderPresent(affichage.getRendu());
+    }
+
+    return quit;
 }
