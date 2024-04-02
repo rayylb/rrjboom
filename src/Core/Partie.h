@@ -13,18 +13,17 @@ const int PARTIE_MAX_FLAMES = 9;
 
 /*
 * @class Partie
-* @brief Classe représentant une partie de jeu
-* Elle contient une grille, deux joueurs, des bombes et des explosions
-*
+* @brief Classe représentant une partie du jeu.
+* Elle contient une grille, deux joueurs, des bombes et des explosions.
 */
 
 class Partie {
     private:
-        Grille grille; ///< La grille de jeu
-        Joueur joueur1; ///< Le joueur 1
-        Joueur joueur2; ///< Le joueur 2
-        std::vector<Bombe> bombes; ///< La liste des bombes posées sur la grille
-        std::vector<Explosion> explosions; ///< La liste des explosions sur la grille
+        Grille grille; //La grille de jeu
+        Joueur joueur1; //Le joueur 1
+        Joueur joueur2; //Le joueur 2
+        std::vector<Bombe> bombes; //La liste des bombes posées sur la grille
+        std::vector<Explosion> explosions; //La liste des explosions sur la grille
 
     public:
 

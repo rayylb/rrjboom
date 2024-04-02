@@ -44,8 +44,16 @@ void Bloc::detruire() {
 }
 
 int Bloc::typeBloc() {
-    if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien))
-        return 7;
+    if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien)) {
+        if(typeBonus == BonusType::BombUp)
+            return 7;
+        else if (typeBonus == BonusType::FlameUp)
+            return 7;
+        else if(typeBonus == BonusType::SpeedUp)
+            return 8;
+        else
+            return 7;
+    }
     else if (onPeutMarcher())
         return 0;
     else if (estDestructible() == true)

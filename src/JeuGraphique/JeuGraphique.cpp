@@ -94,6 +94,8 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     for(int i = 0; i < dimX; i++) {
         for(int j = 0; j < dimY; j++) {
             int type_bloc = jeu.getGrille().infoCase(i, j).typeBloc();
+            if(type_bloc > 6)
+                affichage.afficherSprite(i, j, 0, taille_bloc);
             affichage.afficherSprite(i, j, type_bloc, taille_bloc);
         }
     }

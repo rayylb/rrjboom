@@ -73,13 +73,11 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
 }
 
 void Partie::avancerPartie() {
-    if (!bombes.empty()) { ///AVANCE TIMER BOMBES
-        for (int i = bombes.size()-1; i >= 0; i--) {
-            bombes.at(i).avancerTemps();
-            if (bombes.at(i).estExplosee()) {
-                creerExplosions(bombes.at(i)); ///EXPLOSIONS DES BOMBES
-                bombes.erase(bombes.begin()+i);
-            }
+    for (int i = bombes.size()-1; i >= 0; i--) {
+        bombes.at(i).avancerTemps();
+        if (bombes.at(i).estExplosee()) {
+            creerExplosions(bombes.at(i)); ///EXPLOSIONS DES BOMBES
+            bombes.erase(bombes.begin()+i);
         }
     }
     if (!explosions.empty()) { ///AVANCE TIMER EXPLOSIONS
@@ -97,7 +95,6 @@ void Partie::avancerPartie() {
 }
 
 void Partie::creerExplosions(Bombe source) {
-    source.exploser();
     if(source.getJoueur() == 1)
         joueur1.recupererBombe();
     else
@@ -107,8 +104,7 @@ void Partie::creerExplosions(Bombe source) {
     int brange = source.getRange();
     int i, j;
     int step;
-    Explosion newexp(bx, by); //EXPLOSION CENTRE
-    explosions.push_back(newexp);
+    pushExplosion(bx, by); //EXPLOSION CENTRE
     j = by-1;
     while (j >= by-brange && j >= 0) { ///EXPLOSION HAUT
         pushExplosion(bx, j);
@@ -151,7 +147,6 @@ void Partie::creerExplosions(Bombe source) {
         grille.detruireCase(bx, j);
         j = step;
     }
-    
 }
 
 bool Partie::caseEstExplosee(int posX, int posY) {
@@ -179,7 +174,8 @@ void Partie::pushExplosion(int posX, int posY) {
     explosions.push_back(newexp);
     for (int i=0; i<bombes.size(); i++)
         if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) {
-            creerExplosions(bombes.at(i));
-            bombes.erase(bombes.begin()+i);
+            bombes.at(i).exploser();
         }
+    if(grille.infoCase(posX, posY).onPeutMarcher() && grille.infoCase(posX, posY).aBonus())
+        grille.recupererBonus(posX, posY);
 }

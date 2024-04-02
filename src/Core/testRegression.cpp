@@ -1,12 +1,8 @@
-#include "Bloc.h"
-#include "Grille.h"
 #include "Partie.h"
-#include "Joueur.h"
-#include "JeuGraphique/JeuGraphique.h" 
 #include <assert.h>
 
 int main(void){
-    // Test régression bloc.h
+    // Test régression Bloc.h
     Grille grille;
     Partie partie;
     Bloc bloc;
@@ -18,11 +14,11 @@ int main(void){
     assert(bloc.onPeutMarcher() == false);
     assert(bloc.estDestructible() == false);
     assert(bloc.aBonus() == false);
-    bloc.blocDes(true);
+    bloc.blocDes(BonusType::Rien);
     assert(bloc.onPeutMarcher() == false);
     assert(bloc.estDestructible() == true);
     assert(bloc.aBonus() == true);
-    bloc.blocDes(false);
+    bloc.blocDes(BonusType::Rien);
     assert(bloc.onPeutMarcher() == false);
     assert(bloc.estDestructible() == true);
     assert(bloc.aBonus() == false);
@@ -31,6 +27,7 @@ int main(void){
     assert(bloc.estDestructible() == false);
     assert(bloc.aBonus() == false);
 
+    // Test régression Grille.h
     grille.initGrille();
     assert(grille.getDimX() == 7);
     assert(grille.getDimY() == 5);

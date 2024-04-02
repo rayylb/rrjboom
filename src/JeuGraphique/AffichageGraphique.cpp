@@ -29,6 +29,7 @@ void AffichageGraphique::initFenetre(int width, int height) {
             case 5: surface = IMG_Load("../data/bombe.png"); break;
             case 6: surface = IMG_Load("../data/explosion.png"); break;
             case 7: surface = IMG_Load("../data/bonus.png"); break;
+            case 8: surface = IMG_Load("../data/bonus_vitesse.png"); break;
             default: std::cout << "Erreur : Type de bloc non pris en charge." << std::endl; return;
         }
         if (surface == nullptr) {

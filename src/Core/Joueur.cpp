@@ -13,7 +13,7 @@ void Joueur::spawn(bool num, int xg, int yg){
     porteeBombe = 1;
     porteeMax = 9;
     speed = 2;
-    speedMax = 5;
+    speedMax = 4;
     
     hitboxUP = 0.1;
     hitboxDOWN = 0.4;
