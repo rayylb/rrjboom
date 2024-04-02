@@ -71,7 +71,6 @@ void JeuGraphique::boucleJeuMain() {
     bool quit = false;
     while(!quit) {
         bool play = boucleMenu(quit);
-        std::cout<<quit<<std::endl;
         if(play && !quit)
             nouvellePartie(64);
     }
@@ -131,12 +130,10 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
                 for (int i = 0; i < 2; i++) {
                     if (SDL_PointInRect(&p, &buttons[i].rect)) {
                         if (i == 0) {
-                            std::cout << "Play" << std::endl;
                             affichage.detruireFenetre();
                             return true;
                         }
                         else if (i == 1) {
-                            std::cout << "Quit" << std::endl;
                             affichage.detruireFenetre();
                             mainQuit = true;
                             return false;
@@ -157,6 +154,8 @@ void JeuGraphique::dessinerMenu(Button buttons[2]) {
     affichage.clearRendu(fond);
     affichage.afficherRectangle(buttons[0].rect, buttons[0].textColor);
     affichage.afficherRectangle(buttons[1].rect, buttons[1].textColor);
+    affichage.afficherTexte(buttons[0]);
+    affichage.afficherTexte(buttons[1]);
     affichage.afficherRendu();
 }
 

@@ -16,6 +16,11 @@ void AffichageGraphique::initFenetre(int width, int height) {
         return;
     }
     IMG_Init(IMG_INIT_PNG);
+    TTF_Init();
+    if(!TTF_WasInit()) {
+        std::cout << "TTF_Init failed " << TTF_GetError() << std::endl;
+        return;
+    }
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     SDL_RenderClear(rendu);
     for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
@@ -47,12 +52,14 @@ void AffichageGraphique::initFenetre(int width, int height) {
         }
     }
 }
-void afficherRectangle(SDL_Rect rect);
+
 void AffichageGraphique::detruireFenetre() {
     SDL_DestroyRenderer(rendu);
     SDL_DestroyWindow(fenetre);
     for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++)
         SDL_DestroyTexture(textures[i]);
+    TTF_Quit();
+    IMG_Quit();
     SDL_Quit();
 }
 
@@ -110,82 +117,24 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
     SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }
 
-void AffichageGraphique::afficherBouton(Button bouton) {
-    SDL_SetRenderDrawColor(rendu, 200, 200, 0, 255); // Couleur de fond orange
-    SDL_RenderClear(rendu);
-    Button buttons[2];
-    /* Initialisation des boutons
-    buttons[0].text = "Play";
-    buttons[0].textColor = {255, 255, 255, 255};
-    buttons[1].text = "Quit";
-    buttons[1].textColor = {255, 255, 255, 255};
-    */
-    // Coordonnées et dimensions des boutons
-    SDL_Rect playRect = {
-        static_cast<int>(static_cast<double>(dimX) / 2 - static_cast<double>(dimX) * 0.6 * 0.5),
-        static_cast<int>(static_cast<double>(dimY) * 0.3 - static_cast<double>(dimY) * 0.1 * 0.5),
-        static_cast<int>(dimX * 0.6),
-        static_cast<int>(dimY * 0.1)
-    };
-    SDL_Rect quitRect = {
-        static_cast<int>(static_cast<double>(dimX) / 2 - static_cast<double>(dimX) * 0.6 * 0.5),
-        static_cast<int>(static_cast<double>(dimY) * 0.3 + static_cast<double>(dimY) * 0.1 * 0.5),
-        static_cast<int>(dimX * 0.6),
-        static_cast<int>(dimY * 0.1)
-    };
-    // Dessin des boutons
-    SDL_SetRenderDrawColor(rendu, 255, 0, 0, 255); // Couleur rouge pour les boutons (pour tester)     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 0); // Couleur transparente
-    SDL_RenderDrawRect(rendu, &playRect); // Dessine le rectangle du bouton "Play"
-    SDL_RenderDrawRect(rendu, &quitRect); // Dessine le rectangle du bouton "Quit"
-    // Met à jour l'affichage
-    SDL_RenderPresent(rendu);
-
-    /* POUR LE TEXTE (pas utile pour l'instant)
-    
-    Charger la police 
-    TTF_Font* font = TTF_OpenFont("mygame.ttf", 24); // Adapter la taille de police au besoin
-
-    // Vérifier si la police a été chargée avec succès
+void AffichageGraphique::afficherTexte(Button bouton) {
+    TTF_Font* font = TTF_OpenFont("../data/test.ttf", 24);
     if (!font) {
         std::cout << "Erreur lors du chargement de la police : " << TTF_GetError() << std::endl;
         return;
-    } 
-
-    // pour afficher le texte dans les boutons apres avoir charger la police
-    SDL_Surface* playTextSurface = TTF_RenderText_Solid(font, buttons[0].text.c_str(), buttons[0].textColor);
-    SDL_Surface* quitTextSurface = TTF_RenderText_Solid(font, buttons[1].text.c_str(), buttons[1].textColor);
-    
-
-    // Convertir les surfaces en textures (affiche les boutons)
-    SDL_Texture* playTextTexture = SDL_CreateTextureFromSurface(rendu, playTextSurface);
-    SDL_Texture* quitTextTexture = SDL_CreateTextureFromSurface(rendu, quitTextSurface);
-
-    // Libérer les surfaces car elles ne sont plus nécessaires
-    SDL_FreeSurface(playTextSurface);
-    SDL_FreeSurface(quitTextSurface);
-
-    // Vérifier si les textures ont été créées avec succès
-    if (!playTextTexture || !quitTextTexture) {
-        std::cerr << "Erreur lors de la création des textures de texte : " << SDL_GetError() << std::endl;
+    }
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, bouton.text.c_str(), bouton.textColor);
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(rendu, textSurface);
+    SDL_FreeSurface(textSurface);
+    if (!textTexture) {
+        std::cout << "Erreur lors de la création des textures de texte : " << SDL_GetError() << std::endl;
         TTF_CloseFont(font);
         return;
     }
-
-    // Obtenir les dimensions des textures pour les positionner correctement
-    int playTextWidth, playTextHeight, quitTextWidth, quitTextHeight;
-    SDL_QueryTexture(playTextTexture, nullptr, nullptr, &playTextWidth, &playTextHeight);
-    SDL_QueryTexture(quitTextTexture, nullptr, nullptr, &quitTextWidth, &quitTextHeight);
-
-    // Positionner et afficher les textures des boutons
-    SDL_Rect playTextRect = {playRect.x + 10, playRect.y + 10, playTextWidth, playTextHeight};
-    SDL_Rect quitTextRect = {quitRect.x + 10, quitRect.y + 10, quitTextWidth, quitTextHeight};
-    SDL_RenderCopy(rendu, playTextTexture, nullptr, &playTextRect);
-    SDL_RenderCopy(rendu, quitTextTexture, nullptr, &quitTextRect);
-
-    // Libérer la police
-    TTF_CloseFont(font);
-    
-    */
+    int textWidth, textHeight;
+    SDL_QueryTexture(textTexture, NULL, NULL, &textWidth, &textHeight);
+    SDL_Rect textRect = {bouton.rect.w / 2, bouton.rect.h / 2, textWidth, textHeight};
+    SDL_RenderCopy(rendu, textTexture, NULL, &bouton.rect);
 }
 
 

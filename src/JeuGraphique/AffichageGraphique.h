@@ -36,7 +36,7 @@ class AffichageGraphique {
         void afficherRectangle(int posX, int posY, int width, int height, SDL_Color color = {255, 255, 255, 255});
         void afficherRectangle(SDL_Rect rect, SDL_Color color = {255, 255, 255, 255});
         void afficherSprite(float posX, float posY, int type_bloc, int taille_bloc);
-        void afficherBouton(Button bouton);
+        void afficherTexte(Button bouton);
 };
 
 #endif
