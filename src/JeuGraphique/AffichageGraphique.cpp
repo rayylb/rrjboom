@@ -7,7 +7,7 @@ void AffichageGraphique::initFenetre(int width, int height) {
         SDL_Quit();
     }
     dimX = width;
-    dimY = height;
+    dimY = height + 100;
     fenetre = SDL_CreateWindow("Rrjboom", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimX, dimY, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     rendu = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
     if (rendu == nullptr) {
