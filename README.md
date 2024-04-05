@@ -5,7 +5,7 @@ Réalisé dans le cadre de l'UE LIFAPCD.
 <ins>Compatibilité :</ins>  
 Le projet peut être build et run seulement sur Linux.
   
-__Outils utilisés :__  
+<ins>Outils utilisés :</ins>  
 SDL2 pour l'interface graphique.  
 CMake pour build le projet.  
 Doxygen pour la documentation.  
@@ -16,15 +16,15 @@ Doxygen pour la documentation.
 ``make``  
   
 ## Run  
-Version textuel :  
+<ins>Version textuel :</ins>  
 ``cd rrjboom/build``  
 ``./BombTex``  
   
-Version graphique :  
+<ins>Version graphique :</ins>  
 ``cd rrjboom/build``  
 ``./BombGraph``  
 
-Commande pour build en accéléré + run la version graphique en même temps :  
+<ins>Commande pour build en accéléré + run la version graphique en même temps :</ins>  
 ``make -j 8 && ./BombGraph``  
   
 ## Documentation  
