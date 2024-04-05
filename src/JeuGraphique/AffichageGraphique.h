@@ -3,10 +3,11 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include "../Core/Grille.h"
 
-const int AFFICHAGE_NB_TEXTURES = 11; //Nombre de textures en mémoire
+const int AFFICHAGE_NB_TEXTURES = 15; //Nombre de textures en mémoire
 
 struct Button {
     int x, y;
@@ -22,6 +23,7 @@ class AffichageGraphique {
         SDL_Window* fenetre;
         SDL_Surface* surface;
         SDL_Texture* textures[AFFICHAGE_NB_TEXTURES];
+        TTF_Font* font;
 
     public:
         void initFenetre(int width, int height);

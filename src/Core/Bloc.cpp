@@ -46,13 +46,13 @@ void Bloc::detruire() {
 int Bloc::typeBloc() {
     if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien)) {
         if(typeBonus == BonusType::BombUp)
-            return 8;
+            return 11;
         else if (typeBonus == BonusType::FlameUp)
-            return 9;
+            return 12;
         else if(typeBonus == BonusType::SpeedUp)
-            return 10;
+            return 13;
         else
-            return 7;
+            return 10;
     }
     else if (onPeutMarcher())
         return 0;

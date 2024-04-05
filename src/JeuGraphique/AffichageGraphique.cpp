@@ -1,6 +1,4 @@
 #include "AffichageGraphique.h"
-#include <SDL2/SDL_ttf.h>
-#include <iostream>
 
 void AffichageGraphique::initFenetre(int width, int height) {
     if(SDL_Init(SDL_INIT_VIDEO)<0) {
@@ -21,6 +19,11 @@ void AffichageGraphique::initFenetre(int width, int height) {
         std::cout << "TTF_Init failed " << TTF_GetError() << std::endl;
         return;
     }
+    font = TTF_OpenFont("../data/font.ttf", 24);
+    if (!font) {
+        std::cout << "Erreur lors du chargement de la police : " << TTF_GetError() << std::endl;
+        return;
+    }
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     SDL_RenderClear(rendu);
     for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
@@ -30,14 +33,18 @@ void AffichageGraphique::initFenetre(int width, int height) {
             case 0: surface = IMG_Load("../data/bloc_sol.png"); break;
             case 1: surface = IMG_Load("../data/bloc_destructible.png"); break;
             case 2: surface = IMG_Load("../data/bloc_indestructible.png"); break;
-            case 3: surface = IMG_Load("../data/joueur1.png"); break;
-            case 4: surface = IMG_Load("../data/joueur2.png"); break;
-            case 5: surface = IMG_Load("../data/bombe.png"); break;
-            case 6: surface = IMG_Load("../data/explosion.png"); break;
-            case 7: surface = IMG_Load("../data/bonus.png"); break;
-            case 8: surface = IMG_Load("../data/bonus_bombe.png"); break;
-            case 9: surface = IMG_Load("../data/bonus_flame.png"); break;
-            case 10: surface = IMG_Load("../data/bonus_vitesse.png"); break;
+            case 3: surface = IMG_Load("../data/bombe.png"); break;
+            case 4: surface = IMG_Load("../data/bombe_rouge.png"); break;
+            case 5: surface = IMG_Load("../data/explosion.png"); break;
+            case 6: surface = IMG_Load("../data/joueur_bas.png"); break;
+            case 7: surface = IMG_Load("../data/joueur_haut.png"); break;
+            case 8: surface = IMG_Load("../data/joueur_gauche.png"); break;
+            case 9: surface = IMG_Load("../data/joueur_droite.png"); break;
+            case 10: surface = IMG_Load("../data/bonus.png"); break;
+            case 11: surface = IMG_Load("../data/bonus_bombe.png"); break;
+            case 12: surface = IMG_Load("../data/bonus_flame.png"); break;
+            case 13: surface = IMG_Load("../data/bonus_vitesse.png"); break;
+            case 14: surface = IMG_Load("../data/titre_bomberman.png"); break;
             default: std::cout << "Erreur : Type de bloc non pris en charge." << std::endl; return;
         }
         if (surface == nullptr) {
@@ -56,8 +63,10 @@ void AffichageGraphique::initFenetre(int width, int height) {
 void AffichageGraphique::detruireFenetre() {
     SDL_DestroyRenderer(rendu);
     SDL_DestroyWindow(fenetre);
+    SDL_FreeSurface(surface);
     for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++)
         SDL_DestroyTexture(textures[i]);
+    TTF_CloseFont(font);
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
@@ -100,12 +109,12 @@ void AffichageGraphique::afficherRectangle(SDL_Rect rect, SDL_Color color) {
 
 void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, int taille_bloc) {
     SDL_Rect destRect = {(int) (posX*taille_bloc), (int) (posY*taille_bloc), taille_bloc, taille_bloc};
-    if(type_bloc == 3 || type_bloc == 4) {
+    if(type_bloc >= 6 && type_bloc <= 9) {
         destRect.h = destRect.w*3/2;
         destRect.x -= taille_bloc/2;
         destRect.y -= taille_bloc;
     }
-    if(type_bloc == 5) {
+    if(type_bloc == 3) {
         destRect.h = destRect.w*19/15;
         destRect.y -= taille_bloc*19/15;
         destRect.y += taille_bloc;
@@ -118,23 +127,17 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
 }
 
 void AffichageGraphique::afficherTexte(Button bouton) {
-    TTF_Font* font = TTF_OpenFont("../data/test.ttf", 24);
-    if (!font) {
-        std::cout << "Erreur lors du chargement de la police : " << TTF_GetError() << std::endl;
-        return;
-    }
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, bouton.text.c_str(), bouton.textColor);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(rendu, textSurface);
     SDL_FreeSurface(textSurface);
     if (!textTexture) {
         std::cout << "Erreur lors de la création des textures de texte : " << SDL_GetError() << std::endl;
-        TTF_CloseFont(font);
         return;
     }
     int textWidth, textHeight;
     SDL_QueryTexture(textTexture, NULL, NULL, &textWidth, &textHeight);
     SDL_Rect textRect = {bouton.rect.w / 2, bouton.rect.h / 2, textWidth, textHeight};
     SDL_RenderCopy(rendu, textTexture, NULL, &bouton.rect);
+    SDL_FreeSurface(textSurface);
+    SDL_DestroyTexture(textTexture);
 }
-
-

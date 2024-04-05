@@ -184,7 +184,7 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     for(int i = 0; i < dimX; i++) {
         for(int j = 0; j < dimY; j++) {
             int type_bloc = jeu.getGrille().infoCase(i, j).typeBloc();
-            if(type_bloc > 6)
+            if(type_bloc > 9)
                 affichage.afficherSprite(i, j, 0, taille_bloc);
             affichage.afficherSprite(i, j, type_bloc, taille_bloc);
         }
@@ -193,16 +193,16 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
     for(int i = 0; i < jeu.getExplosions().size(); i++) {
         testCase = jeu.getGrille().infoCase(jeu.getExplosions().at(i).getPosX(), jeu.getExplosions().at(i).getPosY());
         if(testCase.estDestructible() || testCase.onPeutMarcher())
-            affichage.afficherSprite(jeu.getExplosions().at(i).getPosX(), jeu.getExplosions().at(i).getPosY(), 6, taille_bloc);
+            affichage.afficherSprite(jeu.getExplosions().at(i).getPosX(), jeu.getExplosions().at(i).getPosY(), 5, taille_bloc);
     }
     for(int i = 0; i < jeu.getBombes().size(); i++)
-        affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 5, taille_bloc);
+        affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 3, taille_bloc);
     float J1X = jeu.getJoueur1().getExactX();
     float J1Y = jeu.getJoueur1().getExactY();
-    affichage.afficherSprite(J1X, J1Y, 3, taille_bloc);
+    affichage.afficherSprite(J1X, J1Y, 6, taille_bloc);
     float J2X = jeu.getJoueur2().getExactX();
     float J2Y = jeu.getJoueur2().getExactY();
-    affichage.afficherSprite(J2X, J2Y, 4, taille_bloc);
+    affichage.afficherSprite(J2X, J2Y, 7, taille_bloc);
     affichage.afficherRendu();
 }
 
