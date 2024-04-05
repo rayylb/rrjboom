@@ -16,18 +16,19 @@ Doxygen pour la documentation.
 ``make``  
   
 ## Run  
-<ins>Version textuel :</ins>  
+Version textuel :  
 ``cd rrjboom/build``  
 ``./BombTex``  
   
-<ins>Version graphique :</ins>  
+Version graphique :  
 ``cd rrjboom/build``  
 ``./BombGraph``  
 
-<ins>Commande pour build en accéléré + run la version graphique en même temps :</ins>  
+Commande pour build en accéléré + run la version graphique en même temps :  
 ``make -j 8 && ./BombGraph``  
   
 ## Documentation  
 ``cd rrjboom``  
 ``doxygen doc/doxyfile`` (Génère la doc, pas besoin de le faire à chaque fois.)  
-``firefox doc/html/index.html``  
+Sous Linux : ``firefox doc/html/index.html``  
+Sous Mac : ``open -a firefox doc/html/index.html``
