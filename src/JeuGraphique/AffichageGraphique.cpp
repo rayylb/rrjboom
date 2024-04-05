@@ -129,7 +129,6 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
 void AffichageGraphique::afficherTexte(Button bouton) {
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, bouton.text.c_str(), bouton.textColor);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(rendu, textSurface);
-    SDL_FreeSurface(textSurface);
     if (!textTexture) {
         std::cout << "Erreur lors de la création des textures de texte : " << SDL_GetError() << std::endl;
         return;
