@@ -3,7 +3,7 @@ Jeu Bomberman à 2 joueurs en version Textuel et Graphique.
 Réalisé dans le cadre de l'UE LIFAPCD.  
   
 <ins>Compatibilité :</ins>  
-Le projet peut être build et run seulement sur Linux.
+Le projet peut être build et run sur Linux et Windows 32-bit, à condition d'avoir SDL2 déjà installé.
   
 <ins>Outils utilisés :</ins>  
 SDL2 pour l'interface graphique.  
