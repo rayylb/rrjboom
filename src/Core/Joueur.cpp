@@ -1,5 +1,9 @@
 #include "Joueur.h"
 
+Joueur::Joueur() {
+    spawn(true, 0, 0);
+}
+
 void Joueur::spawn(bool num, int xg, int yg){
     x = xg;
     y = yg;
@@ -9,11 +13,8 @@ void Joueur::spawn(bool num, int xg, int yg){
     
     nbBombesPosee = 0;
     nbBombesPoseeMax = 1;
-    nbBombesMax = 9;
     porteeBombe = 1;
-    porteeMax = 9;
-    speed = 2;
-    speedMax = 3;
+    speed = 10;
     
     hitboxUP = 0;
     hitboxDOWN = 0.4;
@@ -22,7 +23,7 @@ void Joueur::spawn(bool num, int xg, int yg){
 }
 
 void Joueur::moveR(bool canSkip, bool canSkipUp, bool canSkipDown) {
-    xExact += (float)(speed)/20;
+    xExact += (float)(speed)/100;
     bool canMove = canSkip;
     if((int)(xExact + hitboxRIGHT) > x) {
         if(yExact-y-hitboxUP < 0) {
@@ -42,7 +43,7 @@ void Joueur::moveR(bool canSkip, bool canSkipUp, bool canSkipDown) {
 }
 
 void Joueur::moveL(bool canSkip, bool canSkipUp, bool canSkipDown) {
-    xExact -= (float)(speed)/20;
+    xExact -= (float)(speed)/100;
     bool canMove = canSkip;
     if((xExact - hitboxLEFT) < 0)
         xExact = x + hitboxLEFT;
@@ -64,7 +65,7 @@ void Joueur::moveL(bool canSkip, bool canSkipUp, bool canSkipDown) {
 }
 
 void Joueur::moveU(bool canSkip, bool canSkipLeft, bool canSkipRight) {
-    yExact -= (float)(speed)/20;
+    yExact -= (float)(speed)/100;
     bool canMove = canSkip;
     if((yExact - hitboxUP) < 0)
         yExact = y + hitboxUP;
@@ -86,7 +87,7 @@ void Joueur::moveU(bool canSkip, bool canSkipLeft, bool canSkipRight) {
 }
 
 void Joueur::moveD(bool canSkip, bool canSkipLeft, bool canSkipRight) {
-    yExact += (float)(speed)/20;
+    yExact += (float)(speed)/100;
     bool canMove = canSkip;
     if((int)(yExact + hitboxDOWN) > y) {
         if(xExact-x-hitboxLEFT < 0) {
@@ -120,9 +121,9 @@ void Joueur::exploser() {
 void Joueur::appliquerBonus(BonusType typeBonus) {
     switch(typeBonus) {
         case BonusType::Rien : break;
-        case BonusType::BombUp : if(nbBombesPoseeMax < nbBombesMax) nbBombesPoseeMax += 1; break;
-        case BonusType::FlameUp : if(porteeBombe < porteeMax) porteeBombe += 1; break;
-        case BonusType::SpeedUp : if(speed < speedMax) speed += 1; break;
+        case BonusType::BombUp : if(nbBombesPoseeMax < JOUEUR_MAX_BOMBES) nbBombesPoseeMax += 1; break;
+        case BonusType::FlameUp : if(porteeBombe < JOUEUR_MAX_FLAMES) porteeBombe += 1; break;
+        case BonusType::SpeedUp : if(speed < JOUEUR_MAX_SPEED) speed += 2; break;
         default: break;
     }
 }

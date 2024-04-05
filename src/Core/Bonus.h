@@ -2,7 +2,8 @@
 #define _BONUS_H
 
 /**
- * @brief Enumération des types de bonus disponibles.
+ * @enum BonusType
+ * @brief Un bonus est représenté par un énum qui contient tout les types de bonus ainsi que le bonus vide
  */
 
 enum BonusType {

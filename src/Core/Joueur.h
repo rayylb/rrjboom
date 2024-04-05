@@ -4,6 +4,15 @@
 #include <iostream>
 #include "Bonus.h"
 
+const int JOUEUR_MAX_BOMBES = 9; //Nombre maximum de bombe pouvant être posées à la fois par un joueur
+const int JOUEUR_MAX_FLAMES = 9; //Portée maximum des bombes d'un joueur
+const int JOUEUR_MAX_SPEED = 20; //Vitesse maximale d'un joueur
+
+/**
+ * @class Joueur
+ * @brief Classe représentant un joueur. Elle stocke sa position, ses bonus, le nombre de bombes posées, ainsi que les hitboxes du joueur.
+*/
+
 class Joueur {
 private:
     int x; //Position en X du joueur sur la grille
@@ -14,18 +23,17 @@ private:
 
     int nbBombesPosee; //Nombre de bombes posées par le joueur
     int nbBombesPoseeMax; //Nombre maximum de bombes que le joueur peut poser
-    int nbBombesMax;
-    int porteeBombe; //ortée de l'explosion de la bombe du joueur
-    int porteeMax;
-    int speed;
-    int speedMax;
+    int porteeBombe; //Portée de l'explosion de la bombe du joueur
+    int speed; //Vitesse du joueur
     
-    float hitboxUP;
-    float hitboxDOWN;
-    float hitboxLEFT;
-    float hitboxRIGHT;
+    float hitboxUP; //Hitbox haute du joueur
+    float hitboxDOWN; //Hitbox basse du joueur
+    float hitboxLEFT; //Hitbox gauche du joueur
+    float hitboxRIGHT; //Hitbox droite du joueur
     
 public:
+    Joueur();
+
     void spawn(bool num, int xg, int yg);
 
     /**

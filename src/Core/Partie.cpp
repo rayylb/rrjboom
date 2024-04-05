@@ -1,30 +1,14 @@
 #include "Partie.h"
 #include <iostream>
 
+Partie::Partie() {
+    initPartie();
+}
+
 void Partie::initPartie() {
     grille.initGrille();
     joueur1.spawn(true, 0, 0);
     joueur2.spawn(false, grille.getDimX()-1, grille.getDimY()-1);
-}
-
-Grille& Partie::getGrille() {
-    return grille;
-}
-
-Joueur& Partie::getJoueur1() {
-    return joueur1;
-}
-
-Joueur& Partie::getJoueur2() {
-    return joueur2;
-}
-
-std::vector<Bombe>& Partie::getBombes() {
-    return bombes;
-}
-
-std::vector<Explosion>& Partie::getExplosions() {
-    return explosions;
 }
 
 void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
@@ -192,9 +176,29 @@ void Partie::pushExplosion(int posX, int posY) {
     Explosion newexp(posX, posY);
     explosions.push_back(newexp);
     for (int i=0; i<bombes.size(); i++)
-        if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) {
+        if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) { ///EXPLOSIONS EN CHAINE
             bombes.at(i).exploser();
         }
     if(grille.infoCase(posX, posY).onPeutMarcher() && grille.infoCase(posX, posY).aBonus())
         grille.recupererBonus(posX, posY);
+}
+
+Grille& Partie::getGrille() {
+    return grille;
+}
+
+Joueur& Partie::getJoueur1() {
+    return joueur1;
+}
+
+Joueur& Partie::getJoueur2() {
+    return joueur2;
+}
+
+std::vector<Bombe>& Partie::getBombes() {
+    return bombes;
+}
+
+std::vector<Explosion>& Partie::getExplosions() {
+    return explosions;
 }

@@ -1,12 +1,23 @@
 #include "AffichageGraphique.h"
 
+AffichageGraphique::AffichageGraphique() {
+    dimX = 100;
+    dimY = 100;
+    fenetre = nullptr;
+    rendu = nullptr;
+    surface = nullptr;
+    for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++)
+        textures[i] = nullptr;
+    font = nullptr;
+}
+
 void AffichageGraphique::initFenetre(int width, int height) {
+    dimX = width;
+    dimY = height;
     if(SDL_Init(SDL_INIT_VIDEO)<0) {
         std::cout<<"Erreur lors de l'initialisation de la SDL : "<<SDL_GetError()<<std::endl;
         SDL_Quit();
     }
-    dimX = width;
-    dimY = height;
     fenetre = SDL_CreateWindow("Rrjboom", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimX, dimY, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     rendu = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
     if (rendu == nullptr) {
@@ -52,7 +63,6 @@ void AffichageGraphique::initFenetre(int width, int height) {
             return;
         }
         textures[i] = SDL_CreateTextureFromSurface(rendu, surface);
-        SDL_FreeSurface(surface);
         if (textures[i] == nullptr) {
             std::cout << "Erreur : Création de la texture impossible." << std::endl;
             return;
@@ -79,18 +89,6 @@ void AffichageGraphique::clearRendu(SDL_Color color) {
 
 void AffichageGraphique::afficherRendu() {
     SDL_RenderPresent(rendu);
-}
-
-int AffichageGraphique::getDimX() {
-    return dimX;
-}
-
-int AffichageGraphique::getDimY() {
-    return dimY;
-}
-
-SDL_Renderer* AffichageGraphique::getRendu() {
-    return rendu;
 }
 
 void AffichageGraphique::afficherRectangle(int posX, int posY, int width, int height, SDL_Color color) {
@@ -139,4 +137,12 @@ void AffichageGraphique::afficherTexte(Button bouton) {
     SDL_RenderCopy(rendu, textTexture, NULL, &bouton.rect);
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(textTexture);
+}
+
+int AffichageGraphique::getDimX() {
+    return dimX;
+}
+
+int AffichageGraphique::getDimY() {
+    return dimY;
 }

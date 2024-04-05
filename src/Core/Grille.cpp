@@ -2,12 +2,8 @@
 #include <stdlib.h>
 #include <iostream>
 
-int Grille::getDimX() {
-    return GRILLE_DIMX;
-}
-
-int Grille::getDimY() {
-    return GRILLE_DIMY;
+Grille::Grille() {
+    initGrille();
 }
 
 void Grille::initGrille() {
@@ -22,6 +18,16 @@ void Grille::initGrille() {
             else
                 terrain[i][j].blocSol();
         }
+}
+
+void Grille::detruireCase(int x, int y) {
+    terrain[x][y].detruire();
+}
+
+BonusType Grille::recupererBonus(int x, int y) {
+    BonusType bonusSurCase = terrain[x][y].getBonusType();
+    terrain[x][y].retirerBonus();
+    return bonusSurCase;
 }
 
 void Grille::affichTerminal() {
@@ -40,6 +46,14 @@ void Grille::affichTerminal() {
     }
 }
 
+int Grille::getDimX() {
+    return GRILLE_DIMX;
+}
+
+int Grille::getDimY() {
+    return GRILLE_DIMY;
+}
+
 void Grille::infoCase(int x, int y, Bloc& copie) {
     if (terrain[x][y].onPeutMarcher() == true)
         copie.blocSol();
@@ -54,16 +68,6 @@ Bloc& Grille::infoCase(int x, int y) {
         return terrain[1][1];
     else
         return terrain[x][y];
-}
-
-void Grille::detruireCase(int x, int y) {
-    terrain[x][y].detruire();
-}
-
-BonusType Grille::recupererBonus(int x, int y) {
-    BonusType bonusSurCase = terrain[x][y].getBonusType();
-    terrain[x][y].retirerBonus();
-    return bonusSurCase;
 }
 
 BonusType Grille::nouveauBonus() {

@@ -2,7 +2,7 @@
 #define _TIMER_H
 #include <SDL2/SDL.h>
 
-/*
+/**
 * @class Timer
 * @brief Classe représentant un timer dans le jeu
 * Elle contient deux entiers qui représentent le temps de début du timer et le temps de début de pause, 

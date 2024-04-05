@@ -6,6 +6,6 @@
 int main() {
     srand(time(NULL));
     AffichageTexte jeuText;
-    jeuText.boucleJeu();
+    jeuText.boucleJeuMain();
     return 0;
 }
