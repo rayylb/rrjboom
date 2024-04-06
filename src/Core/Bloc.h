@@ -5,8 +5,7 @@
 
 /**
  * @class Bloc
- *
- * @brief La classe Bloc représente un bloc de la grille. Cette classe permet de créer et manipuler des bloc. 
+ * @brief Classe représentant un bloc de la grille. Cette classe permet de créer et manipuler des bloc. 
  * La classe est constituée de booléens représentant si elle est destructible, si elle est détruite, si un bonus est présent sur la case, et lequel.
  */
 
@@ -19,7 +18,7 @@ private:
 
 public:
     Bloc();
-    
+
     Bloc(bool isDestructible, bool hasBonus, bool canWalk);
 
     /**

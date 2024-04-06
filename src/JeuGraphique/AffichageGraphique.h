@@ -2,8 +2,8 @@
 #define _AFFICHAGEGRAPHIQUE_H_
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 #include "../Core/Grille.h"
 #include "Button.h"
@@ -26,7 +26,7 @@ class AffichageGraphique {
         TTF_Font* font; //Police utilisée pour les textes chargée en mémoire
 
     public:
-        AffichageGraphique;
+        AffichageGraphique();
 
         /**
          * @brief Initialise la SDL, charge les images et la police en mémoire, et ouvre une nouvelle fenêtre

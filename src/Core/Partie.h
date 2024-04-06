@@ -8,10 +8,10 @@
 #include "Explosion.h"
 #include <vector>
 
-/*
-* @class Partie
-* @brief Classe représentant une partie du jeu.
-* Elle contient une grille et deux joueurs. Elle gère les mouvements de joueurs, ainsi que les bombes et les explosions.
+/**
+ * @class Partie
+ * @brief Classe représentant une partie du jeu.
+ * Elle contient une grille et deux joueurs. Elle gère les mouvements de joueurs, ainsi que les bombes et les explosions.
 */
 
 class Partie {
