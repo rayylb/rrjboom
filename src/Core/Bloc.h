@@ -17,7 +17,7 @@ private:
     BonusType typeBonus; //Bonus présent sur la case
 
 public:
-    Bloc();
+    Bloc() : destructible(false), bonusPresent(false), peutMarcher(true), typeBonus(BonusType::Rien) {};
 
     Bloc(bool isDestructible, bool hasBonus, bool canWalk);
 

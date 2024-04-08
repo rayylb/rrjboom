@@ -36,11 +36,8 @@ void AffichageGraphique::initFenetre(int width, int height) {
         return;
     }
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
-    SDL_RenderClear(rendu);
-    for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
-        textures[i] = nullptr;
-        surface = nullptr;
-        switch (i) {
+    for(int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
+        switch(i) {
             case 0: surface = IMG_Load("../data/bloc_sol.png"); break;
             case 1: surface = IMG_Load("../data/bloc_destructible.png"); break;
             case 2: surface = IMG_Load("../data/bloc_indestructible.png"); break;

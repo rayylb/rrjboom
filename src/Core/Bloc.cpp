@@ -1,15 +1,10 @@
 #include "Bloc.h"
 
-Bloc::Bloc() {
-    destructible = false;
-    bonusPresent = false;
-    peutMarcher = true;
-}
-
 Bloc::Bloc(bool isDestructible, bool hasBonus, bool canWalk) {
     destructible = isDestructible;
     bonusPresent = hasBonus;
     peutMarcher = canWalk;
+    typeBonus = BonusType::Rien;
 }
 
 void Bloc::blocSol() {

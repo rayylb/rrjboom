@@ -1,6 +1,13 @@
 #include "JeuGraphique.h"
 #include <iostream>
 
+JeuGraphique::JeuGraphique() {
+    joueur1movX = 0;
+    joueur1movY = 0;
+    joueur2movX = 0;
+    joueur2movY = 0;
+}
+
 void JeuGraphique::boucleJeuMain() {
     bool quit = false;
     while(!quit) {
@@ -76,7 +83,7 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
                 }
             }
         }
-        dessinerMenu(buttons);
+        afficherMenu(buttons);
     }
     affichage.detruireFenetre();
     mainQuit = true;
