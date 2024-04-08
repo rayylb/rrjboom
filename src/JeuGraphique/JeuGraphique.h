@@ -38,13 +38,13 @@ class JeuGraphique {
          * @brief Commence une nouvelle partie
          * @param taille_bloc Taille en pixel avec laquelle seront affichés les cases du terrain
         */
-        void nouvellePartie(int taille_bloc);
+        void nouvellePartie(int taille_bloc, bool& mainQuit);
         
         /**
          * @brief Récupère les action des joueur et fait avancer la partie d'une frame
          * @param stillRunning Indique si la partie est finie
         */
-        void tourDeJeu(bool& stillRunning);
+        void tourDeJeu(bool& stillRunning, bool& mainQuit);
 
         /**
          * @brief Convertis les inputs du joueur en commandes compréhensibles par la partie

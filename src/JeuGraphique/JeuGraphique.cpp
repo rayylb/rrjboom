@@ -13,7 +13,7 @@ void JeuGraphique::boucleJeuMain() {
     while(!quit) {
         bool play = boucleMenu(quit);
         if(play && !quit)
-            nouvellePartie(64);
+            nouvellePartie(64, quit);
     }
 }
 
@@ -90,7 +90,7 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
     return false;
 }
 
-void JeuGraphique::nouvellePartie(int taille_bloc) {
+void JeuGraphique::nouvellePartie(int taille_bloc, bool& mainQuit) {
     jeu.initPartie();
     affichage.initFenetre(jeu.getGrille().getDimX()*taille_bloc, jeu.getGrille().getDimY()*taille_bloc);
     afficherPartie(taille_bloc);
@@ -100,14 +100,14 @@ void JeuGraphique::nouvellePartie(int taille_bloc) {
     joueur2movY = 0;
     bool running = true;
     while(running) {
-        tourDeJeu(running);
+        tourDeJeu(running, mainQuit);
         afficherPartie(taille_bloc);
         SDL_Delay(33);
     }
     affichage.detruireFenetre();
 }
 
-void JeuGraphique::tourDeJeu(bool& stillRunning) {
+void JeuGraphique::tourDeJeu(bool& stillRunning, bool& mainQuit) {
     char movJ1 = ' ';
     char bombJ1 = ' ';
     char movJ2 = ' ';
@@ -115,7 +115,7 @@ void JeuGraphique::tourDeJeu(bool& stillRunning) {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
             switch(event.type) {
-                case SDL_QUIT : stillRunning = false; break;
+                case SDL_QUIT : stillRunning = false; mainQuit = true; break;
                 case SDL_KEYDOWN :
                     switch (event.key.keysym.sym) {
                         case SDLK_z : joueur1movY = -1; break;

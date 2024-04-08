@@ -61,6 +61,9 @@ public:
     */
     void poserBombe();
 
+    /**
+    * @brief Fonction qui fait récupérer une bombe au joueur
+    */
     void recupererBombe();
 
     /**
@@ -68,6 +71,10 @@ public:
     */
     void exploser();
 
+    /**
+    * @brief Fonction qui donne un bonus au joueur
+    * @param typeBonus Le bonus qui est donné au joueur
+    */
     void appliquerBonus(BonusType typeBonus);
 
     /*
@@ -104,7 +111,6 @@ public:
     * @return L'entier joueur.nbBombes qui est le nombre de bombes posées par le joueur
     */
     int getNbBombes();
-
 
     /*
     * @brief Fonction qui retourne le nombre maximum de bombes que le joueur peut poser

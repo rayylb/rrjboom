@@ -7,6 +7,8 @@ Partie::Partie() {
 
 void Partie::initPartie() {
     grille.initGrille();
+    bombes.clear();
+    explosions.clear();
     joueur1.spawn(true, 0, 0);
     joueur2.spawn(false, grille.getDimX()-1, grille.getDimY()-1);
 }
