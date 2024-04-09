@@ -1,35 +1,22 @@
 #include "Partie.h"
 #include <iostream>
 
+Partie::Partie() {
+    initPartie();
+}
+
 void Partie::initPartie() {
     grille.initGrille();
+    bombes.clear();
+    explosions.clear();
     joueur1.spawn(true, 0, 0);
     joueur2.spawn(false, grille.getDimX()-1, grille.getDimY()-1);
-}
-
-Grille& Partie::getGrille() {
-    return grille;
-}
-
-Joueur& Partie::getJoueur1() {
-    return joueur1;
-}
-
-Joueur& Partie::getJoueur2() {
-    return joueur2;
-}
-
-std::vector<Bombe>& Partie::getBombes() {
-    return bombes;
-}
-
-std::vector<Explosion>& Partie::getExplosions() {
-    return explosions;
 }
 
 void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     int jx, jy;
     BonusType bonus;
+    bool caseDevant, caseAvant, caseApres;
 
     //////////JOUEUR1
     jx = joueur1.getPositionX();
@@ -37,10 +24,22 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     bonus = grille.recupererBonus(jx,jy);
     joueur1.appliquerBonus(bonus);
     switch(movJ1) {
-        case('U') : joueur1.moveU(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1))); break;
-        case('L') : joueur1.moveL(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy))); break;
-        case('D') : joueur1.moveD(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1))); break;
-        case('R') : joueur1.moveR(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy))); break;
+        case('U') : caseDevant = jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1));
+            caseAvant = jy > 0 && grille.infoCase(jx-1, jy-1).onPeutMarcher() && (!caseEstMinee(jx-1, jy-1));
+            caseApres = jy > 0 && grille.infoCase(jx+1, jy-1).onPeutMarcher() && (!caseEstMinee(jx+1, jy-1));
+            joueur1.moveU(caseDevant, caseAvant, caseApres); break;
+        case('L') : caseDevant = jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy));
+            caseAvant = jx > 0 && grille.infoCase(jx-1, jy-1).onPeutMarcher() && (!caseEstMinee(jx-1, jy-1));
+            caseApres = jx > 0 && grille.infoCase(jx-1, jy+1).onPeutMarcher() && (!caseEstMinee(jx-1, jy+1));
+            joueur1.moveL(caseDevant, caseAvant, caseApres); break;
+        case('D') : caseDevant = jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1));
+            caseAvant = jy < grille.getDimY()-1 && grille.infoCase(jx-1, jy+1).onPeutMarcher() && (!caseEstMinee(jx-1, jy+1));
+            caseApres = jy < grille.getDimY()-1 && grille.infoCase(jx+1, jy+1).onPeutMarcher() && (!caseEstMinee(jx+1, jy+1));
+            joueur1.moveD(caseDevant, caseAvant, caseApres); break;
+        case('R') : caseDevant = jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy));
+            caseAvant = jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy-1).onPeutMarcher() && (!caseEstMinee(jx+1, jy-1));
+            caseApres = jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy+1).onPeutMarcher() && (!caseEstMinee(jx+1, jy+1));
+            joueur1.moveR(caseDevant, caseAvant, caseApres); break;
         default: break;
     }
     jx = joueur1.getPositionX();
@@ -57,10 +56,16 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     bonus = grille.recupererBonus(jx,jy);
     joueur2.appliquerBonus(bonus);
     switch(movJ2) {
-        case('U') : joueur2.moveU(jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1))); break;
-        case('L') : joueur2.moveL(jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy))); break;
-        case('D') : joueur2.moveD(jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1))); break;
-        case('R') : joueur2.moveR(jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy))); break;
+        case('U') : caseDevant = jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1));
+            joueur2.moveU(caseDevant, caseDevant, caseDevant); break;
+        case('L') : caseDevant = jx > 0 && grille.infoCase(jx-1, jy).onPeutMarcher() && (!caseEstMinee(jx-1, jy));
+            joueur2.moveL(caseDevant, caseDevant, caseDevant); break;
+        case('D') : caseDevant = jy < grille.getDimY()-1 && grille.infoCase(jx, jy+1).onPeutMarcher() && (!caseEstMinee(jx, jy+1));
+            joueur2.moveD(caseDevant, caseDevant, caseDevant); break;
+        case('R') : caseDevant = jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy).onPeutMarcher() && (!caseEstMinee(jx+1, jy));
+            caseAvant = jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy-1).onPeutMarcher() && (!caseEstMinee(jx+1, jy-1));
+            caseApres = jx < grille.getDimX()-1 && grille.infoCase(jx+1, jy+1).onPeutMarcher() && (!caseEstMinee(jx+1, jy+1));
+            joueur2.moveR(caseDevant, caseAvant, caseApres); break;
         default: break;
     }
     jx = joueur2.getPositionX();
@@ -73,13 +78,11 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
 }
 
 void Partie::avancerPartie() {
-    if (!bombes.empty()) { ///AVANCE TIMER BOMBES
-        for (int i = bombes.size()-1; i >= 0; i--) {
-            bombes.at(i).avancerTemps();
-            if (bombes.at(i).estExplosee()) {
-                creerExplosions(bombes.at(i)); ///EXPLOSIONS DES BOMBES
-                bombes.erase(bombes.begin()+i);
-            }
+    for (int i = bombes.size()-1; i >= 0; i--) {
+        bombes.at(i).avancerTemps();
+        if (bombes.at(i).estExplosee()) {
+            creerExplosions(bombes.at(i)); ///EXPLOSIONS DES BOMBES
+            bombes.erase(bombes.begin()+i);
         }
     }
     if (!explosions.empty()) { ///AVANCE TIMER EXPLOSIONS
@@ -97,7 +100,6 @@ void Partie::avancerPartie() {
 }
 
 void Partie::creerExplosions(Bombe source) {
-    source.exploser();
     if(source.getJoueur() == 1)
         joueur1.recupererBombe();
     else
@@ -107,8 +109,7 @@ void Partie::creerExplosions(Bombe source) {
     int brange = source.getRange();
     int i, j;
     int step;
-    Explosion newexp(bx, by); //EXPLOSION CENTRE
-    explosions.push_back(newexp);
+    pushExplosion(bx, by); //EXPLOSION CENTRE
     j = by-1;
     while (j >= by-brange && j >= 0) { ///EXPLOSION HAUT
         pushExplosion(bx, j);
@@ -151,7 +152,6 @@ void Partie::creerExplosions(Bombe source) {
         grille.detruireCase(bx, j);
         j = step;
     }
-    
 }
 
 bool Partie::caseEstExplosee(int posX, int posY) {
@@ -178,8 +178,29 @@ void Partie::pushExplosion(int posX, int posY) {
     Explosion newexp(posX, posY);
     explosions.push_back(newexp);
     for (int i=0; i<bombes.size(); i++)
-        if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) {
-            creerExplosions(bombes.at(i));
-            bombes.erase(bombes.begin()+i);
+        if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) { ///EXPLOSIONS EN CHAINE
+            bombes.at(i).exploser();
         }
+    if(grille.infoCase(posX, posY).onPeutMarcher() && grille.infoCase(posX, posY).aBonus())
+        grille.recupererBonus(posX, posY);
+}
+
+Grille& Partie::getGrille() {
+    return grille;
+}
+
+Joueur& Partie::getJoueur1() {
+    return joueur1;
+}
+
+Joueur& Partie::getJoueur2() {
+    return joueur2;
+}
+
+std::vector<Bombe>& Partie::getBombes() {
+    return bombes;
+}
+
+std::vector<Explosion>& Partie::getExplosions() {
+    return explosions;
 }

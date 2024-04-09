@@ -34,7 +34,8 @@ int Timer::tempsTimer() {
     if (started) {
         if (paused) {
             return debutPause;
-        } else {
+        }
+        else {
             return SDL_GetTicks() - debutTimer;
         }
     }

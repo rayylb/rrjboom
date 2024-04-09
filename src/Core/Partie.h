@@ -8,55 +8,27 @@
 #include "Explosion.h"
 #include <vector>
 
-const int PARTIE_MAX_BOMBES = 9;
-const int PARTIE_MAX_FLAMES = 9;
-
-/*
-* @class Partie
-* @brief Classe représentant une partie de jeu
-* Elle contient une grille, deux joueurs, des bombes et des explosions
-*
+/**
+ * @class Partie
+ * @brief Classe représentant une partie du jeu.
+ * Elle contient une grille et deux joueurs. Elle gère les mouvements de joueurs, ainsi que les bombes et les explosions.
 */
 
 class Partie {
     private:
-        Grille grille; ///< La grille de jeu
-        Joueur joueur1; ///< Le joueur 1
-        Joueur joueur2; ///< Le joueur 2
-        std::vector<Bombe> bombes; ///< La liste des bombes posées sur la grille
-        std::vector<Explosion> explosions; ///< La liste des explosions sur la grille
+        Grille grille; //La grille de jeu
+        Joueur joueur1; //Le joueur 1
+        Joueur joueur2; //Le joueur 2
+        std::vector<Bombe> bombes; //La liste des bombes posées sur la grille
+        std::vector<Explosion> explosions; //La liste des explosions sur la grille
 
     public:
+        Partie();
 
         /**
          * @brief Fonction qui initialise une partie de jeu
          */
-        void initPartie();
-
-        /**
-         * @brief Fonction qui retourne l'adresse mémoire de la grille de la partie
-         */
-        Grille& getGrille();
-
-        /**
-         * @brief Fonction qui retourne l'adresse mémoire du joueur 1
-         */        
-        Joueur& getJoueur1();
-
-        /**
-         * @brief Fonction qui retourne l'adresse mémoire du joueur 2
-         */        
-        Joueur& getJoueur2();
-
-        /**
-         * @brief Fonction qui retourne la liste des bombes de la partie
-         */        
-        std::vector<Bombe>& getBombes();
-
-        /**
-         * @brief Fonction qui retourne la liste des explosions de la partie
-         */
-        std::vector<Explosion>& getExplosions();
+        void initPartie();        
 
         /**
          * @brief Procédure permettant aux joueurs de se déplacer et de poser des bombes
@@ -94,7 +66,42 @@ class Partie {
          */
         bool caseEstMinee(int posX, int posY);
 
+        /**
+         * @brief Fonction qui rajouter une explosion sur la grille et vérifie si elle déclenche d'autre bombes
+         * @param posX Coordonnée horizontale de la case
+         * @param posY Coordonnée verticale de la case
+        */
         void pushExplosion(int posX, int posY);
+
+        /**
+         * @brief Fonction qui retourne l'adresse mémoire de la grille de la partie
+         * @return Un lien vers la grille de jeu
+         */
+        Grille& getGrille();
+
+        /**
+         * @brief Fonction qui retourne l'adresse mémoire du joueur 1
+         * @return Un lien vers le joueur 1
+         */        
+        Joueur& getJoueur1();
+
+        /**
+         * @brief Fonction qui retourne l'adresse mémoire du joueur 2
+         * @return Un lien vers le joueur 2
+         */        
+        Joueur& getJoueur2();
+
+        /**
+         * @brief Fonction qui retourne la liste des bombes de la partie
+         * @return Un lien vers le vecteur de bombes
+         */        
+        std::vector<Bombe>& getBombes();
+
+        /**
+         * @brief Fonction qui retourne la liste des explosions de la partie
+         * @return Un lien vers le vecteur d'explosions
+         */
+        std::vector<Explosion>& getExplosions();
 };
 
 #endif

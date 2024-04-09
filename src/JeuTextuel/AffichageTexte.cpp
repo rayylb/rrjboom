@@ -1,7 +1,11 @@
 #include <iostream>
 #include "AffichageTexte.h"
 
-void AffichageTexte::boucleJeu() {
+AffichageTexte::AffichageTexte() {
+    return;
+}
+
+void AffichageTexte::boucleJeuMain() {
     bool jeuFini = false;
     char reponse;
     std::cout<<"Bienvenue dans Bomberman !"<<std::endl;
@@ -74,7 +78,7 @@ void AffichageTexte::tourDeJeu() {
     convertirMove('Z', 'Q', 'S', 'D', movJ1);
     convertirMove('I', 'J', 'K', 'L', movJ2);
     std::cout<<movJ1<<" "<<bombJ1<<" "<<movJ2<<" "<<bombJ2<<std::endl;
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 10; i++)
         jeu.actionsJoueurs(movJ1, bombJ1, movJ2, bombJ2);
     for(int i = 0; i < 20; i++)
         jeu.avancerPartie();

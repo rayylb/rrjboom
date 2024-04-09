@@ -1,15 +1,10 @@
 #include "Bloc.h"
 
-Bloc::Bloc() {
-    destructible = false;
-    bonusPresent = false;
-    peutMarcher = true;
-}
-
 Bloc::Bloc(bool isDestructible, bool hasBonus, bool canWalk) {
     destructible = isDestructible;
     bonusPresent = hasBonus;
     peutMarcher = canWalk;
+    typeBonus = BonusType::Rien;
 }
 
 void Bloc::blocSol() {
@@ -44,8 +39,16 @@ void Bloc::detruire() {
 }
 
 int Bloc::typeBloc() {
-    if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien))
-        return 7;
+    if (onPeutMarcher() && aBonus() && (typeBonus != BonusType::Rien)) {
+        if(typeBonus == BonusType::BombUp)
+            return 11;
+        else if (typeBonus == BonusType::FlameUp)
+            return 12;
+        else if(typeBonus == BonusType::SpeedUp)
+            return 13;
+        else
+            return 10;
+    }
     else if (onPeutMarcher())
         return 0;
     else if (estDestructible() == true)

@@ -1,7 +1,17 @@
 #ifndef _JOUEUR_H
 #define _JOUEUR_H
 
+#include <iostream>
 #include "Bonus.h"
+
+const int JOUEUR_MAX_BOMBES = 9; //Nombre maximum de bombe pouvant être posées à la fois par un joueur
+const int JOUEUR_MAX_FLAMES = 9; //Portée maximum des bombes d'un joueur
+const int JOUEUR_MAX_SPEED = 20; //Vitesse maximale d'un joueur
+
+/**
+ * @class Joueur
+ * @brief Classe représentant un joueur. Elle stocke sa position, ses bonus, le nombre de bombes posées, ainsi que les hitboxes du joueur.
+*/
 
 class Joueur {
 private:
@@ -13,45 +23,47 @@ private:
 
     int nbBombesPosee; //Nombre de bombes posées par le joueur
     int nbBombesPoseeMax; //Nombre maximum de bombes que le joueur peut poser
-    int nbBombesMax;
-    int porteeBombe; //ortée de l'explosion de la bombe du joueur
-    int porteeMax;
-    int speed;
-    int speedMax;
+    int porteeBombe; //Portée de l'explosion de la bombe du joueur
+    int speed; //Vitesse du joueur
     
-    float hitboxUP;
-    float hitboxDOWN;
-    float hitboxLEFT;
-    float hitboxRIGHT;
+    float hitboxUP; //Hitbox haute du joueur
+    float hitboxDOWN; //Hitbox basse du joueur
+    float hitboxLEFT; //Hitbox gauche du joueur
+    float hitboxRIGHT; //Hitbox droite du joueur
     
 public:
+    Joueur();
+
     void spawn(bool num, int xg, int yg);
 
     /**
     * @brief Fonction qui déplace le joueur vers la droite
     */
-    void moveR(bool canSkip);
+    void moveR(bool canSkip, bool canSkipUp, bool canSkipDown);
 
     /**
     * @brief Fonction qui déplace le joueur vers la gauche
     */
-    void moveL(bool canSkip);
+    void moveL(bool canSkip, bool canSkipUp, bool canSkipDown);
 
     /**
     * @brief Fonction qui déplace le joueur vers le haut
     */
-    void moveU(bool canSkip);
+    void moveU(bool canSkip, bool canSkipLeft, bool canSkipRight);
 
     /**
     * @brief Fonction qui déplace le joueur vers le bas
     */
-    void moveD(bool canSkip);
+    void moveD(bool canSkip, bool canSkipLeft, bool canSkipRight);
 
     /**
     * @brief Fonction qui fait poser une bombe au joueur
     */
     void poserBombe();
 
+    /**
+    * @brief Fonction qui fait récupérer une bombe au joueur
+    */
     void recupererBombe();
 
     /**
@@ -59,6 +71,10 @@ public:
     */
     void exploser();
 
+    /**
+    * @brief Fonction qui donne un bonus au joueur
+    * @param typeBonus Le bonus qui est donné au joueur
+    */
     void appliquerBonus(BonusType typeBonus);
 
     /*
@@ -95,7 +111,6 @@ public:
     * @return L'entier joueur.nbBombes qui est le nombre de bombes posées par le joueur
     */
     int getNbBombes();
-
 
     /*
     * @brief Fonction qui retourne le nombre maximum de bombes que le joueur peut poser

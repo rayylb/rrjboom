@@ -1,12 +1,13 @@
 #ifndef _TIMER_H
 #define _TIMER_H
+
 #include <SDL2/SDL.h>
 
 /*
 * @class Timer
 * @brief Classe représentant un timer dans le jeu
 * Elle contient deux entiers qui représentent le temps de début du timer et le temps de début de pause, 
-* ainsi que deux booléens qui indiquent si le timer a commencé et s'il est en pause
+* ainsi que deux booléens qui indiquent si le timer a commencé et s'il est en pause.
 */
 
 class Timer {
@@ -57,7 +58,6 @@ class Timer {
         * @return Le booléen qui indique si le timer est en pause
         */
         bool isPaused();
-
 };
 
 #endif
