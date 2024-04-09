@@ -144,7 +144,6 @@ void Partie::creerExplosions(Bombe source) {
     j = by+1;
     while (j <= by+brange && j < grille.getDimY()) { ///EXPLOSION BAS
         pushExplosion(bx, j);
-        grille.detruireCase(bx, j);
         if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
             step = grille.getDimY();
         else
@@ -181,8 +180,6 @@ void Partie::pushExplosion(int posX, int posY) {
         if (bombes.at(i).getPosX() == posX && bombes.at(i).getPosY() == posY && (!bombes.at(i).estExplosee())) { ///EXPLOSIONS EN CHAINE
             bombes.at(i).exploser();
         }
-    if(grille.infoCase(posX, posY).onPeutMarcher() && grille.infoCase(posX, posY).aBonus())
-        grille.recupererBonus(posX, posY);
 }
 
 Grille& Partie::getGrille() {

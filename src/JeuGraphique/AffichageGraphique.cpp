@@ -148,7 +148,7 @@ void AffichageGraphique::afficherTexte(Button bouton) {
 
 void AffichageGraphique::jouerMusique() {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);  //44100 fréquence d'échantillonnage standard
-    Mix_Music *m = Mix_LoadMUS("../data/13_Battle_1.mp3");
+    Mix_Music *m = Mix_LoadMUS("../data/music_battle.mp3");
     Mix_PlayMusic(m, -1); //pour le jouer en boucle
     Mix_FreeMusic(m);
 }

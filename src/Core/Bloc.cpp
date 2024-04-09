@@ -36,6 +36,8 @@ void Bloc::detruire() {
         peutMarcher = true;
         destructible = false;
     }
+    else if (peutMarcher && bonusPresent)
+        retirerBonus();
 }
 
 int Bloc::typeBloc() {

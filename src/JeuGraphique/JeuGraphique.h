@@ -42,6 +42,12 @@ class JeuGraphique {
          * @param taille_bloc Taille en pixel avec laquelle seront affichés les cases du terrain
         */
         void nouvellePartie(int taille_bloc, bool& mainQuit);
+
+        /**
+         * @brief Ecran de fin de partie
+         * @param mainQuit Indique si l'excécution doit être arrêtée
+        */
+        void finDePartie(bool& mainQuit);
         
         /**
          * @brief Récupère les action des joueur et fait avancer la partie d'une frame

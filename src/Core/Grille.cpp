@@ -73,7 +73,7 @@ Bloc& Grille::infoCase(int x, int y) {
 }
 
 BonusType Grille::nouveauBonus() {
-    if(rand()%2 == 0)
+    if(rand()%10 > 10)
         return BonusType::Rien;
     else switch (rand()%5) {
         case 0 : return BonusType::BombUp;

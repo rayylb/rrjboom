@@ -79,7 +79,7 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
             if (event.type == SDL_MOUSEBUTTONDOWN) {
                 SDL_GetMouseState(&x, &y);
                 SDL_Point p = {x, y};
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < 3; i++) {
                     if (SDL_PointInRect(&p, &buttons[i].rect)) {
                         if (i == 0) {
                             affichage.detruireFenetre();
@@ -137,20 +137,97 @@ void JeuGraphique::nouvellePartie(int taille_bloc, bool& mainQuit) {
         tourDeJeu(running, mainQuit);
         afficherPartie(taille_bloc, affTemps);
         SDL_Delay(33);
-        /*
         while(timer.isPaused()) {
             afficherPartie(taille_bloc, affTemps);
-            while (SDL_PollEvent(&event))
+            while (SDL_PollEvent(&event)) {
+                if (event.type == SDL_QUIT) {
+                    timer.unpause();
+                    running = false;
+                    mainQuit = true;
+                }
                 if (event.type == SDL_KEYDOWN) {
                     if (event.key.keysym.sym == SDLK_p)
                         timer.unpause();
                 }
+            }
         }
-        */
         if((taille_grille*60)-(timer.tempsTimer()/1000) < 0)
             running = false;
     }
+    if(!mainQuit) finDePartie(mainQuit);
     affichage.detruireFenetre();
+}
+
+void JeuGraphique::finDePartie(bool& mainQuit) {
+    SDL_Color colorFront = {0, 0, 0, 255};
+    SDL_Color colorBack = {255, 255, 100, 255};
+    SDL_Color colorRect = {255, 0, 0, 255};
+    int dimX = affichage.getDimX();
+    int dimY = affichage.getDimY();
+
+    Button buttons[3];
+    for(int i = 0; i < 3; i++) {
+        buttons[i].textColor = colorFront;
+        buttons[i].backColor = colorBack;
+        buttons[i].rectColor = colorRect;
+    }
+    buttons[0].rectColor = colorBack;
+    buttons[0].rect.x = affichage.getDimX() * 0.1;
+    buttons[0].rect.y = affichage.getDimY() * 0.2;
+    buttons[0].rect.w = affichage.getDimX() * 0.8;
+    buttons[0].rect.h = affichage.getDimY() * 0.2;
+    if(jeu.getJoueur1().estVivant() == jeu.getJoueur2().estVivant()) 
+        buttons[0].text = "Draw game...";
+    else if (!jeu.getJoueur1().estVivant())
+        buttons[0].text = "Player 2 won!";
+    else
+        buttons[0].text = "Player 1 won!";
+    buttons[1].rect.w = dimX * 0.5;
+    buttons[1].rect.h = dimY / 6;
+    buttons[1].rect.x = (dimX / 4);
+    buttons[1].rect.y = dimY*0.5;
+    buttons[1].text = "Replay";
+    buttons[2].rect.w = dimX * 0.5;
+    buttons[2].rect.h = dimY / 6;
+    buttons[2].rect.x = (dimX / 4);
+    buttons[2].rect.y = dimY*0.7;
+    buttons[2].text = "Quit";
+    
+    SDL_Color fond = {255, 255, 200, 255};
+    bool quit = false;
+    SDL_Event event;
+    int x, y;
+    while (!quit) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {quit = true; mainQuit = true;}
+            if (event.type == SDL_KEYDOWN) {
+                if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {quit = true; mainQuit = true;}
+            }
+            if (event.type == SDL_MOUSEBUTTONDOWN) {
+                SDL_GetMouseState(&x, &y);
+                SDL_Point p = {x, y};
+                for (int i = 1; i < 3; i++) {
+                    if (SDL_PointInRect(&p, &buttons[i].rect)) {
+                        if (i==1) {
+                            quit = true;
+                        }
+                        else if (i==2) {
+                            quit = true;
+                            mainQuit = true;
+                        }
+                    }
+                }
+            }
+        }
+        affichage.clearRendu(fond);
+        affichage.afficherTexte(buttons[0]);
+        affichage.afficherTexte(buttons[1]);
+        affichage.afficherTexte(buttons[2]);
+        affichage.afficherRectangle(buttons[0].rect, buttons[0].rectColor);
+        affichage.afficherRectangle(buttons[1].rect, buttons[1].rectColor);
+        affichage.afficherRectangle(buttons[2].rect, buttons[2].rectColor);
+        affichage.afficherRendu();
+    }
 }
 
 void JeuGraphique::tourDeJeu(bool& stillRunning, bool& mainQuit) {
@@ -163,7 +240,7 @@ void JeuGraphique::tourDeJeu(bool& stillRunning, bool& mainQuit) {
             switch(event.type) {
                 case SDL_QUIT : stillRunning = false; mainQuit = true; break;
                 case SDL_KEYDOWN :
-                    if(event.key.keysym.sym = SDLK_p) timer.pause();
+                    if(event.key.keysym.sym == SDLK_p) timer.pause();
                     switch (event.key.keysym.sym) {
                         case SDLK_z : joueur1movY = -1; break;
                         case SDLK_s : joueur1movY = +1; break;
