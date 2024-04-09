@@ -37,6 +37,7 @@ void AffichageGraphique::initFenetre(int width, int height) {
         std::cout << "Erreur lors du chargement de la police : " << TTF_GetError() << std::endl;
         return;
     }
+    Mix_Init(MIX_INIT_MP3);
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     for(int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
         switch(i) {
@@ -78,6 +79,7 @@ void AffichageGraphique::detruireFenetre() {
     TTF_CloseFont(font);
     TTF_Quit();
     IMG_Quit();
+    Mix_Quit();
     SDL_Quit();
 }
 
@@ -142,6 +144,13 @@ void AffichageGraphique::afficherTexte(Button bouton) {
     SDL_RenderCopy(rendu, textTexture, NULL, &bouton.rect);
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(textTexture);
+}
+
+void AffichageGraphique::jouerMusique() {
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);  //44100 fréquence d'échantillonnage standard
+    Mix_Music *m = Mix_LoadMUS("../data/13_Battle_1.mp3");
+    Mix_PlayMusic(m, -1); //pour le jouer en boucle
+    Mix_FreeMusic(m);
 }
 
 int AffichageGraphique::getDimX() {

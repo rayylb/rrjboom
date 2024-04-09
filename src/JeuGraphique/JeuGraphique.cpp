@@ -128,14 +128,25 @@ void JeuGraphique::nouvellePartie(int taille_bloc, bool& mainQuit) {
     affTemps.rectColor = {255, 255, 255, 255};
     affTemps.backColor = {200, 200, 255, 255};
     affTemps.textColor = {255, 255, 255, 255};
+    
     bool running = true;
     SDL_Event event;
     afficherPartie(taille_bloc, affTemps);
+    affichage.jouerMusique();
     while(running) {
         tourDeJeu(running, mainQuit);
         afficherPartie(taille_bloc, affTemps);
         SDL_Delay(33);
-
+        /*
+        while(timer.isPaused()) {
+            afficherPartie(taille_bloc, affTemps);
+            while (SDL_PollEvent(&event))
+                if (event.type == SDL_KEYDOWN) {
+                    if (event.key.keysym.sym == SDLK_p)
+                        timer.unpause();
+                }
+        }
+        */
         if((taille_grille*60)-(timer.tempsTimer()/1000) < 0)
             running = false;
     }
@@ -152,6 +163,7 @@ void JeuGraphique::tourDeJeu(bool& stillRunning, bool& mainQuit) {
             switch(event.type) {
                 case SDL_QUIT : stillRunning = false; mainQuit = true; break;
                 case SDL_KEYDOWN :
+                    if(event.key.keysym.sym = SDLK_p) timer.pause();
                     switch (event.key.keysym.sym) {
                         case SDLK_z : joueur1movY = -1; break;
                         case SDLK_s : joueur1movY = +1; break;
@@ -245,6 +257,10 @@ void JeuGraphique::afficherPartie(int taille_bloc, Button affTemps) {
     affichage.afficherSprite(J2X, J2Y, 6+jeu.getJoueur2().getDirection(), taille_bloc);
 
     ///AFFICHAGE BANNIERE
+    if (timer.isPaused()) {
+        affTemps.text = "PAUSE";
+    }
+    else {
     int secondes = timer.tempsTimer()/1000;
     secondes = (taille_grille*60) - secondes;
     int minutes = secondes/60;
@@ -253,6 +269,7 @@ void JeuGraphique::afficherPartie(int taille_bloc, Button affTemps) {
     if(secondes < 10)
         affTemps.text = affTemps.text + "0";
     affTemps.text = affTemps.text + std::to_string(secondes);
+    }
     affichage.afficherTexte(affTemps);
     affichage.afficherRectangle(affTemps.rect, affTemps.rectColor);
 

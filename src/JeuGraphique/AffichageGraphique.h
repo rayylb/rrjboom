@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <iostream>
 #include "../Core/Grille.h"
 #include "Button.h"
@@ -82,6 +83,8 @@ class AffichageGraphique {
          * @param bouton Une structure contenant toutes les informations sur un texte à afficher sur la fenêtre
         */
         void afficherTexte(Button bouton);
+
+        void jouerMusique();
 
         /**
          * @brief Retourne la largeur de la fenêtre
