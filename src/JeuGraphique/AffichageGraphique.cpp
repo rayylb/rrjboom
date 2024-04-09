@@ -47,9 +47,9 @@ void AffichageGraphique::initFenetre(int width, int height) {
             case 4: surface = IMG_Load("../data/bombe_rouge.png"); break;
             case 5: surface = IMG_Load("../data/explosion.png"); break;
             case 6: surface = IMG_Load("../data/joueur_bas.png"); break;
-            case 7: surface = IMG_Load("../data/joueur_haut.png"); break;
-            case 8: surface = IMG_Load("../data/joueur_gauche.png"); break;
-            case 9: surface = IMG_Load("../data/joueur_droite.png"); break;
+            case 7: surface = IMG_Load("../data/joueur_droite.png"); break;
+            case 8: surface = IMG_Load("../data/joueur_haut.png"); break;
+            case 9: surface = IMG_Load("../data/joueur_gauche.png"); break;
             case 10: surface = IMG_Load("../data/bonus.png"); break;
             case 11: surface = IMG_Load("../data/bonus_bombe.png"); break;
             case 12: surface = IMG_Load("../data/bonus_flame.png"); break;
@@ -120,10 +120,16 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
         destRect.x += taille_bloc*0.1;
         destRect.y += taille_bloc*0.3;
     }
+    if(type_bloc == 14) {
+        destRect.w = dimX;
+        destRect.h = dimY * 0.3;
+    }
     SDL_RenderCopy(rendu, textures[type_bloc], NULL, &destRect);
 }
 
 void AffichageGraphique::afficherTexte(Button bouton) {
+    SDL_SetRenderDrawColor(rendu, bouton.backColor.r, bouton.backColor.g, bouton.backColor.b, bouton.backColor.a);
+    SDL_RenderFillRect(rendu, &bouton.rect);
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, bouton.text.c_str(), bouton.textColor);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(rendu, textSurface);
     if (!textTexture) {

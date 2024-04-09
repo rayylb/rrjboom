@@ -20,9 +20,11 @@ void Joueur::spawn(bool num, int xg, int yg){
     hitboxDOWN = 0.4;
     hitboxLEFT = 0.3;
     hitboxRIGHT = 0.3;
+    direction = 0;
 }
 
 void Joueur::moveR(bool canSkip, bool canSkipUp, bool canSkipDown) {
+    direction = 1;
     xExact += (float)(speed)/100;
     bool canMove = canSkip;
     if((int)(xExact + hitboxRIGHT) > x) {
@@ -43,6 +45,7 @@ void Joueur::moveR(bool canSkip, bool canSkipUp, bool canSkipDown) {
 }
 
 void Joueur::moveL(bool canSkip, bool canSkipUp, bool canSkipDown) {
+    direction = 3;
     xExact -= (float)(speed)/100;
     bool canMove = canSkip;
     if((xExact - hitboxLEFT) < 0)
@@ -65,6 +68,7 @@ void Joueur::moveL(bool canSkip, bool canSkipUp, bool canSkipDown) {
 }
 
 void Joueur::moveU(bool canSkip, bool canSkipLeft, bool canSkipRight) {
+    direction = 2;
     yExact -= (float)(speed)/100;
     bool canMove = canSkip;
     if((yExact - hitboxUP) < 0)
@@ -87,6 +91,7 @@ void Joueur::moveU(bool canSkip, bool canSkipLeft, bool canSkipRight) {
 }
 
 void Joueur::moveD(bool canSkip, bool canSkipLeft, bool canSkipRight) {
+    direction = 0;
     yExact += (float)(speed)/100;
     bool canMove = canSkip;
     if((int)(yExact + hitboxDOWN) > y) {
@@ -158,4 +163,8 @@ int Joueur::getNbBombesMax() {
 
 int Joueur::getPorteeBombe() {
     return porteeBombe;
+}
+
+int Joueur::getDirection() {
+    return direction;
 }

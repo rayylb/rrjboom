@@ -2,11 +2,11 @@
 #include <iostream>
 
 Partie::Partie() {
-    initPartie();
+    initPartie(GRILLE_DIMX_MAX, GRILLE_DIMY_MAX);
 }
 
-void Partie::initPartie() {
-    grille.initGrille();
+void Partie::initPartie(int grilleX, int grilleY) {
+    grille.initGrille(grilleX, grilleY);
     bombes.clear();
     explosions.clear();
     joueur1.spawn(true, 0, 0);

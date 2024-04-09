@@ -21,7 +21,7 @@ void AffichageTexte::boucleJeuMain() {
 }
 
 void AffichageTexte::nouvellePartie() {
-    jeu.initPartie();
+    jeu.initPartie(GRILLE_DIMX_MAX, GRILLE_DIMY_MAX);
     afficherPartie();
     while(jeu.getJoueur1().estVivant() && jeu.getJoueur2().estVivant()) {
         tourDeJeu();

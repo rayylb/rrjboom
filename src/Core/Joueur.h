@@ -30,6 +30,7 @@ private:
     float hitboxDOWN; //Hitbox basse du joueur
     float hitboxLEFT; //Hitbox gauche du joueur
     float hitboxRIGHT; //Hitbox droite du joueur
+    int direction; //Durection dans laquelle regarde le joueur
     
 public:
     Joueur();
@@ -123,6 +124,12 @@ public:
     * @return L'entier joueur.porteeBombe qui est la portée de l'explosion de la bombe du joueur
     */
     int getPorteeBombe();
+
+    /*
+    * @brief Fonction qui retourne la direction du joueur
+    * @return En entier entre 0 et 3 pour chaque direction cardinale
+    */
+    int getDirection();
 };
 
 #endif

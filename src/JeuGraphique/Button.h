@@ -10,10 +10,11 @@
 */
 
 struct Button {
-    int x, y;
     SDL_Rect rect;
     std::string text;
     SDL_Color textColor;
+    SDL_Color backColor;
+    SDL_Color rectColor;
 };
 
 #endif

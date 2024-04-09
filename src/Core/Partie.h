@@ -28,7 +28,7 @@ class Partie {
         /**
          * @brief Fonction qui initialise une partie de jeu
          */
-        void initPartie();        
+        void initPartie(int grilleX, int grilleY);        
 
         /**
          * @brief Procédure permettant aux joueurs de se déplacer et de poser des bombes

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "../Core/Partie.h"
 #include "AffichageGraphique.h"
+#include "Timer.h"
 
 /**
  * @class JeuGraphique
@@ -14,10 +15,12 @@ class JeuGraphique {
     private:
         Partie jeu; //La partie du jeu
         AffichageGraphique affichage; //L'affichage du jeu
+        Timer timer; //Le timer du jeu
         int joueur1movX; //La vitesse horizontale du joueur 1
         int joueur1movY; //La vitesse verticale du joueur 1
         int joueur2movX; //La vitesse horizontale du joueur 2
         int joueur2movY; //La vitesse verticale du joueur 2
+        int taille_grille;
 
     public:
         JeuGraphique();
@@ -58,13 +61,13 @@ class JeuGraphique {
          * @brief Affiche le menu sur la fenêtre
          * @param buttons Boutons présents sur le menu
         */
-        void afficherMenu(Button buttons[2]);
+        void afficherMenu(Button buttons[]);
 
         /**
          * @brief Affiche la partie sur la fenêtre
          * @param taille_bloc Taille en pixel avec laquelle seront affichés les cases du terrain
         */
-        void afficherPartie(int taille_bloc);
+        void afficherPartie(int taille_bloc, Button affTemps);
 
         /**
          * @brief Demo de mouvement d'un personnage dans la fenêtre

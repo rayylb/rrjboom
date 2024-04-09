@@ -3,8 +3,8 @@
 
 #include "Bloc.h"
 
-const int GRILLE_DIMX = 12; //Largeur grille
-const int GRILLE_DIMY = 7; //Hauteur grille
+const int GRILLE_DIMX_MAX = 1+(3*(2*4)); //Largeur grille
+const int GRILLE_DIMY_MAX = 1+(3*(2*2)); //Hauteur grille
 
 /**
  * @class Grille
@@ -14,7 +14,9 @@ const int GRILLE_DIMY = 7; //Hauteur grille
 
 class Grille {
 private:
-    Bloc terrain[GRILLE_DIMX][GRILLE_DIMY]; //Tableau de cases représentant le plateau de jeu
+    Bloc terrain[GRILLE_DIMX_MAX][GRILLE_DIMY_MAX]; //Tableau de cases représentant le plateau de jeu
+    int dimX; //Largeur utilisée de la grille
+    int dimY; //Hauteur urilisée de la grille
 
 public:
     Grille();
@@ -22,7 +24,7 @@ public:
     /**
     * @brief Fonction qui initialise la grille pour la rendre prête à être utilisée
     */
-    void initGrille();
+    void initGrille(int largeur, int hauteur);
 
     /**
     * @brief Fonction qui détruit la case demandée, si elle est destructible

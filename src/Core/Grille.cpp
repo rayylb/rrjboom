@@ -3,15 +3,17 @@
 #include <iostream>
 
 Grille::Grille() {
-    initGrille();
+    initGrille(GRILLE_DIMX_MAX, GRILLE_DIMY_MAX);
 }
 
-void Grille::initGrille() {
-    for (int j = 0; j < GRILLE_DIMY; j++)
-        for (int i = 0; i < GRILLE_DIMX; i++) {
+void Grille::initGrille(int largeur, int hauteur) {
+    dimX = largeur;
+    dimY = hauteur;
+    for (int j = 0; j < dimY; j++)
+        for (int i = 0; i < dimX; i++) {
             if ((i + 1)%2 == 0 && (j + 1)%2 == 0)
                 terrain[i][j].blocMur();
-            else if ((i+j) < 3 || (i+j) > (GRILLE_DIMX+GRILLE_DIMY - 5))
+            else if ((i+j) < 3 || (i+j) > (dimX+dimY - 5))
                 terrain[i][j].blocSol();
             else if (rand()%3 < 2)
                 terrain[i][j].blocDes(nouveauBonus());
@@ -31,8 +33,8 @@ BonusType Grille::recupererBonus(int x, int y) {
 }
 
 void Grille::affichTerminal() {
-    for (int j = 0; j < GRILLE_DIMY; j++) {
-        for (int i = 0; i < GRILLE_DIMX; i++) {
+    for (int j = 0; j < dimY; j++) {
+        for (int i = 0; i < dimX; i++) {
             if (terrain[i][j].onPeutMarcher() == true)
                 std::cout<<" ";
             else if (terrain[i][j].estDestructible() == true)
@@ -47,11 +49,11 @@ void Grille::affichTerminal() {
 }
 
 int Grille::getDimX() {
-    return GRILLE_DIMX;
+    return dimX;
 }
 
 int Grille::getDimY() {
-    return GRILLE_DIMY;
+    return dimY;
 }
 
 void Grille::infoCase(int x, int y, Bloc& copie) {
@@ -64,7 +66,7 @@ void Grille::infoCase(int x, int y, Bloc& copie) {
 }
 
 Bloc& Grille::infoCase(int x, int y) {
-    if(x < 0 || x > GRILLE_DIMX-1 || y < 0 || y > GRILLE_DIMY-1) 
+    if(x < 0 || x > dimX-1 || y < 0 || y > dimY-1) 
         return terrain[1][1];
     else
         return terrain[x][y];
@@ -73,7 +75,7 @@ Bloc& Grille::infoCase(int x, int y) {
 BonusType Grille::nouveauBonus() {
     if(rand()%2 == 0)
         return BonusType::Rien;
-    else switch (rand()%10) {
+    else switch (rand()%5) {
         case 0 : return BonusType::BombUp;
         case 1 : return BonusType::BombUp;
         case 2 : return BonusType::FlameUp;

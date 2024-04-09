@@ -6,6 +6,7 @@ void Timer::start() {
     paused = false;
     debutTimer = SDL_GetTicks();
     debutPause = 0;
+    pausedTime = 0;
 }
 
 void Timer::stop() {
@@ -13,6 +14,7 @@ void Timer::stop() {
     paused = false;
     debutTimer = 0;
     debutPause = 0;
+    pausedTime = 0;
 }
 
 void Timer::pause() {
@@ -25,7 +27,7 @@ void Timer::pause() {
 void Timer::unpause() {
     if (started && paused) {
         paused = false;
-        debutTimer = SDL_GetTicks() - debutPause;
+        pausedTime += SDL_GetTicks() - debutPause;
         debutPause = 0;
     }
 }
@@ -33,10 +35,10 @@ void Timer::unpause() {
 int Timer::tempsTimer() {
     if (started) {
         if (paused) {
-            return debutPause;
+            return debutPause - pausedTime;
         }
         else {
-            return SDL_GetTicks() - debutTimer;
+            return SDL_GetTicks() - debutTimer - pausedTime;
         }
     }
     return 0;

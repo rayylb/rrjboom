@@ -35,6 +35,8 @@ set(GRAPH
     src/JeuGraphique/AffichageGraphique.h
     src/JeuGraphique/JeuGraphique.cpp
     src/JeuGraphique/JeuGraphique.h
+    src/JeuGraphique/Timer.cpp
+    src/JeuGraphique/Timer.h
     src/JeuGraphique/main.cpp
     )
 

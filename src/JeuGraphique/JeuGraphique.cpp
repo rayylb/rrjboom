@@ -6,6 +6,7 @@ JeuGraphique::JeuGraphique() {
     joueur1movY = 0;
     joueur2movX = 0;
     joueur2movY = 0;
+    taille_grille = 1;
 }
 
 void JeuGraphique::boucleJeuMain() {
@@ -22,28 +23,38 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
     int dimY = 600;
     affichage.initFenetre(dimX, dimY);
 
-    SDL_Rect r; //DIMENSIONS BOUTON PLAY
-    r.w = 300;
-    r.h = 100;
+    SDL_Rect r; //DIMENSIONS BOUTON
+    r.w = dimX * 0.5;
+    r.h = dimY / 6;
     r.x = (dimX / 2) - (r.w / 2);
-    r.y = (dimY * 0.4);
-    SDL_Rect r2; //DIMENSIONS BOUTON QUIT
-    r2.w = 300;
-    r2.h = 100;
-    r2.x = dimX / 2 - r2.w * 0.5;
-    r2.y = (dimY * 0.6);
+    r.y = dimY*0.35;
+    SDL_Color colorFront = {0, 0, 0, 255};
+    SDL_Color colorBack = {255, 255, 100, 255};
+    SDL_Color colorRect = {255, 0, 0, 255};
 
-    Button buttons[2];
+    Button buttons[3];
+    for(int i = 0; i < 3; i++) {
+        buttons[i].textColor = colorFront;
+        buttons[i].backColor = colorBack;
+        buttons[i].rectColor = colorRect;
+    }
     buttons[0].text = "Play";
-    buttons[0].textColor = {255, 255, 255, 255};
-    buttons[0].x = r.x;
-    buttons[0].y = r.y;
-    buttons[0].rect = {r.x, r.y, r.w, r.h};
-    buttons[1].text = "Quit";
-    buttons[1].textColor = {255, 255, 255, 255};
-    buttons[1].x = r2.x;
-    buttons[1].y = r2.y;
-    buttons[1].rect = {r2.x, r2.y, r2.w, r2.h};
+    buttons[0].rect = r;
+    r.y = dimY * 0.55;
+    r.w = dimX * 0.8;
+    r.x = (dimX / 2) - (r.w / 2);
+    switch (taille_grille) {
+        case 1 : buttons[1].text = "Grille : petite"; break;
+        case 2 : buttons[1].text = "Grille : moyenne"; break;
+        case 3 : buttons[1].text = "Grille : grande"; break;
+        default : buttons[1].text = "Grille : petite"; break;
+    }
+    buttons[1].rect = r;
+    r.y = dimY*0.75;
+    r.w = dimX * 0.5;
+    r.x = (dimX / 2) - (r.w / 2);
+    buttons[2].text = "Quit";
+    buttons[2].rect = r;
     
     bool quit = false;
     SDL_Event event;
@@ -74,7 +85,15 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
                             affichage.detruireFenetre();
                             return true;
                         }
-                        else if (i == 1) {
+                        else if (i==1) {
+                            switch (taille_grille) {
+                                case 1 : taille_grille = 2; buttons[1].text = "Grille : moyenne"; break;
+                                case 2 : taille_grille = 3; buttons[1].text = "Grille : grande"; break;
+                                case 3 : taille_grille = 1; buttons[1].text = "Grille : petite"; break;
+                                default : break;
+                            }
+                        }
+                        else if (i == 2) {
                             affichage.detruireFenetre();
                             mainQuit = true;
                             return false;
@@ -91,18 +110,34 @@ bool JeuGraphique::boucleMenu(bool& mainQuit) {
 }
 
 void JeuGraphique::nouvellePartie(int taille_bloc, bool& mainQuit) {
-    jeu.initPartie();
-    affichage.initFenetre(jeu.getGrille().getDimX()*taille_bloc, jeu.getGrille().getDimY()*taille_bloc);
-    afficherPartie(taille_bloc);
+    int dimX = (((GRILLE_DIMX_MAX - 1) / 3) * taille_grille) + 1; 
+    int dimY = (((GRILLE_DIMY_MAX - 1) / 3) * taille_grille) + 1; 
+    jeu.initPartie(dimX, dimY);
+    affichage.initFenetre(jeu.getGrille().getDimX()*taille_bloc, (jeu.getGrille().getDimY()*taille_bloc)+100);
+    timer.start();
     joueur1movX = 0;
     joueur1movY = 0;
     joueur2movX = 0;
     joueur2movY = 0;
+    Button affTemps;
+    affTemps.rect.x = (affichage.getDimX()/2) - 100;
+    affTemps.rect.y = affichage.getDimY() - 90;
+    affTemps.rect.w = 200;
+    affTemps.rect.h = 80;
+    affTemps.text = "0:00";
+    affTemps.rectColor = {255, 255, 255, 255};
+    affTemps.backColor = {200, 200, 255, 255};
+    affTemps.textColor = {255, 255, 255, 255};
     bool running = true;
+    SDL_Event event;
+    afficherPartie(taille_bloc, affTemps);
     while(running) {
         tourDeJeu(running, mainQuit);
-        afficherPartie(taille_bloc);
+        afficherPartie(taille_bloc, affTemps);
         SDL_Delay(33);
+
+        if((taille_grille*60)-(timer.tempsTimer()/1000) < 0)
+            running = false;
     }
     affichage.detruireFenetre();
 }
@@ -169,25 +204,28 @@ void JeuGraphique::convertirTouches(int joueurMovX, int joueurMovY, char& mov) {
         mov = 'U';
 }
 
-void JeuGraphique::afficherMenu(Button buttons[2]) {
-    SDL_Color fond = {0, 0, 0, 255};
+void JeuGraphique::afficherMenu(Button buttons[]) {
+    SDL_Color fond = {255, 255, 200, 255};
     affichage.clearRendu(fond);
-    affichage.afficherRectangle(buttons[0].rect, buttons[0].textColor);
-    affichage.afficherRectangle(buttons[1].rect, buttons[1].textColor);
     affichage.afficherTexte(buttons[0]);
     affichage.afficherTexte(buttons[1]);
+    affichage.afficherTexte(buttons[2]);
+    affichage.afficherRectangle(buttons[0].rect, buttons[0].rectColor);
+    affichage.afficherRectangle(buttons[1].rect, buttons[1].rectColor);
+    affichage.afficherRectangle(buttons[2].rect, buttons[2].rectColor);
+    affichage.afficherSprite(0, 0, 14, 0);
     affichage.afficherRendu();
 }
 
-void JeuGraphique::afficherPartie(int taille_bloc) {
+void JeuGraphique::afficherPartie(int taille_bloc, Button affTemps) {
     affichage.clearRendu();
+
+    //AFFICHAGE GRILLE
     int dimX = jeu.getGrille().getDimX();
     int dimY = jeu.getGrille().getDimY();
     for(int i = 0; i < dimX; i++) {
         for(int j = 0; j < dimY; j++) {
             int type_bloc = jeu.getGrille().infoCase(i, j).typeBloc();
-            if(type_bloc > 9)
-                affichage.afficherSprite(i, j, 0, taille_bloc);
             affichage.afficherSprite(i, j, type_bloc, taille_bloc);
         }
     }
@@ -201,10 +239,23 @@ void JeuGraphique::afficherPartie(int taille_bloc) {
         affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 3, taille_bloc);
     float J1X = jeu.getJoueur1().getExactX();
     float J1Y = jeu.getJoueur1().getExactY();
-    affichage.afficherSprite(J1X, J1Y, 6, taille_bloc);
+    affichage.afficherSprite(J1X, J1Y, 6+jeu.getJoueur1().getDirection(), taille_bloc);
     float J2X = jeu.getJoueur2().getExactX();
     float J2Y = jeu.getJoueur2().getExactY();
-    affichage.afficherSprite(J2X, J2Y, 7, taille_bloc);
+    affichage.afficherSprite(J2X, J2Y, 6+jeu.getJoueur2().getDirection(), taille_bloc);
+
+    ///AFFICHAGE BANNIERE
+    int secondes = timer.tempsTimer()/1000;
+    secondes = (taille_grille*60) - secondes;
+    int minutes = secondes/60;
+    secondes = secondes%60;
+    affTemps.text = std::to_string(minutes) + ":";
+    if(secondes < 10)
+        affTemps.text = affTemps.text + "0";
+    affTemps.text = affTemps.text + std::to_string(secondes);
+    affichage.afficherTexte(affTemps);
+    affichage.afficherRectangle(affTemps.rect, affTemps.rectColor);
+
     affichage.afficherRendu();
 }
 
@@ -251,7 +302,7 @@ void JeuGraphique::jeuRectangle() {
 }
 
 void JeuGraphique::jeuSprite() {
-    jeu.initPartie();
+    jeu.initPartie(GRILLE_DIMX_MAX, GRILLE_DIMY_MAX);
     int dimX = jeu.getGrille().getDimX();
     int dimY = jeu.getGrille().getDimY();
     affichage.initFenetre(800, 600);

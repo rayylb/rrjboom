@@ -14,12 +14,12 @@ class Timer {
     private:
         int debutTimer; //Le temps de début du timer
         int debutPause; //Le temps de fin du timer
+        int pausedTime; //Le temps passé en pause
         bool paused; //Indique si le timer est en pause
         bool started; //Indique si le timer a commencé
     
     public:
-
-        Timer() : debutTimer(0), debutPause(0), paused(false), started(false) {};
+        Timer() : debutTimer(0), debutPause(0), pausedTime(0), paused(false), started(false) {};
 
         /*
         * @brief Fonction qui démarre le timer
