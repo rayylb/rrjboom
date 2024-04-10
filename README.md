@@ -3,7 +3,8 @@ Jeu Bomberman à 2 joueurs en version Textuel et Graphique.
 Réalisé dans le cadre de l'UE LIFAPCD.  
   
 <ins>Compatibilité :</ins>  
-Le projet peut être build et run sur Linux et Windows 32-bit, à condition d'avoir SDL2, SDL_image, SDL_ttf, et SDL_mixer déjà installé.
+Le projet peut être build et run sur Linux, Mac et Windows 32-bit, à condition d'avoir les outils utilisés déjà installé (voir plus bas.)  
+Les commandes listées ci-dessous marchent seulement sous Mac et Linux, Windows utilise des commandes différentes.  
   
 <ins>Comment jouer ?</ins>  
 Menus : cliquez sur les boutons avec la souris.  
@@ -12,7 +13,8 @@ En jeu : controlez les joueurs avec le clavier et appuyez sur 'P' pour mettre en
     Joueur 2 : Flèches (mouvement) + 0 (bombe).  
   
 <ins>Outils utilisés :</ins>  
-SDL2 pour l'interface graphique.  
+Le code a été ralisé en C++.  
+SDL2 pour l'interface graphique (avec les extensions image, ttf, et mixer.)  
 CMake pour build le projet.  
 Doxygen pour la documentation.  
   
