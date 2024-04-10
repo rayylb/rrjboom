@@ -1,22 +1,17 @@
 #include "Bloc.h"
 
-Bloc::Bloc(bool isDestructible, bool hasBonus, bool canWalk) {
-    destructible = isDestructible;
-    bonusPresent = hasBonus;
-    peutMarcher = canWalk;
-    typeBonus = BonusType::Rien;
-}
-
 void Bloc::blocSol() {
     destructible = false;
     bonusPresent = false;
     peutMarcher = true;
+    typeBonus = BonusType::Rien;
 }
 
 void Bloc::blocMur() {
     destructible = false;
     bonusPresent = false;
     peutMarcher = false;
+    typeBonus = BonusType::Rien;
 }
 
 void Bloc::blocDes(BonusType bonus) {
@@ -70,7 +65,7 @@ bool Bloc::onPeutMarcher() {
 }
 
 bool Bloc::aBonus() {
-    return bonusPresent;
+    return typeBonus != BonusType::Rien;
 }
 
 BonusType Bloc::getBonusType() {

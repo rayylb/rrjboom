@@ -73,7 +73,7 @@ class JeuGraphique {
          * @brief Affiche la partie sur la fenêtre
          * @param taille_bloc Taille en pixel avec laquelle seront affichés les cases du terrain
         */
-        void afficherPartie(int taille_bloc, Button affTemps);
+        void afficherPartie(int taille_bloc, Button buttons[5]);
 
         /**
          * @brief Demo de mouvement d'un personnage dans la fenêtre

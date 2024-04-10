@@ -48,7 +48,12 @@ class Bombe {
         * @return Le nombre de case dans chaque direction
         */
         int getRange();
-        
+
+        /**
+         * @brief Fonction qui retourne un booléen indiquant si la bombe est proche d'exploser
+        */
+        bool estProcheExplosee();
+
         /**
          * @brief Fonction qui retourne un booléen indiquant si la bombe a explosé
         */

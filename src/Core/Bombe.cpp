@@ -29,6 +29,10 @@ int Bombe::getRange() {
     return range;
 }
 
+bool Bombe::estProcheExplosee() {
+    return (timer < 20);
+}
+
 bool Bombe::estExplosee() {
     return (timer == 0);
 }

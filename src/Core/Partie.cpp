@@ -22,6 +22,7 @@ void Partie::actionsJoueurs(char movJ1, char bombJ1, char movJ2, char bombJ2) {
     jx = joueur1.getPositionX();
     jy = joueur1.getPositionY();
     bonus = grille.recupererBonus(jx,jy);
+    
     joueur1.appliquerBonus(bonus);
     switch(movJ1) {
         case('U') : caseDevant = jy > 0 && grille.infoCase(jx, jy-1).onPeutMarcher() && (!caseEstMinee(jx, jy-1));

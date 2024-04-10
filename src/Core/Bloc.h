@@ -19,8 +19,6 @@ private:
 public:
     Bloc() : destructible(false), bonusPresent(false), peutMarcher(true), typeBonus(BonusType::Rien) {};
 
-    Bloc(bool isDestructible, bool hasBonus, bool canWalk);
-
     /**
     * @brief Transforme un bloc en "bloc sol" en affectant destructible = false, bonusPresent = false et peutMarcher = true
     */

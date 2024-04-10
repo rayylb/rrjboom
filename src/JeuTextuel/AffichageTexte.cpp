@@ -21,7 +21,9 @@ void AffichageTexte::boucleJeuMain() {
 }
 
 void AffichageTexte::nouvellePartie() {
-    jeu.initPartie(GRILLE_DIMX_MAX, GRILLE_DIMY_MAX);
+    int dimX = 5;
+    int dimY = 3;
+    jeu.initPartie(dimX, dimY);
     afficherPartie();
     while(jeu.getJoueur1().estVivant() && jeu.getJoueur2().estVivant()) {
         tourDeJeu();
@@ -73,11 +75,10 @@ void AffichageTexte::tourDeJeu() {
     std::cin>>bombJ2;
     if(bombJ1 == 'X' || bombJ1 == 'x')
         bombJ1 = 'X';
-    if(bombJ2 == 'P' || bombJ1 == 'p')
-        bombJ1 = 'X';
+    if(bombJ2 == 'P' || bombJ2 == 'p')
+        bombJ2 = 'X';
     convertirMove('Z', 'Q', 'S', 'D', movJ1);
     convertirMove('I', 'J', 'K', 'L', movJ2);
-    std::cout<<movJ1<<" "<<bombJ1<<" "<<movJ2<<" "<<bombJ2<<std::endl;
     for(int i = 0; i < 10; i++)
         jeu.actionsJoueurs(movJ1, bombJ1, movJ2, bombJ2);
     for(int i = 0; i < 20; i++)
@@ -88,10 +89,10 @@ void AffichageTexte::convertirMove(char up, char left, char down, char right, ch
     char diff = 'A'-'a';
     if(mov == up || mov == up-diff)
         mov = 'U';
-    if(mov == left || mov == left-diff)
+    else if(mov == left || mov == left-diff)
         mov = 'L';
-    if(mov == down || mov == down-diff)
+    else if(mov == down || mov == down-diff)
         mov = 'D';
-    if(mov == right || mov == right-diff)
+    else if(mov == right || mov == right-diff)
         mov = 'R';
 }

@@ -25,6 +25,7 @@ class AffichageGraphique {
         SDL_Surface* surface; //Objet Surface de la SDL
         SDL_Texture* textures[AFFICHAGE_NB_TEXTURES]; //Tableau des textures chargées en mémoire
         TTF_Font* font; //Police utilisée pour les textes chargée en mémoire
+        Mix_Music* music; //Musique du jeu chargée en mémoire
 
     public:
         AffichageGraphique();
@@ -84,7 +85,15 @@ class AffichageGraphique {
         */
         void afficherTexte(Button bouton);
 
+        /**
+         * @brief Lance la musique de combat
+        */
         void jouerMusique();
+
+        /**
+         * @brief Arrête la musique de combat
+        */
+        void arreterMusique();
 
         /**
          * @brief Retourne la largeur de la fenêtre

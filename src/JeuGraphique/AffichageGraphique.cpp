@@ -14,7 +14,7 @@ AffichageGraphique::AffichageGraphique() {
 void AffichageGraphique::initFenetre(int width, int height) {
     dimX = width;
     dimY = height;
-    if(SDL_Init(SDL_INIT_VIDEO)<0) {
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)<0) {
         std::cout<<"Erreur lors de l'initialisation de la SDL : "<<SDL_GetError()<<std::endl;
         SDL_Quit();
     }
@@ -37,7 +37,11 @@ void AffichageGraphique::initFenetre(int width, int height) {
         std::cout << "Erreur lors du chargement de la police : " << TTF_GetError() << std::endl;
         return;
     }
-    Mix_Init(MIX_INIT_MP3);
+    if(!Mix_Init(MIX_INIT_MP3))
+        std::cout<<"Erreur initialisation SDL_MIX"<<std::endl;
+    if(!Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 4096))
+        std::cout<<"Erreur open audio : "<<Mix_GetError()<<std::endl;
+    music = Mix_LoadMUS("../data/music_battle.mp3");
     SDL_SetRenderDrawColor(rendu, 0, 0, 0, 255);
     for(int i = 0; i < AFFICHAGE_NB_TEXTURES; i++) {
         switch(i) {
@@ -77,6 +81,7 @@ void AffichageGraphique::detruireFenetre() {
     for (int i = 0; i < AFFICHAGE_NB_TEXTURES; i++)
         SDL_DestroyTexture(textures[i]);
     TTF_CloseFont(font);
+    Mix_FreeMusic(music);
     TTF_Quit();
     IMG_Quit();
     Mix_Quit();
@@ -113,7 +118,7 @@ void AffichageGraphique::afficherSprite(float posX, float posY, int type_bloc, i
         destRect.x -= taille_bloc/2;
         destRect.y -= taille_bloc;
     }
-    if(type_bloc == 3) {
+    if(type_bloc == 3 || type_bloc == 4) {
         destRect.h = destRect.w*19/15;
         destRect.y -= taille_bloc*19/15;
         destRect.y += taille_bloc;
@@ -147,10 +152,12 @@ void AffichageGraphique::afficherTexte(Button bouton) {
 }
 
 void AffichageGraphique::jouerMusique() {
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);  //44100 fréquence d'échantillonnage standard
-    Mix_Music *m = Mix_LoadMUS("../data/music_battle.mp3");
-    Mix_PlayMusic(m, -1); //pour le jouer en boucle
-    Mix_FreeMusic(m);
+    if(!Mix_PlayMusic(music, 0))
+        std::cout<<"Erreur play music : "<<Mix_GetError()<<std::endl;
+}
+
+void AffichageGraphique::arreterMusique() {
+    Mix_HaltMusic();
 }
 
 int AffichageGraphique::getDimX() {

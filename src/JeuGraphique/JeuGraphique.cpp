@@ -119,26 +119,35 @@ void JeuGraphique::nouvellePartie(int taille_bloc, bool& mainQuit) {
     joueur1movY = 0;
     joueur2movX = 0;
     joueur2movY = 0;
-    Button affTemps;
-    affTemps.rect.x = (affichage.getDimX()/2) - 100;
-    affTemps.rect.y = affichage.getDimY() - 90;
-    affTemps.rect.w = 200;
-    affTemps.rect.h = 80;
-    affTemps.text = "0:00";
-    affTemps.rectColor = {255, 255, 255, 255};
-    affTemps.backColor = {200, 200, 255, 255};
-    affTemps.textColor = {255, 255, 255, 255};
+    Button buttons[5];
+    for (int i = 0; i < 5; i ++) {
+        buttons[i].rectColor = {0, 0, 0, 255};
+        buttons[i].backColor = {255, 255, 200, 255};
+        buttons[i].textColor = {0, 0, 0, 255};
+        buttons[i].rect.y = affichage.getDimY() - 90;
+        buttons[i].rect.h = taille_bloc;
+        buttons[i].rect.w = 20;
+    }
+    buttons[0].backColor = {200, 255, 255, 255};
+    buttons[0].rect.x = (affichage.getDimX()/2) - 100;
+    buttons[0].text = "0:00";
+    buttons[0].rect.h = 80;
+    buttons[0].rect.w = 200;
+    buttons[1].rect.x = taille_bloc + 10;
+    buttons[2].rect.x = 2*taille_bloc + 40;
+    buttons[3].rect.x = affichage.getDimX() - 60 - taille_bloc;
+    buttons[4].rect.x = affichage.getDimX() - 30;
     
     bool running = true;
     SDL_Event event;
-    afficherPartie(taille_bloc, affTemps);
+    afficherPartie(taille_bloc, buttons);
     affichage.jouerMusique();
     while(running) {
         tourDeJeu(running, mainQuit);
-        afficherPartie(taille_bloc, affTemps);
+        afficherPartie(taille_bloc, buttons);
         SDL_Delay(33);
         while(timer.isPaused()) {
-            afficherPartie(taille_bloc, affTemps);
+            afficherPartie(taille_bloc, buttons);
             while (SDL_PollEvent(&event)) {
                 if (event.type == SDL_QUIT) {
                     timer.unpause();
@@ -155,6 +164,7 @@ void JeuGraphique::nouvellePartie(int taille_bloc, bool& mainQuit) {
             running = false;
     }
     if(!mainQuit) finDePartie(mainQuit);
+    affichage.arreterMusique();
     affichage.detruireFenetre();
 }
 
@@ -306,7 +316,7 @@ void JeuGraphique::afficherMenu(Button buttons[]) {
     affichage.afficherRendu();
 }
 
-void JeuGraphique::afficherPartie(int taille_bloc, Button affTemps) {
+void JeuGraphique::afficherPartie(int taille_bloc, Button buttons[5]) {
     affichage.clearRendu();
 
     //AFFICHAGE GRILLE
@@ -324,8 +334,12 @@ void JeuGraphique::afficherPartie(int taille_bloc, Button affTemps) {
         if(testCase.estDestructible() || testCase.onPeutMarcher())
             affichage.afficherSprite(jeu.getExplosions().at(i).getPosX(), jeu.getExplosions().at(i).getPosY(), 5, taille_bloc);
     }
-    for(int i = 0; i < jeu.getBombes().size(); i++)
-        affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 3, taille_bloc);
+    for(int i = 0; i < jeu.getBombes().size(); i++) {
+        if(jeu.getBombes().at(i).estProcheExplosee())
+            affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 4, taille_bloc);
+        else
+            affichage.afficherSprite(jeu.getBombes().at(i).getPosX(), jeu.getBombes().at(i).getPosY(), 3, taille_bloc);
+    }
     float J1X = jeu.getJoueur1().getExactX();
     float J1Y = jeu.getJoueur1().getExactY();
     affichage.afficherSprite(J1X, J1Y, 6+jeu.getJoueur1().getDirection(), taille_bloc);
@@ -335,20 +349,30 @@ void JeuGraphique::afficherPartie(int taille_bloc, Button affTemps) {
 
     ///AFFICHAGE BANNIERE
     if (timer.isPaused()) {
-        affTemps.text = "PAUSE";
+        buttons[0].text = "PAUSE";
     }
     else {
     int secondes = timer.tempsTimer()/1000;
     secondes = (taille_grille*60) - secondes;
     int minutes = secondes/60;
     secondes = secondes%60;
-    affTemps.text = std::to_string(minutes) + ":";
+    buttons[0].text = std::to_string(minutes) + ":";
     if(secondes < 10)
-        affTemps.text = affTemps.text + "0";
-    affTemps.text = affTemps.text + std::to_string(secondes);
+        buttons[0].text = buttons[0].text + "0";
+    buttons[0].text = buttons[0].text + std::to_string(secondes);
     }
-    affichage.afficherTexte(affTemps);
-    affichage.afficherRectangle(affTemps.rect, affTemps.rectColor);
+    buttons[1].text = std::to_string(jeu.getJoueur1().getNbBombesMax());
+    buttons[2].text = std::to_string(jeu.getJoueur1().getPorteeBombe());
+    buttons[3].text = std::to_string(jeu.getJoueur2().getNbBombesMax());
+    buttons[4].text = std::to_string(jeu.getJoueur2().getPorteeBombe());
+    for(int i = 0; i < 5; i++) {
+        affichage.afficherTexte(buttons[i]);
+        affichage.afficherRectangle(buttons[i].rect, buttons[i].rectColor);
+    }
+    affichage.afficherSprite((float)10/taille_bloc, jeu.getGrille().getDimY()+((float)10/taille_bloc), 11, taille_bloc);
+    affichage.afficherSprite((float)40/taille_bloc + 1, jeu.getGrille().getDimY()+((float)10/taille_bloc), 12, taille_bloc);
+    affichage.afficherSprite((float)(affichage.getDimX()-30)/taille_bloc - 1, jeu.getGrille().getDimY()+((float)10/taille_bloc), 12, taille_bloc);
+    affichage.afficherSprite((float)(affichage.getDimX()-60)/taille_bloc - 2, jeu.getGrille().getDimY()+((float)10/taille_bloc), 11, taille_bloc);
 
     affichage.afficherRendu();
 }
