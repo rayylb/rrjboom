@@ -9,8 +9,8 @@ Les commandes listées ci-dessous marchent seulement sous Mac et Linux, Windows 
 <ins>Comment jouer ?</ins>  
 Menus : cliquez sur les boutons avec la souris.  
 En jeu : controlez les joueurs avec le clavier et appuyez sur 'P' pour mettre en pause.  
-&nbsp;&nbsp;Joueur 1 : ZQSD (mouvement) + ESPACE (bombe).  
-    Joueur 2 : Flèches (mouvement) + 0 (bombe).  
+&nbsp;&nbsp;&nbsp;&nbsp;Joueur 1 : ZQSD (mouvement) + ESPACE (bombe).  
+&nbsp;&nbsp;&nbsp;&nbsp;Joueur 2 : Flèches (mouvement) + 0 (bombe).  
   
 <ins>Outils utilisés :</ins>  
 Le code a été ralisé en C++.  
