@@ -28,9 +28,9 @@ int main(void){
     assert(bloc.aBonus() == false);
 
     // Test régression Grille.h
-    grille.initGrille();
-    assert(grille.getDimX() == 7);
-    assert(grille.getDimY() == 5);
+    grille.initGrille(GRILLE_DIMX_MAX, GRILLE_DIMY_MAX);
+    assert(grille.getDimX() == GRILLE_DIMX_MAX);
+    assert(grille.getDimY() == GRILLE_DIMY_MAX);
     grille.affichTerminal();
     Bloc bloc2;
     grille.infoCase(0, 0, bloc2);
