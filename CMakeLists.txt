@@ -65,7 +65,7 @@ if(WIN32) # Windows
         SDL2_image::SDL2_image;
         SDL2_mixer::SDL2_mixer;
     )
-else() # APPLE & LINUX     
+else() # Apple & Linux     
     target_link_libraries(BombGraph PRIVATE 
         SDL2
         SDL2_ttf
