@@ -12,7 +12,7 @@ set(SRCS_CORE
     src/Core/Joueur.cpp
     src/Core/Partie.cpp
     )
-    
+
 set(HEADERS_CORE
     src/Core/Bonus.h
     src/Core/Bloc.h
