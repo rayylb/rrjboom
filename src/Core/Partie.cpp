@@ -115,7 +115,7 @@ void Partie::creerExplosions(Bombe source) {
     while (j >= by-brange && j >= 0) { ///EXPLOSION HAUT
         pushExplosion(bx, j);
         grille.detruireCase(bx, j);
-        if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
+        if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus() || caseEstMinee(bx, j))
             step = -1;
         else
             step = j - 1;
@@ -125,7 +125,7 @@ void Partie::creerExplosions(Bombe source) {
     i = bx-1;
     while (i >= bx-brange && i >= 0) { ///EXPLOSION GAUCHE
         pushExplosion(i, by);
-        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
+        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus() || caseEstMinee(i, by))
             step = -1;
         else
             step = i - 1;
@@ -135,7 +135,7 @@ void Partie::creerExplosions(Bombe source) {
     i = bx+1;
     while (i <= bx+brange && i < grille.getDimX()) { ///EXPLOSION DROITE
         pushExplosion(i, by);
-        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus())
+        if((!grille.infoCase(i, by).onPeutMarcher()) || grille.infoCase(i, by).aBonus() || caseEstMinee(i, by))
             step = grille.getDimX();
         else
             step = i + 1;
@@ -145,7 +145,7 @@ void Partie::creerExplosions(Bombe source) {
     j = by+1;
     while (j <= by+brange && j < grille.getDimY()) { ///EXPLOSION BAS
         pushExplosion(bx, j);
-        if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus())
+        if((!grille.infoCase(bx, j).onPeutMarcher()) || grille.infoCase(bx, j).aBonus() || caseEstMinee(bx, j))
             step = grille.getDimY();
         else
             step = j + 1;

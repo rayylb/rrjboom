@@ -250,6 +250,7 @@ void JeuGraphique::tourDeJeu(bool& stillRunning, bool& mainQuit) {
             switch(event.type) {
                 case SDL_QUIT : stillRunning = false; mainQuit = true; break;
                 case SDL_KEYDOWN :
+                    if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {stillRunning = false; mainQuit = true;}
                     if(event.key.keysym.sym == SDLK_p) timer.pause();
                     switch (event.key.keysym.sym) {
                         case SDLK_z : joueur1movY = -1; break;
