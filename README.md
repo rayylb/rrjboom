@@ -1,6 +1,9 @@
 # RRJBoom 💣  
-Jeu Bomberman à 2 joueurs en version Textuel et Graphique.  
-Réalisé dans le cadre de l'UE LIFAPCD.  
+Bomberman à 2 joueurs en version Textuel et Graphique.  
+Réalisé dans le cadre de l'UE LIFAPCD par :  
+* Rayane LABZIZI p2201104  
+* Rym ZERZOUH p2201467
+* Julien CHATAIGNER p2208504  
   
 <ins>Compatibilité :</ins>  
 Le projet peut être build et run sur Linux, Mac et Windows 32-bit, à condition d'avoir les outils utilisés déjà installé (voir plus bas.)  
