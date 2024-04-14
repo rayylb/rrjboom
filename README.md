@@ -26,10 +26,12 @@ Doxygen pour la documentation.
   
 ## Comment Jouer  
 Ce jeu s'inspire de la célèbre franchise Bomberman. Ici, deux joueurs s'affronte dans un terrain avec comme seul arme des bombes qu'il peuvent poser sur le terrain. Chaque joueur est limité en nombre de bombes et en puissance de bombes, mais ses dernières peuvent détruire des blocs du terrain où se cachent des bonus pour les améliorer !  
+Le jeu comporte actuellement 3 types de bonus et 3 tailles de grilles différentes.  
+Une partie se termine dès qu'un joueur touche l'explosion d'une bombe ou finit par une égalité si le temps est écoulé.  
   
 <ins>Contrôles du jeu :</ins>  
 Menus : Cliquez sur les boutons avec la souris.  
-En jeu : Contr$olez les joueurs avec le clavier et appuyez sur 'P' pour mettre en pause.  
+En jeu : Contrôlez les joueurs avec le clavier et appuyez sur 'P' pour mettre en pause.  
  - Joueur 1 : ZQSD (mouvement) + ESPACE (bombe).  
  - Joueur 2 : Flèches (mouvement) + 0 (bombe).  
   
