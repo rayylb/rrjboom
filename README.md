@@ -20,9 +20,9 @@ Doxygen pour la documentation.
  - /doc : Documentation générée avec Doxygen + Diagramme des classes, Diagrammes de Gantt et Présentation pour la soutenance
  - /build : Pour compiler avec CMake, l'exécutable se trouvera dans ce dossier
  - /src : Le code en lui-même, séparé en 3 modules :
-   - /src/Core : Le cœur du jeu, qui marche indépendamment de l'interface utilisée
-   - /src/JeuTextuel : La version textuel du jeu, qui utilise le Core
-   - /src/JeuGraphique : La version graphique du jeu, qui utilise le Core
+   - /src/Core : Le cœur du jeu, qui marche indépendamment de l'interface utilisée et ne contient pas de main
+   - /src/JeuTextuel : L'interface textuelle du jeu, qui utilise le Core
+   - /src/JeuGraphique : L'interface graphique du jeu, qui utilise le Core
   
 ## Comment Jouer  
 Ce jeu s'inspire de la célèbre franchise Bomberman. Ici, deux joueurs s'affronte dans un terrain avec comme seul arme des bombes qu'il peuvent poser sur le terrain. Chaque joueur est limité en nombre de bombes et en puissance de bombes, mais ses dernières peuvent détruire des blocs du terrain où se cachent des bonus pour les améliorer !  
