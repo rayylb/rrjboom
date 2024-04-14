@@ -17,7 +17,7 @@ Doxygen pour la documentation.
   
 <ins>Organisation du code :</ins>  
  - /data : Où sont rangés les fichiers images, musiques, etc.
- - /doc : Documentation générée avec Doxygen + Diagramme des classes et Présentation pour la soutenance
+ - /doc : Documentation générée avec Doxygen + Diagramme des classes, Diagrammes de Gantt et Présentation pour la soutenance
  - /build : Pour compiler avec CMake, l'exécutable se trouvera dans ce dossier
  - /src : Le code en lui-même, séparé en 3 modules :
    - /src/Core : Le cœur du jeu, qui marche indépendamment de l'interface utilisée
